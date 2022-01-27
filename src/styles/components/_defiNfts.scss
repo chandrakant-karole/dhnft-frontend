@@ -1,0 +1,12 @@
+.defi-section {
+  flex-direction: column;
+
+  .description,
+  .heading-small {
+    align-self: flex-start;
+  }
+
+  .heading-small {
+    margin-top: 15px;
+  }
+}

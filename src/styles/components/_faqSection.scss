@@ -1,0 +1,128 @@
+@use '../abstracts/' as *;
+
+.faq-section {
+  flex-direction: column;
+
+  > .heading {
+    margin-bottom: 0;
+  }
+
+  > .sub-heading {
+    margin-bottom: 50px;
+    text-align: center;
+  }
+}
+
+.accordion {
+  z-index: 1;
+  .accordion-item {
+    border-bottom: 1px solid $gray-400;
+    button[aria-expanded="true"] {
+      border-bottom: 1px solid $gray-400;
+    }
+  }
+
+  button {
+    font-size: 1.25em !important;
+    position: relative;
+    display: block;
+    text-align: left;
+    width: 100%;
+    padding: 1em 0;
+    font-size: 1.12rem;
+    border: none;
+    background: none;
+    outline: none;
+    &:hover,
+    &:focus {
+      cursor: pointer;
+      &::after {
+        cursor: pointer;
+        color: $dark-theme-text;
+        border: 1px solid $gray-400;
+      }
+    }
+
+    .accordion-title {
+      color: $dark-theme-text;
+      padding-right: 1.5em;
+    }
+
+    .icon {
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 0;
+      width: 22px;
+      height: 22px;
+      border: 1px solid $dark-theme-text;
+      border-radius: 22px;
+      &::before {
+        display: block;
+        position: absolute;
+        content: "";
+        top: 9px;
+        left: 5px;
+        width: 10px;
+        height: 2px;
+        background: $dark-theme-text;
+      }
+      &::after {
+        display: block;
+        position: absolute;
+        content: "";
+        top: 5px;
+        left: 9px;
+        width: 2px;
+        height: 10px;
+        background: $dark-theme-text;
+      }
+    }
+  }
+
+  button[aria-expanded="true"] {
+    // color: $gray-800;
+    .icon {
+      &::after {
+        width: 0;
+      }
+    }
+    + .accordion-content {
+      opacity: 1;
+
+      max-height: 500em;
+      transition: all 200ms linear;
+      will-change: opacity, max-height;
+    }
+  }
+
+  .accordion-content {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 200ms linear, max-height 200ms linear;
+    will-change: opacity, max-height;
+    div {
+      // color: $gray-800;
+      font-size: 1.2em;
+      margin: 1.5em 0;
+      margin-right: 1.5em;
+      text-align: justify;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .accordion {
+    button {
+      font-size: 1.15em !important;
+    }
+
+    .accordion-content {
+      div {
+        font-size: 1.1em;
+      }
+    }
+  }
+}
