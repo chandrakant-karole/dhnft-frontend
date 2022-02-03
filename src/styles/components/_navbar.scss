@@ -5,7 +5,7 @@
     top: 0;
     left: 0;
     right: 0;
-    background: $dark-theme-background;
+    background: #0b1212;
     box-shadow: 0px 4px 6px rgba(54, 54, 54, 0.15);
     >.container {
         flex-direction: row;
@@ -18,7 +18,13 @@
     >a {
         color: $dark-theme-text;
         margin: 0 5px;
-        padding: 0 5px;
+        padding: 5px 10px;
+        display: inline-block;
+        border-bottom: 1px solid transparent;
+        font-size: 17px;
+    }
+    >a:hover{
+        border-bottom: 1px solid #00fcff;
     }
 }
 
@@ -47,11 +53,19 @@
 }
 
 .cont_wlt {
-    background: #3772fd;
-    padding: 4px 15px;
-    font-size: 14px;
+    background: #00fcff;
+    padding: 7px 18px;
+    font-size: 16px;
     font-weight: 400;
-    border-radius: 5px;
+    /* border-radius: 5px; */
+    color: black;
+    font-weight: bold;
+    border: 1px solid #00fcff;
+}
+
+.cont_wlt:hover{
+    background-color: rgb(14, 14, 14);
+    color: #00fcff;
 }
 
 .conted_wlt {
@@ -60,11 +74,19 @@
 }
 
 .fa_disco svg {
-    color: #c4dbf1;
+    color: #00fcff6e;
+}
+
+.fa_disco svg:hover{
+    color: #00fcff;
 }
 
 .twtsqur svg {
-    color: rgba(20, 97, 244, 1);
+    color: #00fcff6e;
+}
+
+.twtsqur svg:hover {
+    color: #00fcff;
 }
 
 a body.hidden {
@@ -129,6 +151,7 @@ a body.hidden {
             font-size: 1.5em;
             >a {
                 line-height: 0;
+                color: #008789;
             }
         }
         .connect-btn {

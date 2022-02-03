@@ -27,7 +27,7 @@
     flex-flow: wrap;
     justify-content: center;
     align-items: center;
-    background-color: #dae8fc;
+    background-color: #0b1212;
     padding: 15px;
 }
 
@@ -38,12 +38,13 @@
 .cntwllt_nav p {
     display: inline-block;
     width: 100%;
-    text-align: center;
-    color: #269126;
+    text-align: left;
+    color: #bdbdbd;
+    font-size: 15px;
 }
 
 .cntwllt_nav b {
-    color: #3772fd;
+    color: #00fcff;
     font-weight: 500;
 }
 
@@ -68,20 +69,25 @@
 }
 
 .nft_boxes {
-    border: 1px solid #222;
+    border: 1px solid #074a4b;
     margin: 15px auto;
+    padding: 10px;
+    background: #143030;
+    border-radius: 5px;
+    box-shadow: inset 0px 0px 10px #0f6667;
 }
 
 .nft_box_btm {
     display: flex;
     flex-flow: column;
     justify-content: center;
-    align-items: center;
-    padding: 15px;
+    align-items: flex-start;
+    padding: 15px 0px;
 }
 
 .nft_box_btm h5 {
     margin: 0;
+    margin-bottom: 10px;
 }
 
 .dh_left_box,
@@ -104,36 +110,43 @@
 
 .btn-danger {
     color: #fff;
-    background-color: #dc3545 !important;
+    background-color: #067778 !important;
     border-color: transparent !important;
+    border-radius: 0px !important;
 }
 
 .dh_left_box {
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    // border: 1px solid #ddd;
+    background-color: #132323;
+    border-radius: 0px;
     overflow: hidden;
+    border-bottom: 1px solid #067778;
+    padding-bottom: 20px;
 }
 
 .dh_left_box h3 {
-    background: #1461f4;
-    color: #fff;
-    padding: 5px 15px;
+    background: #0b1212;
+    color: #d5d5d5;
+    padding: 10px 15px;
+    border-bottom: 1px solid #067778;
 }
 
 .search_input {
-    margin: 15px;
+    margin: 15px 0px;
     width: 80%;
     display: flex;
     align-items: center;
 }
 
 .search_input span {
-    background: #ddd;
+    background: #0e8d8f;
     padding: 2px 25px;
-    border-radius: 5px 0 0 5px;
-    width: 22%;
-    color: #555;
+    border-radius: 0px;
+    width: 18%;
+    color: #000;
+    font-weight: 700;
     text-align: center;
+    border: none;
 }
 
 .search_input .form-control {

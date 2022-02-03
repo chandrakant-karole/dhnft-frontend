@@ -20,7 +20,7 @@ import DHRewards from './components/DHRewards'
 
 function App() {    
   return (
-    <BrowserRouter basename='/stringblock/'>
+    <BrowserRouter basename='/dht_token/'>
       <Switch>      
         <Route exact path="/">
           <Home />

@@ -10,20 +10,24 @@
   > .sub-heading {
     margin-bottom: 50px;
     text-align: center;
+    color: #94a9a9;
   }
 }
 
 .accordion {
   z-index: 1;
   .accordion-item {
-    border-bottom: 1px solid $gray-400;
+    border-bottom: 1px solid #067778;
+    background: black;
     button[aria-expanded="true"] {
-      border-bottom: 1px solid $gray-400;
+      border-bottom: 1px solid #067778;
+      background: black;
     }
   }
 
   button {
-    font-size: 1.25em !important;
+    font-size: 1.05em !important;
+    letter-spacing: 1px;
     position: relative;
     display: block;
     text-align: left;
@@ -90,7 +94,7 @@
     }
     + .accordion-content {
       opacity: 1;
-
+      background: #0b1212;
       max-height: 500em;
       transition: all 200ms linear;
       will-change: opacity, max-height;
@@ -104,11 +108,13 @@
     transition: opacity 200ms linear, max-height 200ms linear;
     will-change: opacity, max-height;
     div {
-      // color: $gray-800;
-      font-size: 1.2em;
-      margin: 1.5em 0;
-      margin-right: 1.5em;
+      color: #9cc1c1;
+      font-size: 1em;
+      letter-spacing: .81px;
+      margin: 1.5em;
+      // margin-right: 1.5em;
       text-align: justify;
+      word-spacing: 3px;
     }
   }
 }

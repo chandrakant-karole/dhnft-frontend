@@ -30,12 +30,12 @@ function TotalMints() {
     <div className="container total-mints-comp">
       <div className="total-mints">
         <span>
-          <h2 className="heading">Diamond Hands Minted</h2>
+          <h2 className="heading gradientHead">Diamond Hands Minted</h2>
           <p className="sub-heading">
             Mint Completed 🥳{" "}
             <a
               href="https://opensea.io/collection/thediamondhands"
-              style={{ color: "#3772fd", textDecoration: "underline" }}
+              style={{ color: "#067778", textDecoration: "underline" }}
             >
               Check all artworks
             </a>

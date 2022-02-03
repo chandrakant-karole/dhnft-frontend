@@ -1,11 +1,11 @@
 @use '../abstracts/' as *;
 
 footer {
-  position: fixed;
+  // position: fixed;
   z-index: 9;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  // bottom: 0;
+  // left: 0;
+  // right: 0;
   background: $dark-theme-background;
   box-shadow: 0px -4px 6px rgba(54, 54, 54, 0.15);
 

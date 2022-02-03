@@ -12,6 +12,7 @@ function TeamSection() {
         Real Artists - Real BlockChain Developers - Real NFT Curators
       </p>
 
+
       <div className="column-grid">
         <TeamProfile
           profileName="Yanis - Ethikdesign"

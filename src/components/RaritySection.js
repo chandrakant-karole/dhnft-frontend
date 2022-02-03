@@ -7,21 +7,29 @@ import rarity4 from "../assets/images/rarity/framed.png";
 function RaritySection() {
   return (
     <section id="rarity" className="container rarity-section">
-      <div className="col-4">
-        <div className="image-container">
-          <img src={rarity1} alt="Air" />
+      <div className="row">
+        <div className="col-lg-3">
+          <div className="image-container">
+            <img src={rarity1} alt="Air" />
+          </div>
         </div>
-        <div className="image-container">
-          <img src={rarity2} alt="Fire" />
+        <div className="col-lg-3">
+          <div className="image-container">
+            <img src={rarity2} alt="Fire" />
+          </div>
         </div>
-        <div className="image-container">
-          <img src={rarity3} alt="Ethic" />
+        <div className="col-lg-3">
+          <div className="image-container">
+            <img src={rarity3} alt="Ethic" />
+          </div>
         </div>
-        <div className="image-container">
-          <img src={rarity4} alt="Trails" />
+        <div className="col-lg-3">
+          <div className="image-container">
+            <img src={rarity4} alt="Trails" />
+          </div>
         </div>
       </div>
-      <div className="col-2">
+      <div className="col-2 mt-4">
         <div className="rarities">
           <ProgressBar title="Human Hands" percentage="40" />
           <ProgressBar title="Love Hands" percentage="17" />

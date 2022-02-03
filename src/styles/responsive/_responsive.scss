@@ -1,0 +1,35 @@
+@media screen and (max-width:991px) {
+    .brandDiv_bottomLink{
+        justify-content: flex-start;
+        margin-top: 20px;
+    }
+    .brandDiv_bottomSocial{
+        justify-content: flex-start;
+        margin-top: 20px;
+    }
+    .bottom_socialLinkDiv{
+    
+        ul{
+            padding-left: 9px;
+        }
+    }
+    .column-grid{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width:670px) {
+    .column-grid{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width:576px) {
+    body{
+        padding-bottom: 20px;
+    }
+    .column-grid{
+        grid-template-columns: repeat(1, 1fr);
+        gap: 40px;
+    }
+}

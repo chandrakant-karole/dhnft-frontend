@@ -1,6 +1,7 @@
 import DefiNfts from "./DefiNfts";
 import Faq from "./Faq";
-import Footer from "./Footer";
+// import Footer from "./Footer";
+import FooterCommon from "./FooterCommon";
 import IntroSection from "./IntroSection";
 import Navbar from "./Navbar";
 import RaritySection from "./RaritySection";
@@ -20,8 +21,9 @@ function Home() {
         <RaritySection />
         <TeamSection />
         <Timeline />
-        <Footer />
+        {/* <Footer /> */}
         <Faq />
+        <FooterCommon/>
       </div>
     );
 }

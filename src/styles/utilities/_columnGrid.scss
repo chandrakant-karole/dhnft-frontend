@@ -1,6 +1,7 @@
 .column-grid {
   width: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   gap: 20px;
   align-items: center;
   justify-content: space-between;

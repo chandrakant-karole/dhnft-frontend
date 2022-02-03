@@ -1,13 +1,14 @@
 import '../styles/components/_connectwallet.scss';
-import { InputGroup, FormControl, Nav, Form, Button } from "react-bootstrap";
+import { Nav, Button } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 
 import Navbar from "./Navbar";
 import Rewards from './Rewards';
-import rarity1 from "../assets/images/rarity/white.png";
-import rarity2 from "../assets/images/rarity/magnethik.png";
-import rarity3 from "../assets/images/rarity/compression.png";
-import rarity4 from "../assets/images/rarity/framed.png";
+// import rarity1 from "../assets/images/rarity/white.png";
+// import rarity2 from "../assets/images/rarity/magnethik.png";
+// import rarity3 from "../assets/images/rarity/compression.png";
+// import rarity4 from "../assets/images/rarity/framed.png";
+import FooterCommon from './FooterCommon';
 
 function DHT() {
   return (
@@ -20,21 +21,21 @@ function DHT() {
             <Nav justify variant="tabs" defaultActiveKey="/home">
               <Nav.Item>
                 <Link to="/DH" className='nav-link'>
-                  <p>TheDiamondHands NFT (DH)</p>
+                  <p style={{textAlign: "center"}}>The DiamondHands NFT (DH)</p>
                   <b>(7 Owned)</b>
-                  <p>(Eligible for DHT Rewards)</p>
+                  <p style={{textAlign: "center"}}>(Eligible for DHT Rewards)</p>
                 </Link>
               </Nav.Item>
               <Nav.Item>
                 <Link eventKey="DHF" to="/DHF" className='nav-link'>
-                  <p>TheDiamondHands Founders NFT (DHF)</p>
+                  <p style={{textAlign: "center"}}>The DiamondHands Founders NFT (DHF)</p>
                   <b>(2 Owned)</b>
-                  <p>(Eligible for DHT Rewards)</p>
+                  <p style={{textAlign: "center"}}>(Eligible for DHT Rewards)</p>
                 </Link>
               </Nav.Item>
               <Nav.Item>
                 <Link eventKey="DHT" className='active nav-link' to="/DHT">
-                  <p>TheDiamondHands Tokens FT (DHT)</p>
+                  <p style={{textAlign: "center"}}>The DiamondHands Tokens FT (DHT)</p>
                   <b>(13200 Owned)</b>
                 </Link>
               </Nav.Item>
@@ -177,6 +178,8 @@ function DHT() {
           </div>
         </div>
       </div>
+
+      <FooterCommon/>
     </div>
   );
 }

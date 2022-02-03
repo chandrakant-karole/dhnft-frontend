@@ -1,14 +1,23 @@
 @use '../abstracts/' as *;
 
 .heading {
-  color: $primary;
+  color: #00a5a5;
   font-size: 2em;
   line-height: 1.5em;
   margin: 15px 0;
 }
 
+.gradientHead{
+  font-weight: 900;
+  background: linear-gradient(47deg
+, #08a1a1 17%, #0c4547 46%, #106e6e 75%, #034545 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 3rem;
+}
+
 .heading-small {
-  color: $primary;
+  color: #1c9595;
   font-size: 1.375em;
   margin: 10px 0;
 }

@@ -21,9 +21,12 @@
   margin: 10px 0;
 
   p {
-    font-size: 1.25em;
+    font-size: 1.09em;
     line-height: 1.6em;
     text-align: justify;
+    color: #b4c1c1;
+    letter-spacing: .90px;
+    word-spacing: .4px;
 
     &:not(:last-child) {
       margin-bottom: 25px;

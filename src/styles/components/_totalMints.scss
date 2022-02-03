@@ -5,11 +5,12 @@
 }
 
 .total-mints {
+  background: #0b1212;
   padding: 2rem;
   width: 100%;
-  border-radius: 20px;
+  border-radius: 5px;
   text-align: center;
-  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.25);
+  box-shadow: 0px 0px 10px #067778;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -25,10 +26,11 @@
 
     .progress {
       position: relative;
-      background: $primary;
+      background: #067778;
       height: 8px;
       padding: 0;
       border-radius: 5px;
+      overflow: visible;
 
       &::after {
         position: absolute;
@@ -38,7 +40,7 @@
         transform: translatex(50%) translateY(-50%);
         height: 18px;
         width: 18px;
-        background: $primary;
+        background: #094445;
         border-radius: 50%;
       }
 
@@ -78,7 +80,7 @@
       transform: translateX(-50%);
 
       &::before {
-        background: #b3d1fb;
+        background: #00bbbd;
         content: "";
         top: 0;
         left: 0;

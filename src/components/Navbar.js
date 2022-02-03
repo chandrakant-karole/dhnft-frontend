@@ -32,7 +32,9 @@ function Navbar() {
 
       // window.location.pathname = '/dht_token/DH'
       document.getElementById('next').click();
-      document.getElementById('connected').innerText = 'Connected'
+      if(typeof address[0] === 'string'){
+        document.getElementById('connected').innerText = 'Connected'
+      }
       // setHide(ShowStyle)
     });
 
@@ -44,18 +46,20 @@ function Navbar() {
     <div className="navbar">
       <div className="container">
         <div className="logo">
-          <img src={logo} alt="Diamond Hands Logo" height="50px" width="auto" />
+          <Link to='/'>
+            <img src={logo} alt="Diamond Hands Logo" height="50px" width="auto" />
+          </Link>
         </div>
         <div className="nav-menu">
-          <a href="#learn">Learn</a>
-          <a href="#defi-nft">DeFi + NFTs</a>
-          <a href="#rarity">Rarity</a>
-          <a href="#team">Team</a>
-          <a href="#faqs">FAQ's</a>
+          <a href='/dht_token/#learn' >Learn</a>
+          <a href="/dht_token/#defi-nft">DeFi + NFTs</a>
+          <a href="/dht_token/#rarity">Rarity</a>
+          <a href="/dht_token/#team">Team</a>
+          <a href="/dht_token/#faqs">FAQ's</a>
         </div>
         <div className="nav-buttons">
           <Link id="next" to="/DH" style={HideStyle} className="conted_wlt">Connected #0x02548</Link>
-          <a id="connected" style={{cursor: 'pointer'}} onClick={openMetaMask} className="cont_wlt">Connect Wallet</a>
+          <a id="connected" style={{ cursor: 'pointer' }} onClick={openMetaMask} className="cont_wlt">Connect Wallet</a>
           <a
             href="https://discord.com/invite/H7KMAKgaSH"
             target="_blank"

@@ -17,19 +17,24 @@
     flex-wrap: wrap;
     align-items: flex-start;
     > * {
-      width: 170px;
-      flex-basis: 170px;
-      flex-grow: 1;
+      width: 100%;
+      // flex-basis: 170px;
+      // flex-grow: 1;
     }
   }
 }
 
 .team-profile {
+  background-color: #0b1212;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 20px 10px;
+  box-shadow: 0px 0px 5px #067577;
+  transform: translateY(0px);
+  transition: all .5s;
 
   .profile-picture {
     width: 170px;
@@ -51,15 +56,21 @@
 
   > .sub-heading {
     margin-bottom: 0;
+    color: #577e7f;
+    font-weight: 500;
   }
+}
+
+.team-profile:hover{
+  transform: translateY(-20px);
 }
 
 @media screen and (max-width: 600px) {
   .team-section {
     .column-grid {
       > * {
-        width: 130px;
-        flex-basis: 130px;
+        width: 100%;
+        // flex-basis: 130px;
       }
     }
   }

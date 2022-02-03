@@ -2,6 +2,8 @@
 
 .video-section {
   height: calc(100vh - 184px);
+  // background-image: url('../../assets/background.png');
+  // background-repeat: no-repeat;
 
   .intro-video {
     width: 100%;
@@ -17,7 +19,7 @@
   .video-section {
     .intro-video {
       max-width: 100%;
-      height: auto;
+      // height: auto;
     }
   }
 }
