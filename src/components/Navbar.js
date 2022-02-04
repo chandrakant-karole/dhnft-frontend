@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { FaTwitterSquare, FaDiscord, FaWallet } from "react-icons/fa";
+import { FaTwitterSquare, FaDiscord } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 import logo from "../assets/logo-white.png";
-import MetaMaskButton from "./MetaMaskButton";
+// import MetaMaskButton from "./MetaMaskButton";
 
 function Navbar() {
   const [active, setActive] = useState(false);
@@ -59,7 +59,7 @@ function Navbar() {
         </div>
         <div className="nav-buttons">
           <Link id="next" to="/DH" style={HideStyle} className="conted_wlt">Connected #0x02548</Link>
-          <a id="connected" style={{ cursor: 'pointer' }} onClick={openMetaMask} className="cont_wlt">Connect Wallet</a>
+          <button id="connected" style={{ cursor: 'pointer' }} onClick={openMetaMask} className="cont_wlt">Connect Wallet</button>
           <a
             href="https://discord.com/invite/H7KMAKgaSH"
             target="_blank"

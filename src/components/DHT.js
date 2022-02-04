@@ -16,36 +16,42 @@ function DHT() {
       <Navbar />
       <Rewards />
       <div className='cont_wallet_box'>
-        <div className="container">
-          <div className='cntwllt_nav'>
-            <Nav justify variant="tabs" defaultActiveKey="/home">
-              <Nav.Item>
-                <Link to="/DH" className='nav-link'>
-                  <p style={{textAlign: "center"}}>The DiamondHands NFT (DH)</p>
-                  <b>(7 Owned)</b>
-                  <p style={{textAlign: "center"}}>(Eligible for DHT Rewards)</p>
-                </Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Link eventKey="DHF" to="/DHF" className='nav-link'>
-                  <p style={{textAlign: "center"}}>The DiamondHands Founders NFT (DHF)</p>
-                  <b>(2 Owned)</b>
-                  <p style={{textAlign: "center"}}>(Eligible for DHT Rewards)</p>
-                </Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Link eventKey="DHT" className='active nav-link' to="/DHT">
-                  <p style={{textAlign: "center"}}>The DiamondHands Tokens FT (DHT)</p>
-                  <b>(13200 Owned)</b>
-                </Link>
-              </Nav.Item>
-            </Nav>
-            <div className="db_navbox">
-              <div className='row'>
-                <div className='col-9'>
-                  <div className="dh_left_box">
-                    <h3>The Diamond Hands NFT (DHT)</h3>
-                    {/* <InputGroup className='search_input'>
+        <div className="container" style={{ display: 'block' }}>
+          <div className='row'>
+            <div className='col-lg-12'>
+              <div className='cntwllt_nav'>
+                <Nav justify variant="tabs" defaultActiveKey="/home">
+                  <Nav.Item>
+                    <Link to="/DH" className='nav-link'>
+                      <p style={{ textAlign: "center" }}>The DiamondHands NFT (DH)</p>
+                      <b>(7 Owned)</b>
+                      <p style={{ textAlign: "center" }}>(Eligible for DHT Rewards)</p>
+                    </Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Link eventKey="DHF" to="/DHF" className='nav-link'>
+                      <p style={{ textAlign: "center" }}>The DiamondHands Founders NFT (DHF)</p>
+                      <b>(2 Owned)</b>
+                      <p style={{ textAlign: "center" }}>(Eligible for DHT Rewards)</p>
+                    </Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Link eventKey="DHT" className='active nav-link' to="/DHT">
+                      <p style={{ textAlign: "center" }}>The DiamondHands Tokens FT (DHT)</p>
+                      <b>(13200 Owned)</b>
+                    </Link>
+                  </Nav.Item>
+                </Nav>
+                <div className="db_navbox">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='row'>
+            <div className='col-lg-9 col-12'>
+              <div className="dh_left_box">
+                <h3>The Diamond Hands NFT (DHT)</h3>
+                {/* <InputGroup className='search_input'>
                             <InputGroup.Text id="btnGroupAddon">Search DH#</InputGroup.Text>
                               <FormControl
                                 type="text"
@@ -53,7 +59,7 @@ function DHT() {
                                 aria-describedby="btnGroupAddon"
                               />
                             </InputGroup> */}
-                    {/* <div className='row'>
+                {/* <div className='row'>
                               <div className='col-2'>
                                 <div className='nft_boxes'>      
                                   <img src={rarity1} alt="" />
@@ -146,40 +152,38 @@ function DHT() {
                                 </div>
                               </div>
                             </div> */}
-                    <div className='row'>
-                      <div className='col-lg-12'>
-                            <div className='dht_nft_list'>
-                              <ul>
-                                <li>Diamond Hands Tokens (DHT) Owned: <span className='dht_span'>3200</span></li>
-                                <li>DHTs claimable from DHF NFTs held: <span className='dht_span'>5500</span></li>
-                                <li>DHTs claimable based on DH NFTs held: <span className='dht_span'>18000</span></li>
-                                <li>DHTs claimable by buring DH NFTS: <span className='dht_span'>2800</span></li>
-                                <li>DHTs claimable based on Other NFTs held: <span className='dht_span'>3000</span></li>
-                                <li>Additional DHT's claimable for this Wallet: <span className='dht_span'>5000</span></li>
-                              </ul>
-                            </div>
-                      </div>
-                      {/* <div className='col-lg-12'>
+                <div className='row'>
+                  <div className='col-lg-12'>
+                    <div className='dht_nft_list'>
+                      <ul>
+                        <li>Diamond Hands Tokens (DHT) Owned: <span className='dht_span'>3200</span></li>
+                        <li>DHTs claimable from DHF NFTs held: <span className='dht_span'>5500</span></li>
+                        <li>DHTs claimable based on DH NFTs held: <span className='dht_span'>18000</span></li>
+                        <li>DHTs claimable by buring DH NFTS: <span className='dht_span'>2800</span></li>
+                        <li>DHTs claimable based on Other NFTs held: <span className='dht_span'>3000</span></li>
+                        <li>Additional DHT's claimable for this Wallet: <span className='dht_span'>5000</span></li>
+                      </ul>
+                    </div>
+                  </div>
+                  {/* <div className='col-lg-12'>
                             <div className='dht_claimBtn'>
                               <Button className='green_btn'>Claim DHT Rewards</Button>
                             </div>
                       </div> */}
-                    </div>
-                  </div>
                 </div>
-                <div className='col-3'>
-                  <div className="dh_right_box">
-                    {/* <h4>3 out of 7 owned NFTs selected</h4> */}
-                    <Button variant="success" className='green_btn'>Claim DHT Rewards</Button>
-                  </div>
-                </div>
+              </div>
+            </div>
+            <div className='col-lg-3 col-12'>
+              <div className="dh_right_box">
+                {/* <h4>3 out of 7 owned NFTs selected</h4> */}
+                <Button variant="success" className='green_btn'>Claim DHT Rewards</Button>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <FooterCommon/>
+      <FooterCommon />
     </div>
   );
 }

@@ -8,22 +8,22 @@ function RaritySection() {
   return (
     <section id="rarity" className="container rarity-section">
       <div className="row">
-        <div className="col-lg-3">
+        <div className="col-lg-3 col-md-3 col-sm-6 col-12">
           <div className="image-container">
             <img src={rarity1} alt="Air" />
           </div>
         </div>
-        <div className="col-lg-3">
+        <div className="col-lg-3 col-md-3 col-sm-6 col-12">
           <div className="image-container">
             <img src={rarity2} alt="Fire" />
           </div>
         </div>
-        <div className="col-lg-3">
+        <div className="col-lg-3 col-md-3 col-sm-6 col-12">
           <div className="image-container">
             <img src={rarity3} alt="Ethic" />
           </div>
         </div>
-        <div className="col-lg-3">
+        <div className="col-lg-3 col-md-3 col-sm-6 col-12">
           <div className="image-container">
             <img src={rarity4} alt="Trails" />
           </div>

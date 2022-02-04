@@ -34,10 +34,10 @@ export default function FooterCommon() {
                     <div className='bottom_socialLinkDiv'>
                             <h4 className='mb-2'>Social Links</h4>
                             <ul>
-                                <li><a href='/stringblock/#learn'><FaFacebookF/> Facebook</a></li>
-                                <li><a href="/stringblock/#defi-nft"><FaDiscord/> Discord</a></li>
-                                <li><a href="/stringblock/#rarity"><FaInstagram/> Instagram</a></li>
-                                <li><a href="/stringblock/#team"><FaTwitter/> Twitter</a></li>
+                                <li><a href='/'><FaFacebookF/> Facebook</a></li>
+                                <li><a href="/"><FaDiscord/> Discord</a></li>
+                                <li><a href="/"><FaInstagram/> Instagram</a></li>
+                                <li><a href="/"><FaTwitter/> Twitter</a></li>
                             </ul>
                         </div>
                     </div>

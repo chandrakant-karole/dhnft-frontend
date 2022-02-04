@@ -338,7 +338,7 @@ select {
 .nav-tabs{
   border: none;
     background: #0b1212;
-    border-radius: 12px;
+    border-radius: 0px;
     margin: 30px 0px;
 
     .nav-link{
@@ -486,4 +486,9 @@ select {
       height: 100%;
     }
   }
+}
+
+a.second_nav {
+  border: 2px solid #0a2f2f;
+  padding: 10px;
 }

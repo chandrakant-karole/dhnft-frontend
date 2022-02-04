@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { getToken } from "../utility/contractMethods/index";
+// import { getToken } from "../utility/contractMethods/index";
 
 function TotalMints() {
   const [totalMints, setTotalMints] = useState("11111");
