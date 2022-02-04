@@ -2,18 +2,18 @@ import '../styles/components/_connectwallet.scss';
 import { Nav, Button } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 
-import Navbar from "./Navbar";
+// import Navbar from "./Navbar";
 import Rewards from './Rewards';
 // import rarity1 from "../assets/images/rarity/white.png";
 // import rarity2 from "../assets/images/rarity/magnethik.png";
 // import rarity3 from "../assets/images/rarity/compression.png";
 // import rarity4 from "../assets/images/rarity/framed.png";
-import FooterCommon from './FooterCommon';
+// import FooterCommon from './FooterCommon';
 
 function DHT() {
   return (
     <div className="connect_wallet">
-      <Navbar />
+      {/* <Navbar /> */}
       <Rewards />
       <div className='cont_wallet_box'>
         <div className="container" style={{ display: 'block' }}>
@@ -183,7 +183,7 @@ function DHT() {
         </div>
       </div>
 
-      <FooterCommon />
+      {/* <FooterCommon /> */}
     </div>
   );
 }

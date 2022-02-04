@@ -17,11 +17,13 @@ import ConnectedWallet from './components/DH';
 import DHF from './components/DHF';
 import DHT from './components/DHT';
 import DHRewards from './components/DHRewards'
+import FooterCommon from './components/FooterCommon';
 
 function App() {
   return (
     <>
       <BrowserRouter basename='/dht_token/'>
+        <Navbar />
         <Switch>
           <Route exact path="/">
             <Home />
@@ -71,6 +73,7 @@ function App() {
           </Route>
           <Route path='/DH_Rewards' component={DHRewards} />
         </Switch>
+        <FooterCommon />
       </BrowserRouter>
     </>
   );

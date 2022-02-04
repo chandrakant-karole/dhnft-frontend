@@ -6,3 +6,13 @@ export const setSetting = (settings) => (dispatch) => {
         payload: settings,
     });
 };
+
+
+export const metaMaskAddress = (getAddress) => {
+    return (dispatch) => {
+        dispatch({
+            type: 'metaMaskAddress',
+            payload: getAddress,
+        })
+    }
+}

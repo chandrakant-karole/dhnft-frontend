@@ -12,17 +12,20 @@ function Navbar() {
     setActive(!active);
     document.body.classList.toggle("hidden");
   }
-
   // ============================== Meta Mask ================================
+
+  //========================== Store Meta Mask Address ==================
+  // const addressValue = useSelector(state => state.addressReducer1)
+  // const dispatch = useDispatch();
 
   const HideStyle = {
     display: 'none'
   }
-  // const ShowStyle = {
-  //   display: 'block'
-  // }
+  const ShowStyle = {
+    display: 'block'
+  }
 
-  // const [Hide, setHide] = useState(HideStyle);
+  const [Hide, setHide] = useState(HideStyle);
 
   const openMetaMask = async () => {
     let data;
@@ -30,12 +33,22 @@ function Navbar() {
       data = address[0]
       console.log(address, 'this is the data we got ')
 
-      // window.location.pathname = '/dht_token/DH'
       document.getElementById('next').click();
-      if(typeof address[0] === 'string'){
+      // setAddress(address[0])
+
+      // =============== redux ==============
+      // dispatch(metaMaskAddress(address[0]))
+      // if (typeof addressValue === 'string') {
+      //   document.getElementById('connected').innerText = 'Connected'
+      // } else {
+      //   document.getElementById('connected').innerText = 'Connect Wallet'
+      // }
+
+
+      if (typeof address[0] === 'string') {
         document.getElementById('connected').innerText = 'Connected'
       }
-      // setHide(ShowStyle)
+      setHide(ShowStyle)
     });
 
     // console.log(Hide)

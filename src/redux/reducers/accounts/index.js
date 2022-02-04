@@ -7,7 +7,7 @@ const initialState = {
   wrongNetwork: "false",
   walletType: "metamask",
 };
-const accountsReducer = (state = initialState, action) => {
+export const accountsReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_SETTING_REQUEST:
       return { ...state, ...action.payload };
@@ -16,4 +16,12 @@ const accountsReducer = (state = initialState, action) => {
   }
 };
 
-export default accountsReducer;
+// export default accountsReducer;
+ 
+export const addressReducer = (state = 'your value is not get', action) => {
+    if(action.type === 'metaMaskAddress'){
+      return action.payload
+    } else {
+      return state 
+    }
+}

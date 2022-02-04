@@ -2,10 +2,12 @@
 import { combineReducers } from "redux";
 
 // ** Reducers Imports
-import accounts from "./accounts";
+import {accountsReducer, addressReducer} from "./accounts/index";
+// import addressReducer from './accounts/index'
 
 const rootReducer = combineReducers({
-    accounts,
+    accounts1:accountsReducer,
+    addressReducer1:addressReducer
 });
 
 export default rootReducer;

@@ -1,9 +1,9 @@
 import DefiNfts from "./DefiNfts";
 import Faq from "./Faq";
 // import Footer from "./Footer";
-import FooterCommon from "./FooterCommon";
+// import FooterCommon from "./FooterCommon";
 import IntroSection from "./IntroSection";
-import Navbar from "./Navbar";
+// import Navbar from "./Navbar";
 import RaritySection from "./RaritySection";
 import TeamSection from "./TeamSection";
 import Timeline from "./Timeline";
@@ -13,7 +13,7 @@ import VideoSection from "./VideoSection";
 function Home() {
     return ( 
       <div className="home_page">
-        <Navbar />
+        {/* <Navbar /> */}
         <VideoSection />
         <TotalMints />
         <IntroSection />
@@ -23,7 +23,7 @@ function Home() {
         <Timeline />
         {/* <Footer /> */}
         <Faq />
-        <FooterCommon/>
+        {/* <FooterCommon/> */}
       </div>
     );
 }
