@@ -20,11 +20,11 @@ export default function FooterCommon() {
                         <div className='bottom_linkDiv'>
                             <h4 className='mb-2'>Links</h4>
                             <ul>
-                                <li><a href='/dht_token/#learn'>Learn</a></li>
-                                <li><a href="/dht_token/#defi-nft">DeFi + NFTs</a></li>
-                                <li><a href="/dht_token/#rarity">Rarity</a></li>
-                                <li><a href="/dht_token/#team">Team</a></li>
-                                <li><a href="/dht_token/#faqs">FAQ's</a></li>
+                                <li><a href='/stringblock/#learn'>Learn</a></li>
+                                <li><a href="/stringblock/#defi-nft">DeFi + NFTs</a></li>
+                                <li><a href="/stringblock/#rarity">Rarity</a></li>
+                                <li><a href="/stringblock/#team">Team</a></li>
+                                <li><a href="/stringblock/#faqs">FAQ's</a></li>
                             </ul>
                         </div>
                     </div>

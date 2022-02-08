@@ -74,11 +74,11 @@ function Navbar() {
           </Link>
         </div>
         <div className="nav-menu">
-          <a href='/dht_token/#learn' >Learn</a>
-          <a href="/dht_token/#defi-nft">DeFi + NFTs</a>
-          <a href="/dht_token/#rarity">Rarity</a>
-          <a href="/dht_token/#team">Team</a>
-          <a href="/dht_token/#faqs">FAQ's</a>
+          <a href='/stringblock/#learn' >Learn</a>
+          <a href="/stringblock/#defi-nft">DeFi + NFTs</a>
+          <a href="/stringblock/#rarity">Rarity</a>
+          <a href="/stringblock/#team">Team</a>
+          <a href="/stringblock/#faqs">FAQ's</a>
         </div>
         <div className="nav-buttons">
           <Link id="next" to="/DH" style={HideStyle} className="conted_wlt">Connected #0x02548</Link>

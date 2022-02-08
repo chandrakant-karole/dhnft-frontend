@@ -22,7 +22,7 @@ import FooterCommon from './components/FooterCommon';
 function App() {
   return (
     <>
-      <BrowserRouter basename='/dht_token/'>
+      <BrowserRouter basename='/stringblock/'>
         <Navbar />
         <Switch>
           <Route exact path="/">
