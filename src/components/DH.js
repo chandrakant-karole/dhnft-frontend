@@ -1,3 +1,4 @@
+import { React, useState, useEffect } from 'react'
 import '../styles/components/_connectwallet.scss';
 import { InputGroup, FormControl, Nav, Form, Button } from "react-bootstrap";
 import { Link } from 'react-router-dom';
@@ -11,13 +12,53 @@ import rarity4 from "../assets/images/rarity/framed.png";
 // import FooterCommon from './FooterCommon';
 
 function DH() {
+  // ======================== Sessions =========================
+  // let checkAddress1 = sessionStorage.getItem('Address');
+
+  // if (checkAddress1 === null) {
+  //   window.location.pathname = '/dht_token/'
+  //   console.log('checkAddress->', checkAddress1);
+  // }
+
+  let [count, setCount] = useState(0);
+
+  const checkedNFTCount = (e) => {
+    const checkedItem = e.target.checked;
+    console.log(checkedItem);
+    if (checkedItem === true) {
+      // console.log('checked')
+      setCount(count + 1)
+      // console.log(count)
+    } 
+    if (checkedItem === false) {
+      // console.log('not checked');
+      setCount(count - 1)
+      // console.log(count)
+    }
+  }
+
+  console.log('updated count',count);
+
+  useEffect(() => {
+    if(count > 7){
+      console.log('enabled Btn');
+      document.getElementById('burn_NftBtn').removeAttribute("disabled");
+    } 
+    if(count < 8) {
+      document.getElementById('burn_NftBtn').setAttribute("disabled", " ");
+    }
+
+  }, [count]);
+  
+
+
   return (
     <div className="connect_wallet">
       {/* <Navbar /> */}
       <Rewards />
       <div className='cont_wallet_box'>
         <div className="container" style={{ display: 'block' }}>
-          <div className='row'>
+          {/* <div className='row'>
             <div className='col-lg-12'>
               <div className='cntwllt_nav'>
                 <Nav justify variant="tabs" defaultActiveKey="/home">
@@ -45,12 +86,12 @@ function DH() {
                 <div className="db_navbox"></div>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className='row'>
             <div className='col-lg-9 col-12'>
               <div className="dh_left_box">
-                <h3>The Diamond Hands NFT (DH)</h3>
-                <div className='container'>
+                {/* <h3>The Diamond Hands NFT (DH)</h3> */}
+                <div className='' style={{ padding: '0px 30px' }}>
                   <div className='row'>
                     <div className='col-lg-12'>
                       <InputGroup className='search_input'>
@@ -62,6 +103,10 @@ function DH() {
                         />
                       </InputGroup>
                     </div>
+                  </div>
+                </div>
+                <div className='container'>
+                  <div className='row dh_NFT_cards_Div'>
                     <div className='col-lg-3 col-md-6 col-12'>
                       <div className='nft_boxes'>
                         <img src={rarity1} alt="" />
@@ -70,7 +115,7 @@ function DH() {
                             <h5>DH # <span>00123</span> </h5>
 
                             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                              <Form.Check type="checkbox" />
+                              <Form.Check type="checkbox" onClick={(e) => { checkedNFTCount(e) }} />
                             </Form.Group>
                           </div>
                           <p> <span>94</span> days held </p>
@@ -87,7 +132,7 @@ function DH() {
                             <h5>DH # <span>00123</span> </h5>
 
                             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                              <Form.Check type="checkbox" />
+                              <Form.Check type="checkbox" onClick={(e) => { checkedNFTCount(e) }} />
                             </Form.Group>
                           </div>
                           <p> <span>94</span> days held </p>
@@ -103,7 +148,7 @@ function DH() {
                             <h5>DH # <span>00123</span> </h5>
 
                             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                              <Form.Check type="checkbox" />
+                              <Form.Check type="checkbox" onClick={(e) => { checkedNFTCount(e) }} />
                             </Form.Group>
                           </div>
                           <p> <span>94</span> days held </p>
@@ -119,7 +164,7 @@ function DH() {
                             <h5>DH # <span>00123</span> </h5>
 
                             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                              <Form.Check type="checkbox" />
+                              <Form.Check type="checkbox" onClick={(e) => { checkedNFTCount(e) }} />
                             </Form.Group>
                           </div>
                           <p> <span>94</span> days held </p>
@@ -135,7 +180,7 @@ function DH() {
                             <h5>DH # <span>00123</span> </h5>
 
                             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                              <Form.Check type="checkbox" />
+                              <Form.Check type="checkbox" onClick={(e) => { checkedNFTCount(e) }} />
                             </Form.Group>
                           </div>
                           <p> <span>94</span> days held </p>
@@ -151,7 +196,7 @@ function DH() {
                             <h5>DH # <span>00123</span> </h5>
 
                             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                              <Form.Check type="checkbox" />
+                              <Form.Check type="checkbox" onClick={(e) => { checkedNFTCount(e) }} />
                             </Form.Group>
                           </div>
                           <p> <span>94</span> days held </p>
@@ -167,7 +212,7 @@ function DH() {
                             <h5>DH # <span>00123</span> </h5>
 
                             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                              <Form.Check type="checkbox" />
+                              <Form.Check type="checkbox" onClick={(e) => { checkedNFTCount(e) }} />
                             </Form.Group>
                           </div>
                           <p> <span>94</span> days held </p>
@@ -183,7 +228,7 @@ function DH() {
                             <h5>DH # <span>00123</span> </h5>
 
                             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                              <Form.Check type="checkbox" />
+                              <Form.Check type="checkbox" onClick={(e) => { checkedNFTCount(e) }} />
                             </Form.Group>
                           </div>
                           <p> <span>94</span> days held </p>
@@ -198,8 +243,8 @@ function DH() {
             </div>
             <div className='col-lg-3 col-12'>
               <div className="dh_right_box">
-                <h4>3 out of 7 owned NFTs selected</h4>
-                <Button variant="success" className='green_btn'>Burn Selected NFTs</Button>
+                <h4>{count} out of 8 owned NFTs selected</h4>
+                <Button variant="success" id='burn_NftBtn' className='green_btn'>Burn Selected NFTs</Button>
               </div>
             </div>
           </div>

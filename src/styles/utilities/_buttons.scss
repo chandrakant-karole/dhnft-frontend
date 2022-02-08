@@ -54,3 +54,9 @@
   justify-content: center;
   font-weight: 500;
 }
+
+.btn:disabled {
+  cursor: not-allowed;
+  background: #085051;
+  border: 2px solid #067778;
+}

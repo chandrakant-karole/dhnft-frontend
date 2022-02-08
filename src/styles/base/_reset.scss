@@ -489,6 +489,42 @@ select {
 }
 
 a.second_nav {
-  border: 2px solid #0a2f2f;
-  padding: 10px;
+  border: 2px solid #7c7d7d;
+  padding: 10px 35px;
+  background-color: #0b1212;
+  border-radius: 25px;
+  color: #7c7d7d;
+  font-weight: 600;
+}
+
+
+.reward_section{
+  
+  .inner_nav_active{
+    border: 2px solid #00fcff;
+    padding: 10px 35px;
+    background-color: #0b1212;
+    border-radius: 25px;
+    color: #00fcff;
+    font-weight: 600;
+  }
+
+}
+
+.dh_NFT_cards_Div{
+  height: 390px;
+  overflow-y: scroll;
+}
+
+.dh_NFT_cards_Div::-webkit-scrollbar{
+  width: 10px;
+  background-color: #067778;
+  border-radius: 25px;
+}
+
+.dh_NFT_cards_Div::-webkit-scrollbar-thumb{
+  width: 10px;
+  background-color: #00fcff;
+  border-radius: 25px;
+  box-shadow: inset 0px 0px 6px #000;
 }

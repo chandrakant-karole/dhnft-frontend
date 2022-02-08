@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaTwitterSquare, FaDiscord } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
@@ -34,7 +34,6 @@ function Navbar() {
       console.log(address, 'this is the data we got ')
 
       document.getElementById('next').click();
-      // setAddress(address[0])
 
       // =============== redux ==============
       // dispatch(metaMaskAddress(address[0]))
@@ -47,13 +46,24 @@ function Navbar() {
 
       if (typeof address[0] === 'string') {
         document.getElementById('connected').innerText = 'Connected'
+        sessionStorage.setItem('Address', 'true')
       }
       setHide(ShowStyle)
     });
 
-    // console.log(Hide)
 
   }
+
+  useEffect(() => {
+    // ================== connected Wallet Txt ================
+    let checkAddress = sessionStorage.getItem('Address');
+    if(checkAddress === 'true'){
+      document.getElementById('connected').innerText = 'Connected'
+    }
+
+
+  }, []);
+
 
   return (
     <div className="navbar">

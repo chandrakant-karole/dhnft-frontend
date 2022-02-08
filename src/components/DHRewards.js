@@ -1,6 +1,8 @@
 import React from 'react';
 // import Navbar from "./Navbar";
 import Rewards from './Rewards';
+import Web3 from "web3";
+import { NFTAbi } from "../utility/contracts/stakingAbiWhiContract";
 // import { InputGroup, FormControl, Form, Button } from "react-bootstrap";
 // import rarity1 from "../assets/images/rarity/white.png";
 // import rarity2 from "../assets/images/rarity/magnethik.png";
@@ -11,8 +13,43 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import questionMark from '../assets/question-mark.svg';
 import logo from '../assets/logo-white.png';
 // import FooterCommon from './FooterCommon';
-
+const loginUserAddress = '0x3b235B5AF7841D8dF5dE1c01a56f52d560Bc35Dd'
+const web3 = new Web3(window.ethereum);
+const stakingABiWthiCONTRACT = new web3.eth.Contract(NFTAbi, '0x028cB60B6B11B4195937676ac99124E80917D1DC');
 export default function DHRewards() {
+    function stakeNFT() {
+        var stakeNumber = document.getElementById('stakeNumber').value;
+        console.log("stakeNumber",stakeNumber);
+        stakingABiWthiCONTRACT.methods.createStake(stakeNumber)
+        .send(
+            {
+            from: loginUserAddress,
+            value:stakeNumber,
+        }
+        )
+        .on('error', function(error){
+            console.log('error');
+        }).then( function( info ) {
+            console.log('success ',info);
+
+        });
+    }
+    function unStakeNFT() {
+        var unStakeNumber = document.getElementById('unStakeNumber').value;
+        console.log("unStakeNumber",unStakeNumber);
+        stakingABiWthiCONTRACT.methods.removeStake(unStakeNumber)
+        .send(
+            {
+            from: loginUserAddress,
+            value:unStakeNumber,
+        }
+        )
+        .on('error', function(error){
+            console.log('error');
+        }).then( function( info ) {
+            console.log('success ',info);
+        });
+    }
     return (
         <>
             {/* <Navbar /> */}
@@ -42,8 +79,8 @@ export default function DHRewards() {
                                             <Tab eventKey="Stake" className='stakeButton' title="Stake">
                                                 <div className="stakeContentDiv">
                                                     <div className="inputDiv">
-                                                        <input type="text" />
-                                                        <button>Stake</button>
+                                                        <input id="stakeNumber" type="number" />
+                                                        <button onClick={stakeNFT}>Stake</button>
                                                     </div>
                                                     <div className="ContentDiv">
                                                         <div className='StakewalletDiv'>
@@ -64,8 +101,8 @@ export default function DHRewards() {
                                             <Tab eventKey="UnStake" title="UnStake">
                                                 <div className="stakeContentDiv">
                                                     <div className="inputDiv">
-                                                        <input type="text" />
-                                                        <button>UnStake</button>
+                                                        <input id='unStakeNumber' type="number" />
+                                                        <button  onClick={unStakeNFT}>UnStake</button>
                                                     </div>
                                                     <div className="ContentDiv">
                                                         <div className='StakewalletDiv'>
