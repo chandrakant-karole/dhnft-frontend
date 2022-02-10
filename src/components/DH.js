@@ -2,6 +2,7 @@ import { React, useState, useEffect } from 'react'
 import '../styles/components/_connectwallet.scss';
 import { InputGroup, FormControl, Nav, Form, Button } from "react-bootstrap";
 import { Link } from 'react-router-dom';
+import dhfNFT from '../assets/dhfNft.png'
 
 // import Navbar from "./Navbar";
 import Rewards from './Rewards';
@@ -32,6 +33,16 @@ function DH() {
 
   const [transcID, setTranscID] = useState('')
 
+  
+  const dh_leftBox_style = {
+    display: 'none'
+  }
+  
+  const dh_leftBox_style1 = {
+    display: 'block'
+  }
+  
+  const [leftBox, setleftBox] = useState(dh_leftBox_style1)
 
   const checkedNFTCount = (e) => {
     const checkedItem = e.target.checked;
@@ -112,45 +123,88 @@ function DH() {
 
   }, [count]);
   
-  function burn(){
-    const http = require("https");
+//   function burn(){
+//     const http = require("https");
 
-    const options = {
-      "method": "POST",
-      "hostname": "api-us-west1.tatum.io",
-      "port": null,
-      "path": "/v3/nft/burn",
-      "headers": {
-        "content-type": "application/json",
-        "x-testnet-type": "ethereum-rinkeby",
-        "x-api-key": "6b9a5165-24f8-4f80-bc22-5dd8e37ad49c"
-      }
-    };
+//     const options = {
+//       "method": "POST",
+//       "hostname": "api-us-west1.tatum.io",
+//       "port": null,
+//       "path": "/v3/nft/burn",
+//       "headers": {
+//         "content-type": "application/json",
+//         "x-testnet-type": "ethereum-rinkeby",
+//         "x-api-key": "6b9a5165-24f8-4f80-bc22-5dd8e37ad49c"
+//       }
+//     };
 
-    const req = http.request(options, function (res) {
-      const chunks = [];
+//     const req = http.request(options, function (res) {
+//       const chunks = [];
 
-      res.on("data", function (chunk) {
-        chunks.push(chunk);
-      });
+//       res.on("data", function (chunk) {
+//         chunks.push(chunk);
+//       });
 
-      res.on("end", function () {
-        const body = Buffer.concat(chunks);
-        console.log(body.toString());
-        setTranscID(body.toString())
-      });
-    });
+//       res.on("end", function () {
+//         const body = Buffer.concat(chunks);
+//         console.log(body.toString());
+//         setTranscID(body.toString())
+//       });
+//     });
 
-    req.write(JSON.stringify({
-      chain: 'ETH',
-      tokenId: '7',
-      contractAddress: '0x5eb2275bf49a6351c3fc25c440dce9281891341c',
-      fromPrivateKey: 'e86d3e8b8351f86a1a1e0d1a9b7c97e8e442acd8905fbcb58a6bbb6e82ef18e8'
-    }));
-    req.end();
+//     req.write(JSON.stringify({
+//       chain: 'ETH',
+//       tokenId: '7',
+//       contractAddress: '0x5eb2275bf49a6351c3fc25c440dce9281891341c',
+//       fromPrivateKey: 'e86d3e8b8351f86a1a1e0d1a9b7c97e8e442acd8905fbcb58a6bbb6e82ef18e8'
+//     }));
+//     req.end();
   
+// };
+function burn(){
+  const http = require("https");
+
+const options = {
+  "method": "POST",
+  "hostname": "api-eu1.tatum.io",
+  "port": null,
+  "path": "/v3/multitoken/burn/batch",
+  "headers": {
+    "content-type": "application/json",
+    "x-testnet-type": "polygonscan",
+    "x-api-key": "bf846fcb-8fb4-4c74-a0ce-0e9642fc6741"
+  }
 };
 
+const req = http.request(options, function (res) {
+  const chunks = [];
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function () {
+    const body = Buffer.concat(chunks);
+    console.log(body.toString());
+    setTranscID(body.toString());
+    setleftBox(dh_leftBox_style)
+    document.getElementById('imageDivBox').style.display = 'block'
+  });
+});
+
+req.write(JSON.stringify({
+  chain: 'MATIC',
+  account: '0x4b812a77b109A150C2Fc89eD133EaBC78bC9EC8f',
+  tokenId: [
+		"1","2","3","4","5","6","7","8","9","10"
+	],
+  amounts: ["1","2","3","4","5","6","7","8","9","10"],
+  contractAddress: "0x4d81828fb2374b1a497fae02802265fef3c15e9f",
+	fromPrivateKey: "0d16e292185631cf0a4d3320e2f2a7f5969489d8cde0f933b0492d3bcd51414d",
+  fee: {gasLimit: '40000', gasPrice: '20'}
+}));
+req.end();
+}
   return (
     <div className="connect_wallet">
       {/* <Navbar /> */}
@@ -188,7 +242,13 @@ function DH() {
           </div> */}
           <div className='row'>
             <div className='col-lg-9 col-12'>
-              <div className="dh_left_box">
+              <div className="dh_left_box" id="imageDivBox" style={{display:'none'}}>
+                <div style={{display:' flex',justifyContent:' center',flexDirection:' column',alignItems: 'center'}}>
+                  <h2 className='my-4'>Your One DHF NFT</h2>
+                <img src={dhfNFT} style={{width:'400px'}}/>
+                </div>
+              </div>
+              <div className="dh_left_box" style={leftBox}>
                 {/* <h3>The Diamond Hands NFT (DH)</h3> */}
                 <div className='' style={{ padding: '0px 30px' }}>
                   <div className='row'>
