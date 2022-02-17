@@ -60,6 +60,7 @@ function DH() {
     }
   }
 
+  //======================== This is Modules and Remainder =====================
   console.log('updated count', count);
 
   let modulesNft = count % 8
@@ -81,8 +82,7 @@ function DH() {
       </div>`
     }
   }
-
-  console.log(zz);
+  // console.log(zz);
 
   function showNFTImg() {
     return { __html: `${zz}` };
@@ -189,49 +189,58 @@ function DH() {
 
   // };
   function burn() {
-    const http = require("https");
 
-    const options = {
-      "method": "POST",
-      "hostname": "api-eu1.tatum.io",
-      "port": null,
-      "path": "/v3/multitoken/burn/batch",
-      "headers": {
-        "content-type": "application/json",
-        "x-testnet-type": "polygonscan",
-        "x-api-key": "bf846fcb-8fb4-4c74-a0ce-0e9642fc6741"
-      }
-    };
 
-    const req = http.request(options, function (res) {
-      const chunks = [];
+    if (modulesNft === 0) {
+      const http = require("https");
 
-      res.on("data", function (chunk) {
-        chunks.push(chunk);
+      const options = {
+        "method": "POST",
+        "hostname": "api-eu1.tatum.io",
+        "port": null,
+        "path": "/v3/multitoken/burn/batch",
+        "headers": {
+          "content-type": "application/json",
+          "x-testnet-type": "polygonscan",
+          "x-api-key": "bf846fcb-8fb4-4c74-a0ce-0e9642fc6741"
+        }
+      };
+
+      const req = http.request(options, function (res) {
+        const chunks = [];
+
+        res.on("data", function (chunk) {
+          chunks.push(chunk);
+        });
+
+        res.on("end", function () {
+          const body = Buffer.concat(chunks);
+          console.log(body.toString());
+          setTranscID(body.toString());
+          setleftBox(dh_leftBox_style)
+          document.getElementById('imageDivBox').style.display = 'block'
+          document.getElementById('burn_NftBtn').setAttribute("disabled"," ")
+        });
       });
 
-      res.on("end", function () {
-        const body = Buffer.concat(chunks);
-        console.log(body.toString());
-        setTranscID(body.toString());
-        setleftBox(dh_leftBox_style)
-        document.getElementById('imageDivBox').style.display = 'block'
-      });
-    });
+      req.write(JSON.stringify({
+        chain: 'MATIC',
+        account: '0x4b812a77b109A150C2Fc89eD133EaBC78bC9EC8f',
+        tokenId: [
+          "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
+        ],
+        amounts: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+        contractAddress: "0x4d81828fb2374b1a497fae02802265fef3c15e9f",
+        fromPrivateKey: "0d16e292185631cf0a4d3320e2f2a7f5969489d8cde0f933b0492d3bcd51414d",
+        fee: { gasLimit: '40000', gasPrice: '20' }
+      }));
+      req.end();
+    }
+  else {
+    alert("Please Select NFT, that are Multiple of 8")
 
-    req.write(JSON.stringify({
-      chain: 'MATIC',
-      account: '0x4b812a77b109A150C2Fc89eD133EaBC78bC9EC8f',
-      tokenId: [
-        "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
-      ],
-      amounts: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
-      contractAddress: "0x4d81828fb2374b1a497fae02802265fef3c15e9f",
-      fromPrivateKey: "0d16e292185631cf0a4d3320e2f2a7f5969489d8cde0f933b0492d3bcd51414d",
-      fee: { gasLimit: '40000', gasPrice: '20' }
-    }));
-    req.end();
   }
+}
   return (
     <div className="connect_wallet">
       {/* <Navbar /> */}
@@ -580,7 +589,7 @@ function DH() {
             </div>
             <div className='col-lg-3 col-12'>
               <div className="dh_right_box">
-                <h4>{modulesNft} = {reminderNft}</h4>
+                {/* <h4>{modulesNft} = {reminderNft}</h4> */}
                 <h4>{count} out of 8 owned NFTs selected</h4>
                 <Button variant="success" id='burn_NftBtn' onClick={burn} className='green_btn'>Burn Selected NFTs</Button>
                 <h4 style={{ wordBreak: 'break-word' }}>Transaction Id : {transcID}</h4>

@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useRef } from 'react';
 // import Navbar from "./Navbar";
 import Rewards from './Rewards';
 import Web3 from "web3";
@@ -68,6 +68,91 @@ export default function DHRewards() {
             alert('Your token is less then unstake token number.. Please insert valid Number!')
         }
     }
+
+
+    function addToken(){
+        console.log("clicked");
+        // ================================================== POST tatum api ===================================================
+
+            // const addTokenOptions = {
+            //     method: "POST",
+            //     hostname: "api-eu1.tatum.io",
+            //     port: null,
+            //     path: "/v3/ethereum/smartcontract",
+            //     headers: {
+            //     "content-type": "application/json",
+            //     "x-testnet-type": "ethereum-rinkeby",
+            //     "x-api-key": "6b9a5165-24f8-4f80-bc22-5dd8e37ad49c"
+            //     }
+            // };
+
+        fetch("https://api-us-west1.tatum.io/v3/ethereum/smartcontract", { method: "POST", 
+            body: JSON.stringify({
+            contractAddress: "0x67a9d055423276f2ae490f1cf03057360108381d",
+            methodName: "transferToken",
+            methodABI:{
+                inputs: [
+                {
+                    internalType: "address",
+                    name: "owner",
+                    type: "address"
+                },
+                {
+                    internalType: "uint256",
+                    name: "amount",
+                    type: "uint256"
+                },
+                {
+                    internalType: "uint256",
+                    name: "numTokens",
+                    type: "uint256"
+                }
+                ],
+                name: "transferToken",
+                outputs: [
+                {
+                    internalType: "string",
+                    name: "",
+                    type: "string"
+                },
+                {
+                    internalType: "uint256",
+                    name: "",
+                    type: "uint256"
+                }
+                ],
+                stateMutability: "payable",
+                type: "function"
+            },
+            params: [
+                "0x19f310afcabc59b9c133a78f4003f3f292bdca90",
+                "1",
+                "1"
+            ],
+            fromPrivateKey: "0x1f89bc6d8e624a748839016424eec40bf48395b8809c48c5ae15073486e392c0",
+            fee: {
+                "gasLimit": "500000",
+                "gasPrice": "20"
+            }
+            
+            }),
+
+            headers: {
+                    "content-type": "application/json",
+                    "x-testnet-type": "ethereum-rinkeby",
+                    "x-api-key": "6b9a5165-24f8-4f80-bc22-5dd8e37ad49c"
+                    }
+
+        }).then(response => response.json())
+
+        .then(json => console.log(json));
+
+
+        console.log(addTokenValue.current.value);
+    }
+
+    const addTokenValue = useRef(null)
+
     return (
         <>
             {/* <Navbar /> */}
@@ -97,8 +182,8 @@ export default function DHRewards() {
                                             <Tab eventKey="Stake" className='stakeButton' title="Stake">
                                                 <div className="stakeContentDiv">
                                                     <div className="inputDiv my-4">
-                                                        <input type="text" />
-                                                        <button style={{ width: '150px' }}>Add Token</button>
+                                                        <input type="number" ref={addTokenValue}/>
+                                                        <button style={{ width: '150px' }} onClick={addToken}>Add Token</button>
                                                     </div>
                                                     <div className="inputDiv">
                                                         <input id="stakeNumber" type="number" />
@@ -123,7 +208,7 @@ export default function DHRewards() {
                                             <Tab eventKey="UnStake" title="UnStake">
                                                 <div className="stakeContentDiv">
                                                 <div className="inputDiv my-4">
-                                                        <input type="text" />
+                                                        <input type="number" />
                                                         <button style={{ width: '150px' }}>Add Token</button>
                                                     </div>
                                                     <div className="inputDiv">
@@ -172,7 +257,7 @@ export default function DHRewards() {
                                                 <button>Collect</button>
                                             </div>
                                             <div className="inputDiv mt-4">
-                                                <input type="text" />
+                                                <input type="number" />
                                                 <button style={{ width: '150px' }}>Add Token</button>
                                             </div>
                                             <div className="ContentDiv">
