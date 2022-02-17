@@ -1,4 +1,4 @@
-import {React, useState} from 'react';
+import { React, useState } from 'react';
 // import Navbar from "./Navbar";
 import Rewards from './Rewards';
 import Web3 from "web3";
@@ -22,49 +22,49 @@ export default function DHRewards() {
     let [diamondWallet, setDiamondWallet] = useState(0)
     function stakeNFT() {
         var stakeNumber = document.getElementById('stakeNumber').value;
-        console.log("stakeNumber",stakeNumber);
+        console.log("stakeNumber", stakeNumber);
         stakingABiWthiCONTRACT.methods.createStake(stakeNumber)
-        .send(
-            {
-            from: loginUserAddress,
-            value:stakeNumber,
-        }
-        )
-        .on('error', function(error){
-            setDiamondWallet(diamondWallet + parseInt(stakeNumber))
-            console.log(typeof stakeNumber);
-            // console.log()
-            // let o = stakeNumber.Number()
-            // console.log(typeof o);
-            console.log('error');
-        }).then( function( info ) {
-            console.log('success ',info);
-            // setDiamondWallet(diamondWallet + stakeNumber)
-            setDiamondWallet(diamondWallet + parseInt(stakeNumber))
-        });
+            .send(
+                {
+                    from: loginUserAddress,
+                    value: stakeNumber,
+                }
+            )
+            .on('error', function (error) {
+                setDiamondWallet(diamondWallet + parseInt(stakeNumber))
+                console.log(typeof stakeNumber);
+                // console.log()
+                // let o = stakeNumber.Number()
+                // console.log(typeof o);
+                console.log('error');
+            }).then(function (info) {
+                console.log('success ', info);
+                // setDiamondWallet(diamondWallet + stakeNumber)
+                setDiamondWallet(diamondWallet + parseInt(stakeNumber))
+            });
     }
     function unStakeNFT() {
         var unStakeNumber = document.getElementById('unStakeNumber').value;
-        console.log("parseInt(diamondWallet)",parseInt(diamondWallet),"unStakeNumber", parseInt(unStakeNumber));
-        if(parseInt(diamondWallet) > parseInt(unStakeNumber)){
+        console.log("parseInt(diamondWallet)", parseInt(diamondWallet), "unStakeNumber", parseInt(unStakeNumber));
+        if (parseInt(diamondWallet) > parseInt(unStakeNumber)) {
 
             var unStakeNumber = document.getElementById('unStakeNumber').value;
-            console.log("unStakeNumber",unStakeNumber);
+            console.log("unStakeNumber", unStakeNumber);
             stakingABiWthiCONTRACT.methods.removeStake(unStakeNumber)
-            .send(
-                {
-                from: loginUserAddress,
-                value:unStakeNumber,
-            }
-            )
-            .on('error', function(error){
-                setDiamondWallet(diamondWallet - parseInt(unStakeNumber))
-                console.log('error');
-            }).then( function( info ) {
-                console.log('success ',info);
-                setDiamondWallet(diamondWallet - parseInt(unStakeNumber))
-            });
-        } else{
+                .send(
+                    {
+                        from: loginUserAddress,
+                        value: unStakeNumber,
+                    }
+                )
+                .on('error', function (error) {
+                    setDiamondWallet(diamondWallet - parseInt(unStakeNumber))
+                    console.log('error');
+                }).then(function (info) {
+                    console.log('success ', info);
+                    setDiamondWallet(diamondWallet - parseInt(unStakeNumber))
+                });
+        } else {
             alert('Your token is less then unstake token number.. Please insert valid Number!')
         }
     }
@@ -96,6 +96,10 @@ export default function DHRewards() {
                                         <Tabs defaultActiveKey="Stake" id="uncontrolled-tab-example" className="my-3 customTab">
                                             <Tab eventKey="Stake" className='stakeButton' title="Stake">
                                                 <div className="stakeContentDiv">
+                                                    <div className="inputDiv my-4">
+                                                        <input type="text" />
+                                                        <button style={{ width: '150px' }}>Add Token</button>
+                                                    </div>
                                                     <div className="inputDiv">
                                                         <input id="stakeNumber" type="number" />
                                                         <button onClick={stakeNFT}>Stake</button>
@@ -118,9 +122,13 @@ export default function DHRewards() {
                                             </Tab>
                                             <Tab eventKey="UnStake" title="UnStake">
                                                 <div className="stakeContentDiv">
+                                                <div className="inputDiv my-4">
+                                                        <input type="text" />
+                                                        <button style={{ width: '150px' }}>Add Token</button>
+                                                    </div>
                                                     <div className="inputDiv">
                                                         <input id='unStakeNumber' type="number" />
-                                                        <button  onClick={unStakeNFT}>UnStake</button>
+                                                        <button onClick={unStakeNFT}>UnStake</button>
                                                     </div>
                                                     <div className="ContentDiv">
                                                         <div className='StakewalletDiv'>
@@ -163,6 +171,10 @@ export default function DHRewards() {
                                                 <input type="text" />
                                                 <button>Collect</button>
                                             </div>
+                                            <div className="inputDiv mt-4">
+                                                <input type="text" />
+                                                <button style={{ width: '150px' }}>Add Token</button>
+                                            </div>
                                             <div className="ContentDiv">
                                                 <div className='StakewalletDiv'>
                                                     <div className="text">
@@ -186,7 +198,7 @@ export default function DHRewards() {
                                                     <div className='compoundingDiv'>
                                                         Compounding <span><img src={questionMark} alt="icon" style={{ width: '25px', marginLeft: '10px' }} /></span>
                                                         <div className="compounding_popover">
-                                                        When you stake DIAMOND HAND, you also earn extra DIAMOND HAND as a bonus reward.
+                                                            When you stake DIAMOND HAND, you also earn extra DIAMOND HAND as a bonus reward.
                                                         </div>
                                                     </div>
                                                 </div>

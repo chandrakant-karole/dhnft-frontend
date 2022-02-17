@@ -1,8 +1,8 @@
-import { React, useState, useEffect } from 'react'
+import { React, useState, useEffect, useRef } from 'react'
 import '../styles/components/_connectwallet.scss';
 import { InputGroup, FormControl, Nav, Form, Button } from "react-bootstrap";
 import { Link } from 'react-router-dom';
-import dhfNFT from '../assets/dhfNft.png'
+import dhfNFT from '../assets/Trails.png'
 
 // import Navbar from "./Navbar";
 import Rewards from './Rewards';
@@ -27,21 +27,22 @@ function DH() {
 
   let [count, setCount] = useState(0);
 
-  
+
   const [contract, setContract] = useState([])
   const [metadataAll, setMetadataAll] = useState([])
+  const [imageArr, setImageArr] = useState([])
 
   const [transcID, setTranscID] = useState('')
 
-  
+
   const dh_leftBox_style = {
     display: 'none'
   }
-  
+
   const dh_leftBox_style1 = {
     display: 'block'
   }
-  
+
   const [leftBox, setleftBox] = useState(dh_leftBox_style1)
 
   const checkedNFTCount = (e) => {
@@ -51,7 +52,7 @@ function DH() {
       // console.log('checked')
       setCount(count + 1)
       // console.log(count)
-    } 
+    }
     if (checkedItem === false) {
       // console.log('not checked');
       setCount(count - 1)
@@ -59,152 +60,178 @@ function DH() {
     }
   }
 
-  console.log('updated count',count);
+  console.log('updated count', count);
+
+  let modulesNft = count % 8
+  let reminderNft = count / 8
+
+  console.log("modulesNft", modulesNft);
+  console.log("reminderNft", reminderNft);
+
+
+  // ==================== This is NFT image after Burn NFT ====================
+  const countO = useRef(`hello 1`);
+  let zz = ""
+  if (modulesNft === 0) {
+    for (let i = 0; i < reminderNft; i++) {
+      // console.log("xxxxxxxxxxxxxx", countO.current)
+      // zz +=   countO.current + "<br>"
+      zz += `<div class="col-lg-4 my-2">
+      <img src=${dhfNFT} />
+      </div>`
+    }
+  }
+
+  console.log(zz);
+
+  function showNFTImg() {
+    return { __html: `${zz}` };
+  }
 
   useEffect(() => {
     // ==================== Enable / Disabled ===========================
-    if(count > 7){
+    if (count > 7) {
       console.log('enabled Btn');
       document.getElementById('burn_NftBtn').removeAttribute("disabled");
-    } 
-    if(count < 8) {
+    }
+    if (count < 8) {
       document.getElementById('burn_NftBtn').setAttribute("disabled", " ");
     }
 
 
     // ================================= Fetch ===============================
     fetch("https://api-us-west1.tatum.io/v3/nft/address/balance/ETH/0x5f9c31883229bf1cff7c373b9bd5ab7867d136fc", requestOptions).then(res => res.json())
-    .then(
-      (result) => {
-        console.log("result", result);
-        setContract(result)
-        // console.log();
-        // this.setState({
-        //   isLoaded: true,
-        //   items: result.items
-        // });
+      .then(
+        (result) => {
+          console.log("result", result);
+          setContract(result)
+          // console.log();
+          // this.setState({
+          //   isLoaded: true,
+          //   items: result.items
+          // });
 
 
-        result.map((param)=>{
-          if(param.contractAddress === '0x3290f349a0642229b46b7102d2024b34fe8bd3cc'){
-          // if(param.contractAddress === "0xfbb89d3e41e1d0ab8d2e1453b2a2278b8644c8a2"){
-            
-            console.log("metadata179", param.metadata)
-            setMetadataAll(param.metadata)
-            console.log(param.metadata);
-            console.log("param.metadata[0].metadata.image",param.metadata[0].metadata.image)
-            // let urlSplit = param.metadata[0].metadata.image.split('./')[1] 
-            // console.log('urlSplit',urlSplit)
-            // let imgUrl = 'https://ipfs.io' + urlSplit
-            // console.log('imgUrl', imgUrl);
-            // metadataAll.map((urls)=>{
-            //   console.log('urls',urls);
-            //   console.log(urls.metadata);
-            // })
-          } else {
-            console.log('something worng');
-            console.log(param.contractAddress)
-          }
-        })
-      },
+          result.map((param) => {
+            if (param.contractAddress === '0x3290f349a0642229b46b7102d2024b34fe8bd3cc') {
+              // if(param.contractAddress === "0xfbb89d3e41e1d0ab8d2e1453b2a2278b8644c8a2"){
+
+              console.log("metadata179", param.metadata)
+              setMetadataAll(param.metadata)
+              console.log(param.metadata);
+              console.log("param.metadata[0].metadata.image", param.metadata[0].metadata.image)
+              // let urlSplit = param.metadata[0].metadata.image.split('./')[1] 
+              // console.log('urlSplit',urlSplit)
+              // let imgUrl = 'https://ipfs.io' + urlSplit
+              // console.log('imgUrl', imgUrl);
+              // metadataAll.map((urls)=>{
+              //   console.log('urls',urls);
+              //   console.log(urls.metadata);
+              // })
+            } else {
+              console.log('something worng');
+              console.log(param.contractAddress)
+            }
+          })
+        },
 
 
-      // Note: it's important to handle errors here
-      // instead of a catch() block so that we don't swallow
-      // exceptions from actual bugs in components.
-      (error) => {
-        console.log("error", error);
-        // this.setState({
-        //   isLoaded: true,
-        //   error
-        // });
-      }
-    )
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          console.log("error", error);
+          // this.setState({
+          //   isLoaded: true,
+          //   error
+          // });
+        }
+      )
 
   }, [count]);
-  
-//   function burn(){
-//     const http = require("https");
 
-//     const options = {
-//       "method": "POST",
-//       "hostname": "api-us-west1.tatum.io",
-//       "port": null,
-//       "path": "/v3/nft/burn",
-//       "headers": {
-//         "content-type": "application/json",
-//         "x-testnet-type": "ethereum-rinkeby",
-//         "x-api-key": "6b9a5165-24f8-4f80-bc22-5dd8e37ad49c"
-//       }
-//     };
+  //   function burn(){
+  //     const http = require("https");
 
-//     const req = http.request(options, function (res) {
-//       const chunks = [];
+  //     const options = {
+  //       "method": "POST",
+  //       "hostname": "api-us-west1.tatum.io",
+  //       "port": null,
+  //       "path": "/v3/nft/burn",
+  //       "headers": {
+  //         "content-type": "application/json",
+  //         "x-testnet-type": "ethereum-rinkeby",
+  //         "x-api-key": "6b9a5165-24f8-4f80-bc22-5dd8e37ad49c"
+  //       }
+  //     };
 
-//       res.on("data", function (chunk) {
-//         chunks.push(chunk);
-//       });
+  //     const req = http.request(options, function (res) {
+  //       const chunks = [];
 
-//       res.on("end", function () {
-//         const body = Buffer.concat(chunks);
-//         console.log(body.toString());
-//         setTranscID(body.toString())
-//       });
-//     });
+  //       res.on("data", function (chunk) {
+  //         chunks.push(chunk);
+  //       });
 
-//     req.write(JSON.stringify({
-//       chain: 'ETH',
-//       tokenId: '7',
-//       contractAddress: '0x5eb2275bf49a6351c3fc25c440dce9281891341c',
-//       fromPrivateKey: 'e86d3e8b8351f86a1a1e0d1a9b7c97e8e442acd8905fbcb58a6bbb6e82ef18e8'
-//     }));
-//     req.end();
-  
-// };
-function burn(){
-  const http = require("https");
+  //       res.on("end", function () {
+  //         const body = Buffer.concat(chunks);
+  //         console.log(body.toString());
+  //         setTranscID(body.toString())
+  //       });
+  //     });
 
-const options = {
-  "method": "POST",
-  "hostname": "api-eu1.tatum.io",
-  "port": null,
-  "path": "/v3/multitoken/burn/batch",
-  "headers": {
-    "content-type": "application/json",
-    "x-testnet-type": "polygonscan",
-    "x-api-key": "bf846fcb-8fb4-4c74-a0ce-0e9642fc6741"
+  //     req.write(JSON.stringify({
+  //       chain: 'ETH',
+  //       tokenId: '7',
+  //       contractAddress: '0x5eb2275bf49a6351c3fc25c440dce9281891341c',
+  //       fromPrivateKey: 'e86d3e8b8351f86a1a1e0d1a9b7c97e8e442acd8905fbcb58a6bbb6e82ef18e8'
+  //     }));
+  //     req.end();
+
+  // };
+  function burn() {
+    const http = require("https");
+
+    const options = {
+      "method": "POST",
+      "hostname": "api-eu1.tatum.io",
+      "port": null,
+      "path": "/v3/multitoken/burn/batch",
+      "headers": {
+        "content-type": "application/json",
+        "x-testnet-type": "polygonscan",
+        "x-api-key": "bf846fcb-8fb4-4c74-a0ce-0e9642fc6741"
+      }
+    };
+
+    const req = http.request(options, function (res) {
+      const chunks = [];
+
+      res.on("data", function (chunk) {
+        chunks.push(chunk);
+      });
+
+      res.on("end", function () {
+        const body = Buffer.concat(chunks);
+        console.log(body.toString());
+        setTranscID(body.toString());
+        setleftBox(dh_leftBox_style)
+        document.getElementById('imageDivBox').style.display = 'block'
+      });
+    });
+
+    req.write(JSON.stringify({
+      chain: 'MATIC',
+      account: '0x4b812a77b109A150C2Fc89eD133EaBC78bC9EC8f',
+      tokenId: [
+        "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
+      ],
+      amounts: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+      contractAddress: "0x4d81828fb2374b1a497fae02802265fef3c15e9f",
+      fromPrivateKey: "0d16e292185631cf0a4d3320e2f2a7f5969489d8cde0f933b0492d3bcd51414d",
+      fee: { gasLimit: '40000', gasPrice: '20' }
+    }));
+    req.end();
   }
-};
-
-const req = http.request(options, function (res) {
-  const chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    const body = Buffer.concat(chunks);
-    console.log(body.toString());
-    setTranscID(body.toString());
-    setleftBox(dh_leftBox_style)
-    document.getElementById('imageDivBox').style.display = 'block'
-  });
-});
-
-req.write(JSON.stringify({
-  chain: 'MATIC',
-  account: '0x4b812a77b109A150C2Fc89eD133EaBC78bC9EC8f',
-  tokenId: [
-		"1","2","3","4","5","6","7","8","9","10"
-	],
-  amounts: ["1","2","3","4","5","6","7","8","9","10"],
-  contractAddress: "0x4d81828fb2374b1a497fae02802265fef3c15e9f",
-	fromPrivateKey: "0d16e292185631cf0a4d3320e2f2a7f5969489d8cde0f933b0492d3bcd51414d",
-  fee: {gasLimit: '40000', gasPrice: '20'}
-}));
-req.end();
-}
   return (
     <div className="connect_wallet">
       {/* <Navbar /> */}
@@ -242,10 +269,13 @@ req.end();
           </div> */}
           <div className='row'>
             <div className='col-lg-9 col-12'>
-              <div className="dh_left_box" id="imageDivBox" style={{display:'none'}}>
-                <div style={{display:' flex',justifyContent:' center',flexDirection:' column',alignItems: 'center'}}>
+              <div className="dh_left_box" id="imageDivBox" style={{ display: 'none' }}>
+                <div style={{ display: ' flex', justifyContent: ' center', flexDirection: ' column', alignItems: 'center' }}>
                   <h2 className='my-4'>Your One DHF NFT</h2>
-                <img src={dhfNFT} style={{width:'400px'}}/>
+                  <div className='container'>
+                    <div className='row justify-content-center' dangerouslySetInnerHTML={showNFTImg()}>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="dh_left_box" style={leftBox}>
@@ -266,7 +296,7 @@ req.end();
                 </div>
                 <div className='container'>
                   <div className='row dh_NFT_cards_Div'>
-                  {/* {metadataAll.map((urls) => {
+                    {/* {metadataAll.map((urls) => {
                           return <div className='col-lg-3 col-md-6 col-12' key={urls.metadata.image}>
                             <div className='nft_boxes'>
                               <img src={urls.metadata.image} alt="" />
@@ -414,6 +444,135 @@ req.end();
                         </div>
                       </div>
                     </div>
+                    <div className='col-lg-3 col-md-6 col-12'>
+                      <div className='nft_boxes'>
+                        <img src={rarity1} alt="" />
+                        <div className='nft_box_btm'>
+                          <div className='title_card'>
+                            <h5>DH # <span>00123</span> </h5>
+
+                            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                              <Form.Check type="checkbox" onClick={(e) => { checkedNFTCount(e) }} />
+                            </Form.Group>
+                          </div>
+                          <p> <span>94</span> days held </p>
+                          <p> DHT Reward: <span>3000</span> </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className='col-lg-3 col-md-6 col-12'>
+                      <div className='nft_boxes'>
+                        <img src={rarity2} alt="" />
+                        <div className='nft_box_btm'>
+                          <div className='title_card'>
+                            <h5>DH # <span>00123</span> </h5>
+
+                            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                              <Form.Check type="checkbox" onClick={(e) => { checkedNFTCount(e) }} />
+                            </Form.Group>
+                          </div>
+                          <p> <span>94</span> days held </p>
+                          <p> DHT Reward: <span>3000</span> </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='col-lg-3 col-md-6 col-12'>
+                      <div className='nft_boxes'>
+                        <img src={rarity3} alt="" />
+                        <div className='nft_box_btm'>
+                          <div className='title_card'>
+                            <h5>DH # <span>00123</span> </h5>
+
+                            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                              <Form.Check type="checkbox" onClick={(e) => { checkedNFTCount(e) }} />
+                            </Form.Group>
+                          </div>
+                          <p> <span>94</span> days held </p>
+                          <p> DHT Reward: <span>3000</span> </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='col-lg-3 col-md-6 col-12'>
+                      <div className='nft_boxes'>
+                        <img src={rarity4} alt="" />
+                        <div className='nft_box_btm'>
+                          <div className='title_card'>
+                            <h5>DH # <span>00123</span> </h5>
+
+                            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                              <Form.Check type="checkbox" onClick={(e) => { checkedNFTCount(e) }} />
+                            </Form.Group>
+                          </div>
+                          <p> <span>94</span> days held </p>
+                          <p> DHT Reward: <span>3000</span> </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='col-lg-3 col-md-6 col-12'>
+                      <div className='nft_boxes'>
+                        <img src={rarity4} alt="" />
+                        <div className='nft_box_btm'>
+                          <div className='title_card'>
+                            <h5>DH # <span>00123</span> </h5>
+
+                            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                              <Form.Check type="checkbox" onClick={(e) => { checkedNFTCount(e) }} />
+                            </Form.Group>
+                          </div>
+                          <p> <span>94</span> days held </p>
+                          <p> DHT Reward: <span>3000</span> </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='col-lg-3 col-md-6 col-12'>
+                      <div className='nft_boxes'>
+                        <img src={rarity3} alt="" />
+                        <div className='nft_box_btm'>
+                          <div className='title_card'>
+                            <h5>DH # <span>00123</span> </h5>
+
+                            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                              <Form.Check type="checkbox" onClick={(e) => { checkedNFTCount(e) }} />
+                            </Form.Group>
+                          </div>
+                          <p> <span>94</span> days held </p>
+                          <p> DHT Reward: <span>3000</span> </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='col-lg-3 col-md-6 col-12'>
+                      <div className='nft_boxes'>
+                        <img src={rarity2} alt="" />
+                        <div className='nft_box_btm'>
+                          <div className='title_card'>
+                            <h5>DH # <span>00123</span> </h5>
+
+                            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                              <Form.Check type="checkbox" onClick={(e) => { checkedNFTCount(e) }} />
+                            </Form.Group>
+                          </div>
+                          <p> <span>94</span> days held </p>
+                          <p> DHT Reward: <span>3000</span> </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='col-lg-3 col-md-6 col-12'>
+                      <div className='nft_boxes'>
+                        <img src={rarity1} alt="" />
+                        <div className='nft_box_btm'>
+                          <div className='title_card'>
+                            <h5>DH # <span>00123</span> </h5>
+
+                            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                              <Form.Check type="checkbox" onClick={(e) => { checkedNFTCount(e) }} />
+                            </Form.Group>
+                          </div>
+                          <p> <span>94</span> days held </p>
+                          <p> DHT Reward: <span>3000</span> </p>
+                        </div>
+                      </div>
+                    </div>
 
                   </div>
                 </div>
@@ -421,9 +580,10 @@ req.end();
             </div>
             <div className='col-lg-3 col-12'>
               <div className="dh_right_box">
+                <h4>{modulesNft} = {reminderNft}</h4>
                 <h4>{count} out of 8 owned NFTs selected</h4>
                 <Button variant="success" id='burn_NftBtn' onClick={burn} className='green_btn'>Burn Selected NFTs</Button>
-                    <h4 style={{wordBreak: 'break-word'}}>Transaction Id : {transcID}</h4>
+                <h4 style={{ wordBreak: 'break-word' }}>Transaction Id : {transcID}</h4>
               </div>
             </div>
           </div>

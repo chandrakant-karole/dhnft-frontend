@@ -8,13 +8,13 @@ function Rewards() {
   
   useEffect(() => {
     
-    if(window.location.pathname === '/dht_token/DH' || window.location.pathname === '/dht_token/DHF' || window.location.pathname === '/dht_token/DHT'){
+    if(window.location.pathname === '/stringblock/DH' || window.location.pathname === '/stringblock/DHF' || window.location.pathname === '/stringblock/DHT'){
       setActiveBurn('inner_nav_active')
     } else {
       setActiveBurn('')
     }
 
-    if(window.location.pathname === '/dht_token/DH_Rewards'){
+    if(window.location.pathname === '/stringblock/DH_Rewards'){
       setActiveStaking('inner_nav_active')
     } else {
       setActiveStaking('')
