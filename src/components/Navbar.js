@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FaTwitterSquare, FaDiscord } from "react-icons/fa";
 import { Link } from "react-router-dom";
 

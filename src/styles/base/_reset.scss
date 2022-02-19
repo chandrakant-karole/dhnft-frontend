@@ -514,6 +514,14 @@ a.second_nav {
 .dh_NFT_cards_Div{
   height: 390px;
   overflow-y: scroll;
+  width: 100%;
+}
+
+.dh_NFT_cards_InnerDiv{
+  display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
 .dh_NFT_cards_Div::-webkit-scrollbar{

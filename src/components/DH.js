@@ -1,5 +1,6 @@
 import { React, useState, useEffect, useRef } from 'react'
 import '../styles/components/_connectwallet.scss';
+import { Grid } from  'react-loader-spinner'
 import { InputGroup, FormControl, Nav, Form, Button } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import dhfNFT from '../assets/Trails.png'
@@ -28,6 +29,8 @@ function DH() {
   //   window.location.pathname = '/dht_token/'
   //   console.log('checkAddress->', checkAddress1);
   // }
+
+  const [loader, setLoader] = useState(false)
 
   let [count, setCount] = useState(0);
 
@@ -108,13 +111,13 @@ function DH() {
   }, [count])
 
   useEffect(() => {
-
+    // setLoader()
 
     // ================================= Fetch ===============================
     fetch("https://api-eu1.tatum.io/v3/nft/address/balance/MATIC/0xd57a6427ad96c17b7611f99967a65451f97b1c74", requestOptions).then(res => res.json())
       .then(
         (result) => {
-          // console.log("result", result.balances);
+          // console.log("result", result);
           setContract(result)
           // setIpfs(result.balances)
           // console.log(ipfs);
@@ -140,7 +143,7 @@ function DH() {
               ipfs.push(ipfs1)
             });
             setIpfs(ipfs)
-           
+            setLoader(true)
             if (param.contractAddress === '0x45e6d6a4598dcdd20df354de0882c9844b47db20') {
               // if(param.contractAddress === "0xfbb89d3e41e1d0ab8d2e1453b2a2278b8644c8a2"){
 
@@ -335,7 +338,7 @@ function DH() {
                 </div>
                 <div className='container'>
                   <div className='row dh_NFT_cards_Div'>
-                    {ipfs.map((urls) => {
+                    {loader ? ipfs.map((urls) => {
                           return <div className='col-lg-3 col-md-6 col-12' key={urls}>
                             <div className='nft_boxes'>
                               <img src={urls} alt="" />
@@ -352,7 +355,10 @@ function DH() {
                               </div>
                             </div>
                           </div>
-                        })
+                        }) : <div className='dh_NFT_cards_InnerDiv'>
+                              {/* <Audio height="100" width="100" color='grey' ariaLabel='loading'/> */}
+                              <Grid color="#FFFFFF" height={60} width={60} />
+                            </div>
                       }
 
                     {/* <div className='col-lg-3 col-md-6 col-12'>
