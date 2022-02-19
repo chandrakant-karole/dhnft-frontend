@@ -14,11 +14,19 @@ import questionMark from '../assets/question-mark.svg';
 import logo from '../assets/logo-white.png';
 // import FooterCommon from './FooterCommon';
 
+import { CONTACT_ADDRESS, CONTACT_ABI } from '../contract/GVOToken'
+const web3 = new Web3(Web3.givenProvider || 'http://localhost:7545');
 
-const loginUserAddress = '0x3b235B5AF7841D8dF5dE1c01a56f52d560Bc35Dd'
-const web3 = new Web3(window.ethereum);
-const stakingABiWthiCONTRACT = new web3.eth.Contract(NFTAbi, '0x028cB60B6B11B4195937676ac99124E80917D1DC');
+
+// ================================================= Stake and UnStake Start ============================================
+var loginUserAddress1 = '';
+const web3_Stake = new Web3(window.ethereum);
+window.ethereum.enable().then((address) => {
+    loginUserAddress1 = address[0];
+})
+const stakingABiWthiCONTRACT = new web3_Stake.eth.Contract(NFTAbi, '0x028cB60B6B11B4195937676ac99124E80917D1DC');
 export default function DHRewards() {
+
     let [diamondWallet, setDiamondWallet] = useState(0)
     function stakeNFT() {
         var stakeNumber = document.getElementById('stakeNumber').value;
@@ -26,7 +34,7 @@ export default function DHRewards() {
         stakingABiWthiCONTRACT.methods.createStake(stakeNumber)
             .send(
                 {
-                    from: loginUserAddress,
+                    from: loginUserAddress1,
                     value: stakeNumber,
                 }
             )
@@ -53,7 +61,7 @@ export default function DHRewards() {
             stakingABiWthiCONTRACT.methods.removeStake(unStakeNumber)
                 .send(
                     {
-                        from: loginUserAddress,
+                        from: loginUserAddress1,
                         value: unStakeNumber,
                     }
                 )
@@ -68,91 +76,67 @@ export default function DHRewards() {
             alert('Your token is less then unstake token number.. Please insert valid Number!')
         }
     }
+    // ================================================= Stake and UnStake End ============================================
+
+    // ================================================= Add Token Start ============================================
+    const TokenValue = useRef(null)
+
+    const addToken = async (e) => {
+        let tokenValue = TokenValue.current.value
+        console.log("event", tokenValue)
+        console.log('mintNft');
+        await window.ethereum.enable().then((address) => {
+            var loginUserAddress = address[0];
+            console.log(address, 'this is the data we got ')
 
 
-    function addToken(){
-        console.log("clicked");
-        // ================================================== POST tatum api ===================================================
+            const contactList = new web3.eth.Contract(CONTACT_ABI, CONTACT_ADDRESS);
 
-            // const addTokenOptions = {
-            //     method: "POST",
-            //     hostname: "api-eu1.tatum.io",
-            //     port: null,
-            //     path: "/v3/ethereum/smartcontract",
-            //     headers: {
-            //     "content-type": "application/json",
-            //     "x-testnet-type": "ethereum-rinkeby",
-            //     "x-api-key": "6b9a5165-24f8-4f80-bc22-5dd8e37ad49c"
-            //     }
-            // };
+            // const web_value = web3.utils.toWei(tokenValue, 'ether');
+            // console.log(web_value);
 
-        fetch("https://api-us-west1.tatum.io/v3/ethereum/smartcontract", { method: "POST", 
-            body: JSON.stringify({
-            contractAddress: "0x67a9d055423276f2ae490f1cf03057360108381d",
-            methodName: "transferToken",
-            methodABI:{
-                inputs: [
-                {
-                    internalType: "address",
-                    name: "owner",
-                    type: "address"
-                },
-                {
-                    internalType: "uint256",
-                    name: "amount",
-                    type: "uint256"
-                },
-                {
-                    internalType: "uint256",
-                    name: "numTokens",
-                    type: "uint256"
-                }
-                ],
-                name: "transferToken",
-                outputs: [
-                {
-                    internalType: "string",
-                    name: "",
-                    type: "string"
-                },
-                {
-                    internalType: "uint256",
-                    name: "",
-                    type: "uint256"
-                }
-                ],
-                stateMutability: "payable",
-                type: "function"
-            },
-            params: [
-                "0x19f310afcabc59b9c133a78f4003f3f292bdca90",
-                "1",
-                "1"
-            ],
-            fromPrivateKey: "0x1f89bc6d8e624a748839016424eec40bf48395b8809c48c5ae15073486e392c0",
-            fee: {
-                "gasLimit": "500000",
-                "gasPrice": "20"
-            }
-            
-            }),
+            var tokenPirce = 0.0001;
+            console.log(" tokenValue", tokenValue);
+            var totalAmount = tokenPirce * tokenValue;
 
-            headers: {
-                    "content-type": "application/json",
-                    "x-testnet-type": "ethereum-rinkeby",
-                    "x-api-key": "6b9a5165-24f8-4f80-bc22-5dd8e37ad49c"
+            console.log('tokenPirce', tokenPirce);
+            console.log('totalAmount', totalAmount);
+            var tokens = web3.utils.toWei(totalAmount.toString(), 'ether')
+            var bntokens = web3.utils.toBN(tokens)
+
+            console.log('tokens', tokens);
+            console.log('bntokens', bntokens);
+            console.log("210000*tokenValue,", 100000 * tokenValue);
+
+            // contactList.methods.transferToken('0x01f58f74ceb948455ff28ecc6e402225c1778d26',bntokens,tokenValue) //client contract address 
+            contactList.methods.transferToken('0x79319A973Be6C6F0cbad2206ea4F6573A9ecF223', tokens, tokenValue) //nadeeem contract address
+                .send(
+                    {
+                        from: loginUserAddress,
+                        gas: 4000000,
+                        gas: 200000 * tokenValue,
+                        // value: web_value,
+                        // value:5
+                        value: tokens,
+                        // gasPrice:'130000000000',
+                        // gasPrice: '5400000000',
                     }
+                )
+                .on('error', function (error) {
+                    console.log('error');
+                    // location.reload();
+                }).then(function (info) {
+                    console.log('success ', info);
+                    alert("You got the GVO Token , Please check the MetaMask! || If You dont get the token the add this Token Address : 0x2b0b868e5595715e3b5d9e54fc58ed6b1f27a450")
+                    // window.location.href = "/success";
+                    // var token_id = info.events.Transfer.returnValues.tokenId;
+                    // var transactionHash = info.transactionHash;
 
-        }).then(response => response.json())
-
-        .then(json => console.log(json));
-
-
-        console.log(addTokenValue.current.value);
+                });
+            // setShow(false)
+        });
     }
-
-    const addTokenValue = useRef(null)
-
+    // ================================================= Add Token End ============================================
     return (
         <>
             {/* <Navbar /> */}
@@ -182,7 +166,7 @@ export default function DHRewards() {
                                             <Tab eventKey="Stake" className='stakeButton' title="Stake">
                                                 <div className="stakeContentDiv">
                                                     <div className="inputDiv my-4">
-                                                        <input type="number" ref={addTokenValue}/>
+                                                        <input type="number" ref={TokenValue} />
                                                         <button style={{ width: '150px' }} onClick={addToken}>Add Token</button>
                                                     </div>
                                                     <div className="inputDiv">
@@ -207,7 +191,7 @@ export default function DHRewards() {
                                             </Tab>
                                             <Tab eventKey="UnStake" title="UnStake">
                                                 <div className="stakeContentDiv">
-                                                <div className="inputDiv my-4">
+                                                    <div className="inputDiv my-4">
                                                         <input type="number" />
                                                         <button style={{ width: '150px' }}>Add Token</button>
                                                     </div>

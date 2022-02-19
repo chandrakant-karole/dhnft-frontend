@@ -14,7 +14,11 @@ import rarity4 from "../assets/images/rarity/framed.png";
 const requestOptions = {
   method: 'GET',
   // headers: { 'x-api-key': '2527a5e1-0c06-48a6-abcc-74fdbc9c7ce4' } //testnet
-  headers: { 'x-api-key': '13d40da7-80c9-4277-a5a0-1d636579613b' } //mainet
+  headers: { 'x-api-key': 'bf846fcb-8fb4-4c74-a0ce-0e9642fc6741',
+            'x-testnet-type':'polygonscan',
+            'Content-Type': 'application/json',
+            'PageSize': '10'
+            } //mainet
 };
 function DH() {
   // ======================== Sessions =========================
@@ -33,6 +37,10 @@ function DH() {
   const [imageArr, setImageArr] = useState([])
 
   const [transcID, setTranscID] = useState('')
+  // const [paramMetaData, setParamMetaData] = useState([])
+  const [ipfs, setIpfs] = useState([])
+
+
 
 
   const dh_leftBox_style = {
@@ -47,7 +55,7 @@ function DH() {
 
   const checkedNFTCount = (e) => {
     const checkedItem = e.target.checked;
-    console.log(checkedItem);
+    // console.log(checkedItem);
     if (checkedItem === true) {
       // console.log('checked')
       setCount(count + 1)
@@ -61,13 +69,13 @@ function DH() {
   }
 
   //======================== This is Modules and Remainder =====================
-  console.log('updated count', count);
+  // console.log('updated count', count);
 
   let modulesNft = count % 8
   let reminderNft = count / 8
 
-  console.log("modulesNft", modulesNft);
-  console.log("reminderNft", reminderNft);
+  // console.log("modulesNft", modulesNft);
+  // console.log("reminderNft", reminderNft);
 
 
   // ==================== This is NFT image after Burn NFT ====================
@@ -77,7 +85,7 @@ function DH() {
     for (let i = 0; i < reminderNft; i++) {
       // console.log("xxxxxxxxxxxxxx", countO.current)
       // zz +=   countO.current + "<br>"
-      zz += `<div class="col-lg-4 my-2">
+      zz += `<div class="col-lg-4 col-md-6 col-12 my-2">
       <img src=${dhfNFT} />
       </div>`
     }
@@ -87,39 +95,59 @@ function DH() {
   function showNFTImg() {
     return { __html: `${zz}` };
   }
-
-  useEffect(() => {
+  useEffect(()=>{
     // ==================== Enable / Disabled ===========================
     if (count > 7) {
-      console.log('enabled Btn');
+      // console.log('enabled Btn');
       document.getElementById('burn_NftBtn').removeAttribute("disabled");
     }
     if (count < 8) {
       document.getElementById('burn_NftBtn').setAttribute("disabled", " ");
     }
 
+  }, [count])
+
+  useEffect(() => {
+
 
     // ================================= Fetch ===============================
-    fetch("https://api-us-west1.tatum.io/v3/nft/address/balance/ETH/0x5f9c31883229bf1cff7c373b9bd5ab7867d136fc", requestOptions).then(res => res.json())
+    fetch("https://api-eu1.tatum.io/v3/nft/address/balance/MATIC/0xd57a6427ad96c17b7611f99967a65451f97b1c74", requestOptions).then(res => res.json())
       .then(
         (result) => {
-          console.log("result", result);
+          // console.log("result", result.balances);
           setContract(result)
+          // setIpfs(result.balances)
+          // console.log(ipfs);
           // console.log();
           // this.setState({
           //   isLoaded: true,
           //   items: result.items
           // });
 
-
+          let num = 100
           result.map((param) => {
-            if (param.contractAddress === '0x3290f349a0642229b46b7102d2024b34fe8bd3cc') {
+            // setParamMetaData(param.metadata)
+            // console.log("meta DAta",param.metadata);
+            // param.metadata.map((resp)=>{console.log("metaDATA",resp)})
+            // console.log(param.metadata[0].url);
+            // console.log(param.metadata[0].url.split("/"));
+            // console.log(param.metadata[0].url.split("/")[2]);
+            param.balances.map((res)=>{
+              num =  num+ 1
+              // console.log(num);
+              let ipfs1 = 'https://gateway.pinata.cloud/ipfs/'+'QmNWsCuxDLHstrGU55oA7i8b8JuT7JSUxYKYN2Nyr6aYjj'+'/DHF_'+num+'.png';
+              // console.log("ipfs", typeof ipfs);
+              ipfs.push(ipfs1)
+            });
+            setIpfs(ipfs)
+           
+            if (param.contractAddress === '0x45e6d6a4598dcdd20df354de0882c9844b47db20') {
               // if(param.contractAddress === "0xfbb89d3e41e1d0ab8d2e1453b2a2278b8644c8a2"){
 
-              console.log("metadata179", param.metadata)
+              // console.log("metadata179", param.metadata)
               setMetadataAll(param.metadata)
-              console.log(param.metadata);
-              console.log("param.metadata[0].metadata.image", param.metadata[0].metadata.image)
+              // console.log(param.metadata);
+              // console.log("param.metadata[0].metadata.image", param.metadata[0].metadata.image)
               // let urlSplit = param.metadata[0].metadata.image.split('./')[1] 
               // console.log('urlSplit',urlSplit)
               // let imgUrl = 'https://ipfs.io' + urlSplit
@@ -147,8 +175,8 @@ function DH() {
           // });
         }
       )
-
-  }, [count]);
+  console.log("RE-RENDERED");
+  }, []);
 
   //   function burn(){
   //     const http = require("https");
@@ -241,6 +269,8 @@ function DH() {
 
   }
 }
+
+// console.log(ipfs); 
   return (
     <div className="connect_wallet">
       {/* <Navbar /> */}
@@ -305,13 +335,13 @@ function DH() {
                 </div>
                 <div className='container'>
                   <div className='row dh_NFT_cards_Div'>
-                    {/* {metadataAll.map((urls) => {
-                          return <div className='col-lg-3 col-md-6 col-12' key={urls.metadata.image}>
+                    {ipfs.map((urls) => {
+                          return <div className='col-lg-3 col-md-6 col-12' key={urls}>
                             <div className='nft_boxes'>
-                              <img src={urls.metadata.image} alt="" />
+                              <img src={urls} alt="" />
                               <div className='nft_box_btm'>
                                 <div className='title_card'>
-                                  <h5>{urls.metadata.name} </h5>
+                                  {/* <h5>{urls.metadata.name} </h5> */}
 
                                   <Form.Group className="mb-3" controlId="formBasicCheckbox">
                                     <Form.Check type="checkbox" onClick={(e) => { checkedNFTCount(e) }}/>
@@ -323,8 +353,9 @@ function DH() {
                             </div>
                           </div>
                         })
-                      } */}
-                    <div className='col-lg-3 col-md-6 col-12'>
+                      }
+
+                    {/* <div className='col-lg-3 col-md-6 col-12'>
                       <div className='nft_boxes'>
                         <img src={rarity1} alt="" />
                         <div className='nft_box_btm'>
@@ -581,7 +612,7 @@ function DH() {
                           <p> DHT Reward: <span>3000</span> </p>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
 
                   </div>
                 </div>

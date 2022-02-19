@@ -26,6 +26,8 @@ function Navbar() {
   }
 
   const [Hide, setHide] = useState(HideStyle);
+  const [walletAddress, setWalletAddress] = useState(null);
+  const [lastFourDigitAddValue, setLastFourDigitAddValue] = useState(null);
 
   const openMetaMask = async () => {
     let data;
@@ -34,7 +36,15 @@ function Navbar() {
       console.log(address, 'this is the data we got ')
 
       document.getElementById('next').click();
-
+      setWalletAddress(data)
+      // console.log(walletAddress);
+      // console.log(walletAddress.length);
+      // console.log(walletAddress.length -4);
+      let lastAddressDigit = data.length - 4
+      // console.log(lastAddressDigit);
+      console.log(data.slice(lastAddressDigit, data.length));
+      let lastFourAddValue = data.slice(lastAddressDigit, data.length)
+      setLastFourDigitAddValue(lastFourAddValue)
       // =============== redux ==============
       // dispatch(metaMaskAddress(address[0]))
       // if (typeof addressValue === 'string') {
@@ -57,7 +67,7 @@ function Navbar() {
   useEffect(() => {
     // ================== connected Wallet Txt ================
     let checkAddress = sessionStorage.getItem('Address');
-    if(checkAddress === 'true'){
+    if (checkAddress === 'true') {
       document.getElementById('connected').innerText = 'Connected'
     }
 
@@ -82,6 +92,7 @@ function Navbar() {
         </div>
         <div className="nav-buttons">
           <Link id="next" to="/DH" style={HideStyle} className="conted_wlt">Connected #0x02548</Link>
+          <span className="walletAddress_txt">{walletAddress}</span><span className="lastFourAddValue">{lastFourDigitAddValue}</span>
           <button id="connected" style={{ cursor: 'pointer' }} onClick={openMetaMask} className="cont_wlt">Connect Wallet</button>
           <a
             href="https://discord.com/invite/H7KMAKgaSH"

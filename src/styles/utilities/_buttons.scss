@@ -55,6 +55,12 @@
   font-weight: 500;
 }
 
+.green_btn:focus{
+  background: #085051;
+  border: 2px solid #067778;
+  box-shadow: transparent;
+}
+
 .btn:disabled {
   cursor: not-allowed;
   background: #515151;

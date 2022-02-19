@@ -528,3 +528,15 @@ a.second_nav {
   border-radius: 25px;
   box-shadow: inset 0px 0px 6px #000;
 }
+
+.walletAddress_txt{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 61px;
+  margin: 0px !important;
+}
+
+.lastFourAddValue{
+  margin: 0px !important;
+}

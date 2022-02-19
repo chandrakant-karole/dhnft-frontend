@@ -28,7 +28,7 @@
     "redux-thunk": "^2.3.0",
     "sass": "^1.38.1",
     "web-vitals": "^1.1.2",
-    "web3": "^1.5.2"
+    "web3": "^1.7.0"
   },
   "scripts": {
     "start": "react-scripts start",
