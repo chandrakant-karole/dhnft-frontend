@@ -11,6 +11,7 @@ import rarity1 from "../assets/images/rarity/white.png";
 import rarity2 from "../assets/images/rarity/magnethik.png";
 import rarity3 from "../assets/images/rarity/compression.png";
 import rarity4 from "../assets/images/rarity/framed.png";
+import { FaSearch } from 'react-icons/fa';
 // import FooterCommon from './FooterCommon';
 const requestOptions = {
   method: 'GET',
@@ -83,13 +84,14 @@ function DH() {
 
   // ==================== This is NFT image after Burn NFT ====================
   const countO = useRef(`hello 1`);
-  let zz = ""
+  let zz = "";
+  // let randomValue = Math.floor(Math.random()*(50-1)+1);
   if (modulesNft === 0) {
     for (let i = 0; i < reminderNft; i++) {
       // console.log("xxxxxxxxxxxxxx", countO.current)
       // zz +=   countO.current + "<br>"
       zz += `<div class="col-lg-4 col-md-6 col-12 my-2">
-      <img src=${dhfNFT} />
+      <img width="500" src='https://gateway.pinata.cloud/ipfs/QmNWsCuxDLHstrGU55oA7i8b8JuT7JSUxYKYN2Nyr6aYjj/DHF_${i+1 * 3}.png' />
       </div>`
     }
   }
@@ -344,7 +346,7 @@ function DH() {
                               <img src={urls} alt="" />
                               <div className='nft_box_btm'>
                                 <div className='title_card'>
-                                  {/* <h5>{urls.metadata.name} </h5> */}
+                                  {/* <h5>NFT Name</h5> */}
 
                                   <Form.Group className="mb-3" controlId="formBasicCheckbox">
                                     <Form.Check type="checkbox" onClick={(e) => { checkedNFTCount(e) }}/>
@@ -356,7 +358,6 @@ function DH() {
                             </div>
                           </div>
                         }) : <div className='dh_NFT_cards_InnerDiv'>
-                              {/* <Audio height="100" width="100" color='grey' ariaLabel='loading'/> */}
                               <Grid color="#FFFFFF" height={60} width={60} />
                             </div>
                       }
@@ -627,7 +628,7 @@ function DH() {
             <div className='col-lg-3 col-12'>
               <div className="dh_right_box">
                 {/* <h4>{modulesNft} = {reminderNft}</h4> */}
-                <h4>{count} out of 8 owned NFTs selected</h4>
+                <h4>{count} NFTs selected</h4>
                 <Button variant="success" id='burn_NftBtn' onClick={burn} className='green_btn'>Burn Selected NFTs</Button>
                 <h4 style={{ wordBreak: 'break-word' }}>Transaction Id : {transcID}</h4>
               </div>

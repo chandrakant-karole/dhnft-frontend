@@ -1,4 +1,4 @@
-import { React, useState, useRef } from 'react';
+import { React, useState, useRef, useEffect } from 'react';
 // import Navbar from "./Navbar";
 import Rewards from './Rewards';
 import Web3 from "web3";
@@ -8,11 +8,13 @@ import { NFTAbi } from "../utility/contracts/stakingAbiWhiContract";
 // import rarity2 from "../assets/images/rarity/magnethik.png";
 // import rarity3 from "../assets/images/rarity/compression.png";
 // import rarity4 from "../assets/images/rarity/framed.png";
-import { Accordion, Tab, Tabs } from 'react-bootstrap';
+import { Accordion, Tab, Tabs, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import questionMark from '../assets/question-mark.svg';
 import logo from '../assets/logo-white.png';
 // import FooterCommon from './FooterCommon';
+import { Grid } from 'react-loader-spinner'
+
 
 import { CONTACT_ADDRESS, CONTACT_ABI } from '../contract/GVOToken'
 const web3 = new Web3(Web3.givenProvider || 'http://localhost:7545');
@@ -137,6 +139,120 @@ export default function DHRewards() {
         });
     }
     // ================================================= Add Token End ============================================
+    const [loader, setLoader] = useState(false)
+    const [metadataAll, setMetadataAll] = useState([])
+
+    const [contract, setContract] = useState([])
+    const [ipfs, setIpfs] = useState([])
+    let [count, setCount] = useState(0);
+
+
+    const checkedNFTCount = (e) => {
+        const checkedItem = e.target.checked;
+        // console.log(checkedItem);
+        if(checkedItem === true ){
+            if (checkedItem === true && count < 3) {
+                // console.log('checked')
+                setCount(count + 1)
+                // console.log(count)
+            } else {
+                alert("You Stake Max 3 DH-NFT")
+                e.target.checked = false
+            }
+        }        
+        if (checkedItem === false) {
+            // console.log('not checked');
+            setCount(count - 1)
+            // console.log(count)
+        }
+    }
+    const requestOptions = {
+        method: 'GET',
+        // headers: { 'x-api-key': '2527a5e1-0c06-48a6-abcc-74fdbc9c7ce4' } //testnet
+        headers: {
+            'x-api-key': 'bf846fcb-8fb4-4c74-a0ce-0e9642fc6741',
+            'x-testnet-type': 'polygonscan',
+            'Content-Type': 'application/json',
+            'PageSize': '10'
+        } //mainet
+    };
+    useEffect(() => {
+        // setLoader()
+
+        // ================================= Fetch ===============================
+        fetch("https://api-eu1.tatum.io/v3/nft/address/balance/MATIC/0xd57a6427ad96c17b7611f99967a65451f97b1c74", requestOptions).then(res => res.json())
+            .then(
+                (result) => {
+                    // console.log("result", result);
+                    setContract(result)
+                    // setIpfs(result.balances)
+                    // console.log(ipfs);
+                    // console.log();
+                    // this.setState({
+                    //   isLoaded: true,
+                    //   items: result.items
+                    // });
+
+                    let num = 100
+                    result.map((param) => {
+                        // setParamMetaData(param.metadata)
+                        // console.log("meta DAta",param.metadata);
+                        // param.metadata.map((resp)=>{console.log("metaDATA",resp)})
+                        // console.log(param.metadata[0].url);
+                        // console.log(param.metadata[0].url.split("/"));
+                        // console.log(param.metadata[0].url.split("/")[2]);
+                        param.balances.map((res) => {
+                            num = num + 1
+                            // console.log(num);
+                            let ipfs1 = 'https://gateway.pinata.cloud/ipfs/' + 'QmNWsCuxDLHstrGU55oA7i8b8JuT7JSUxYKYN2Nyr6aYjj' + '/DHF_' + num + '.png';
+                            // console.log("ipfs", typeof ipfs);
+                            ipfs.push(ipfs1)
+                        });
+                        setIpfs(ipfs)
+                        setLoader(true)
+                        if (param.contractAddress === '0x45e6d6a4598dcdd20df354de0882c9844b47db20') {
+                            // if(param.contractAddress === "0xfbb89d3e41e1d0ab8d2e1453b2a2278b8644c8a2"){
+
+                            // console.log("metadata179", param.metadata)
+                            setMetadataAll(param.metadata)
+                            // console.log(param.metadata);
+                            // console.log("param.metadata[0].metadata.image", param.metadata[0].metadata.image)
+                            // let urlSplit = param.metadata[0].metadata.image.split('./')[1] 
+                            // console.log('urlSplit',urlSplit)
+                            // let imgUrl = 'https://ipfs.io' + urlSplit
+                            // console.log('imgUrl', imgUrl);
+                            // metadataAll.map((urls)=>{
+                            //   console.log('urls',urls);
+                            //   console.log(urls.metadata);
+                            // })
+                        } else {
+                            console.log('something worng');
+                            console.log(param.contractAddress)
+                        }
+                    })
+                },
+
+
+                // Note: it's important to handle errors here
+                // instead of a catch() block so that we don't swallow
+                // exceptions from actual bugs in components.
+                (error) => {
+                    console.log("error", error);
+                    // this.setState({
+                    //   isLoaded: true,
+                    //   error
+                    // });
+                }
+            )
+        console.log("RE-RENDERED");
+
+    }, []);
+
+ 
+  
+    
+    
+
     return (
         <>
             {/* <Navbar /> */}
@@ -165,12 +281,35 @@ export default function DHRewards() {
                                         <Tabs defaultActiveKey="Stake" id="uncontrolled-tab-example" className="my-3 customTab">
                                             <Tab eventKey="Stake" className='stakeButton' title="Stake">
                                                 <div className="stakeContentDiv">
-                                                    <div className="inputDiv my-4">
+                                                    <div className='row dh_NFT_cards_Div my-4' style={{height:'359px'}}>
+                                                        {loader ? ipfs.map((urls) => {
+                                                            return <div className='col-lg-4 col-md-6 col-12' key={urls}>
+                                                                <div className='nft_boxes'>
+                                                                    <img src={urls} alt="" />
+                                                                    <div className='nft_box_btm'>
+                                                                        <div className='title_card'>
+                                                                            {/* <h5>NFT Name</h5> */}
+
+                                                                            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                                                                                <Form.Check type="checkbox" onClick={(e) => { checkedNFTCount(e) }} />
+                                                                            </Form.Group>
+                                                                        </div>
+                                                                        <p> <span>94</span> days held </p>
+                                                                        <p> DHT Reward: <span>3000</span> </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }) : <div className='dh_NFT_cards_InnerDiv'>
+                                                            <Grid color="#FFFFFF" height={60} width={60} />
+                                                        </div>
+                                                        }
+                                                    </div>
+                                                    {/* <div className="inputDiv my-4">
                                                         <input type="number" ref={TokenValue} />
                                                         <button style={{ width: '150px' }} onClick={addToken}>Add Token</button>
-                                                    </div>
+                                                    </div> */}
                                                     <div className="inputDiv">
-                                                        <input id="stakeNumber" type="number" />
+                                                        <input value={count} id="stakeNumber" type="number" disabled/>
                                                         <button onClick={stakeNFT}>Stake</button>
                                                     </div>
                                                     <div className="ContentDiv">
@@ -191,10 +330,10 @@ export default function DHRewards() {
                                             </Tab>
                                             <Tab eventKey="UnStake" title="UnStake">
                                                 <div className="stakeContentDiv">
-                                                    <div className="inputDiv my-4">
+                                                    {/* <div className="inputDiv my-4">
                                                         <input type="number" />
                                                         <button style={{ width: '150px' }}>Add Token</button>
-                                                    </div>
+                                                    </div> */}
                                                     <div className="inputDiv">
                                                         <input id='unStakeNumber' type="number" />
                                                         <button onClick={unStakeNFT}>UnStake</button>
@@ -240,10 +379,10 @@ export default function DHRewards() {
                                                 <input type="text" />
                                                 <button>Collect</button>
                                             </div>
-                                            <div className="inputDiv mt-4">
+                                            {/* <div className="inputDiv mt-4">
                                                 <input type="number" />
                                                 <button style={{ width: '150px' }}>Add Token</button>
-                                            </div>
+                                            </div> */}
                                             <div className="ContentDiv">
                                                 <div className='StakewalletDiv'>
                                                     <div className="text">
