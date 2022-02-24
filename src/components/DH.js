@@ -12,7 +12,13 @@ import rarity3 from "../assets/images/rarity/compression.png";
 import rarity4 from "../assets/images/rarity/framed.png";
 import { FaSearch } from 'react-icons/fa';
 
+
+
+
+
 function DH() {
+
+
   // =========================== API Header Start ================================================
   const requestOptions = {
     method: 'GET',
@@ -28,9 +34,17 @@ function DH() {
   const [count, setCount] = useState(0)
   const [mainNftBox_toggle, setMainNftBox_toggle] = useState(true)
   const [mainNftBox_toggle_oneNft, setMainNftBox_toggle_oneNft] = useState(true)
+  let [loginUserAddress, setloginUserAddress] = useState('');
+  const [imageDetails, setimageDetails] = useState([]);
   // ====================== ALL useRef =================================
   const cardCountRef = useRef(null)
   const burnRef = useRef(null)
+
+  window.ethereum.enable().then((address) => {
+    loginUserAddress = address[0];
+    // console.log("loginUserAddressloginUserAddress",loginUserAddress);
+    setloginUserAddress(loginUserAddress)
+  });
 
   // ============================== NFT CARD COUNT ==================================
 
@@ -40,15 +54,21 @@ function DH() {
       // console.log('nft card', e.target.checked);
       if (e.target.checked === true) {
         setCount(count + 1)
+        console.log(e.target.value);
       } else {
         setCount(count - 1)
       }
     }
 
     let remainder = count % 8
-    console.log('remainder', remainder);
+    // console.log('remainder', remainder);
     if (count > 0 && remainder === 0) {
       document.getElementById('burn_NftBtn').removeAttribute('disabled')
+      // let customValue = 1;
+      // if (count === 8 && remainder === 0) {
+      //   // customValue++
+      //   document.getElementById('burn_NftBtn').setAttribute('disabled', '')
+      // }
     } else {
       document.getElementById('burn_NftBtn').setAttribute('disabled', '')
     }
@@ -62,10 +82,31 @@ function DH() {
 
   // ================================== API useEffect ===================================
   useEffect(() => {
-    fetch("https://api-eu1.tatum.io/v3/nft/address/balance/MATIC/0xD57A6427Ad96C17b7611F99967a65451F97b1C74", requestOptions).then(res => res.json())
+    // console.log("loginadre", loginUserAddress);
+    fetch(`https://api-eu1.tatum.io/v3/nft/address/balance/MATIC/0xD57A6427Ad96C17b7611F99967a65451F97b1C74`, requestOptions).then(res => res.json())
       .then((result) => {
-        console.log('result', result); //API Result log
-      })
+        // console.log('result', result); //API Result log
+        if(result.length > 0){
+          result.map((findOurContractAddre) => {
+            if(findOurContractAddre.contractAddress == '0x5a271f70b958a094904e548fb8b6e5d7ef49dd13'){
+              // console.log("findOurContractAddre",findOurContractAddre);
+              let arrayIMG =[]; 
+              findOurContractAddre.metadata.map((getImageUrl)=>{
+                fetch(getImageUrl.url).then(res => res.json())
+                .then((findImage) => {
+                  // console.log("findImage",findImage);
+                    arrayIMG.push(findImage);
+                    // console.log("imageDetailsARRRAY",imageDetails);
+                });
+                setTimeout(()=>{
+                  setimageDetails(arrayIMG);
+                  // console.log("imageDetails1",imageDetails);
+                },5000)
+              });
+            }
+          });
+        }
+      });
   }, [])
 
   // =================================== Burn useEffect =================================
@@ -88,7 +129,7 @@ function DH() {
   //   console.log('blovk');
   //   document.getElementById('burn_NftBtn').style.display = 'none'
   // }
-
+  // console.log("imageDetails222222",imageDetails);
   return (
     <div className="connect_wallet">
       <Rewards />
@@ -144,16 +185,15 @@ function DH() {
                       <Grid color="#FFFFFF" height={60} width={60} />
                     </div>
                     } */}
-                    {/* {loader ? ipfs.map((urls) => {
-                      return <div className='col-lg-3 col-md-6 col-12' key={urls}>
+                    { imageDetails.map((data) => {
+                      return <div className='col-lg-3 col-md-6 col-12' key={data.name}>
                         <div className='nft_boxes'>
-                          <img src={urls} alt="" />
+                          <img src={data.image} alt="" />
                           <div className='nft_box_btm'>
                             <div className='title_card'>
-                            
-
+                            <h5>{data.name} </h5>
                               <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                                <Form.Check type="checkbox" value={urls} onClick={(e) => { checkedNFTCount(e) }} />
+                                <Form.Check type="checkbox" onClick={(e) => { cardCountRef.current(e) }} />
                               </Form.Group>
                             </div>
                             <p> <span>94</span> days held </p>
@@ -161,12 +201,9 @@ function DH() {
                           </div>
                         </div>
                       </div>
-                    }) : <div className='dh_NFT_cards_InnerDiv'>
-                      <Grid color="#FFFFFF" height={60} width={60} />
-                    </div>
-                    } */}
+                    })}
                     {/* ============================================= DH NFT CARD ================================================== */}
-                    <div className='col-lg-3 col-md-6 col-12'>
+                    {/* <div className='col-lg-3 col-md-6 col-12'>
                       <div className='nft_boxes'>
                         <img src={rarity1} alt="" />
                         <div className='nft_box_btm'>
@@ -423,7 +460,7 @@ function DH() {
                           <p> DHT Reward: <span>3000</span> </p>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
 
                   </div>
                 </div>
