@@ -5,6 +5,7 @@ import { InputGroup, FormControl, Nav, Form, Button } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import dhfNFT from '../assets/Trails.png'
 
+
 import Rewards from './Rewards';
 import rarity1 from "../assets/images/rarity/white.png";
 import rarity2 from "../assets/images/rarity/magnethik.png";
@@ -12,7 +13,9 @@ import rarity3 from "../assets/images/rarity/compression.png";
 import rarity4 from "../assets/images/rarity/framed.png";
 import { FaSearch } from 'react-icons/fa';
 
-
+import { BurnAbi, CONTACT_ADDRESS } from '../contract/burn-abi'
+import Web3 from "web3";
+const web3_Stake = new Web3(window.ethereum);
 
 
 
@@ -36,6 +39,7 @@ function DH() {
   const [mainNftBox_toggle_oneNft, setMainNftBox_toggle_oneNft] = useState(true)
   let [loginUserAddress, setloginUserAddress] = useState('');
   const [imageDetails, setimageDetails] = useState([]);
+  const [imgArry, setImgArry] = useState([])
   // ====================== ALL useRef =================================
   const cardCountRef = useRef(null)
   const burnRef = useRef(null)
@@ -54,7 +58,12 @@ function DH() {
       // console.log('nft card', e.target.checked);
       if (e.target.checked === true) {
         setCount(count + 1)
-        console.log(e.target.value);
+        imgArry.push(e.target.value)
+        setImgArry(imgArry)
+        localStorage.setItem('Data-object', JSON.stringify(imgArry))
+        // console.log(JSON.stringify(e.target.value));
+        // console.log(e.target.value);
+        // console.log(JSON.parse(e.target.value));
       } else {
         setCount(count - 1)
       }
@@ -86,22 +95,22 @@ function DH() {
     fetch(`https://api-eu1.tatum.io/v3/nft/address/balance/MATIC/0xD57A6427Ad96C17b7611F99967a65451F97b1C74`, requestOptions).then(res => res.json())
       .then((result) => {
         // console.log('result', result); //API Result log
-        if(result.length > 0){
+        if (result.length > 0) {
           result.map((findOurContractAddre) => {
-            if(findOurContractAddre.contractAddress == '0x5a271f70b958a094904e548fb8b6e5d7ef49dd13'){
+            if (findOurContractAddre.contractAddress == '0x5a271f70b958a094904e548fb8b6e5d7ef49dd13') {
               // console.log("findOurContractAddre",findOurContractAddre);
-              let arrayIMG =[]; 
-              findOurContractAddre.metadata.map((getImageUrl)=>{
+              let arrayIMG = [];
+              findOurContractAddre.metadata.map((getImageUrl) => {
                 fetch(getImageUrl.url).then(res => res.json())
-                .then((findImage) => {
-                  // console.log("findImage",findImage);
+                  .then((findImage) => {
+                    // console.log("findImage",findImage);
                     arrayIMG.push(findImage);
                     // console.log("imageDetailsARRRAY",imageDetails);
-                });
-                setTimeout(()=>{
+                  });
+                setTimeout(() => {
                   setimageDetails(arrayIMG);
                   // console.log("imageDetails1",imageDetails);
-                },5000)
+                }, 1000)
               });
             }
           });
@@ -114,6 +123,30 @@ function DH() {
     burnRef.current = burnNFT;
     function burnNFT() {
       console.log('Burn Clicked');
+      const burnABiWthiCONTRACT = new web3_Stake.eth.Contract(BurnAbi, CONTACT_ADDRESS);
+
+      // burnABiWthiCONTRACT
+      let localStorageDataGet = JSON.parse(localStorage.getItem('Data-object'));
+      console.log("localStorageDataGet", localStorageDataGet);
+      if (localStorageDataGet.length > 0) {
+        localStorageDataGet.map((getNftName) => {
+          console.log("getNftName", getNftName);
+          var findTokenId = getNftName.split("#");
+          findTokenId = findTokenId[1];
+          console.log(findTokenId);
+          burnABiWthiCONTRACT.methods.burn(findTokenId)
+            .send(
+              {
+                from: loginUserAddress
+              }
+            )
+            .on('error', function (error) {
+              console.log('error');
+            }).then(function (info) {
+              console.log("info",info)
+            });
+        })
+      }
       setMainNftBox_toggle(!mainNftBox_toggle)
       setMainNftBox_toggle_oneNft(!mainNftBox_toggle_oneNft)
     }
@@ -185,15 +218,15 @@ function DH() {
                       <Grid color="#FFFFFF" height={60} width={60} />
                     </div>
                     } */}
-                    { imageDetails.map((data) => {
+                    {imageDetails.map((data) => {
                       return <div className='col-lg-3 col-md-6 col-12' key={data.name}>
                         <div className='nft_boxes'>
                           <img src={data.image} alt="" />
                           <div className='nft_box_btm'>
                             <div className='title_card'>
-                            <h5>{data.name} </h5>
+                              <h5>{data.name} </h5>
                               <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                                <Form.Check type="checkbox" onClick={(e) => { cardCountRef.current(e) }} />
+                                <Form.Check type="checkbox" value={data.name} onClick={(e) => { cardCountRef.current(e) }} />
                               </Form.Group>
                             </div>
                             <p> <span>94</span> days held </p>
