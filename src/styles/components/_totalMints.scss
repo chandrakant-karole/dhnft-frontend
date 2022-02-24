@@ -1,0 +1,94 @@
+@use "../abstracts/" as *;
+
+.total-mints-comp {
+  padding: 2rem;
+}
+
+.total-mints {
+  background: #0b1212;
+  padding: 2rem;
+  width: 100%;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0px 0px 10px #067778;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 70px;
+
+  .progress-bar {
+    background: #b3d1fb;
+    height: 8px;
+    border-radius: 5px;
+    width: 100%;
+    overflow: visible;
+
+    .progress {
+      position: relative;
+      background: #067778;
+      height: 8px;
+      padding: 0;
+      border-radius: 5px;
+      overflow: visible;
+
+      &::after {
+        position: absolute;
+        content: " ";
+        right: 0;
+        top: 50%;
+        transform: translatex(50%) translateY(-50%);
+        height: 18px;
+        width: 18px;
+        background: #094445;
+        border-radius: 50%;
+      }
+
+      .tooltip {
+        position: absolute;
+        right: 0;
+        bottom: 15px;
+        transform: translatex(50%);
+      }
+    }
+  }
+
+  .mint-progress {
+    width: 100%;
+    gap: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > span {
+      font-size: 1.5rem;
+    }
+  }
+
+  .tooltip {
+    position: relative;
+
+    span {
+      position: absolute;
+      font-size: 1.5rem;
+      line-height: 2.1rem;
+      padding: 0px 10px;
+      top: 0px;
+      left: 50%;
+      color: $black;
+      font-weight: 500;
+      transform: translateX(-50%);
+
+      &::before {
+        background: #00bbbd;
+        content: "";
+        top: 0;
+        left: 0;
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        border-radius: 4px;
+      }
+    }
+  }
+}

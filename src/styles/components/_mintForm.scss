@@ -1,0 +1,44 @@
+.mint-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .heading {
+    margin: 0;
+  }
+
+  .counter-input {
+    margin-top: 30px;
+    text-align: center;
+
+    * {
+      display: block;
+    }
+
+    input {
+      margin: auto;
+      width: 200px;
+      font-size: 1.2rem;
+    }
+
+    span.error {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: red;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 20px;
+    margin-top: 50px;
+
+    > button {
+      min-width: 7rem;
+    }
+  }
+}

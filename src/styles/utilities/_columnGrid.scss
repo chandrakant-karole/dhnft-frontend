@@ -1,0 +1,12 @@
+.column-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+
+  > * {
+    flex: 1 1 100%;
+  }
+}
