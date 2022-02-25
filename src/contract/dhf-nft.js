@@ -1,5 +1,5 @@
-export const CONTACT_ADDRESS = '0x84f80640ba7fbf6086c61d14a9f7ab778e9b910e';
-export const BurnAbi = [
+export const CONTACT_ADDRESS_DHFNFT = '0x2A4122Df963B5996088c1DC628b25668bB20d31e';
+export const mint_DHFNFT =[
 	{
 		"inputs": [
 			{
@@ -87,19 +87,6 @@ export const BurnAbi = [
 		"name": "approve",
 		"outputs": [],
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "burnNFT",
-		"outputs": [],
-		"stateMutability": "payable",
 		"type": "function"
 	},
 	{

@@ -13,7 +13,8 @@ import rarity3 from "../assets/images/rarity/compression.png";
 import rarity4 from "../assets/images/rarity/framed.png";
 import { FaSearch } from 'react-icons/fa';
 
-import { BurnAbi, CONTACT_ADDRESS } from '../contract/burn-abi'
+import { BurnAbi, CONTACT_ADDRESS } from '../contract/burn-abi';
+import { mint_DHFNFT, CONTACT_ADDRESS_DHFNFT } from '../contract/dhf-nft';
 import Web3 from "web3";
 const web3_Stake = new Web3(window.ethereum);
 
@@ -40,6 +41,7 @@ function DH() {
   let [loginUserAddress, setloginUserAddress] = useState('');
   const [imageDetails, setimageDetails] = useState([]);
   const [imgArry, setImgArry] = useState([])
+  const [mintedImageUrl, setMintedImageUrl] = useState([])
   // ====================== ALL useRef =================================
   const cardCountRef = useRef(null)
   const burnRef = useRef(null)
@@ -66,12 +68,37 @@ function DH() {
         // console.log(JSON.parse(e.target.value));
       } else {
         setCount(count - 1)
+        // imgArry.pop(e.target.value)
+        var imgName = (e.target.value);
+        console.log("imgName",imgName);
+        var localStrgArr = JSON.parse(localStorage.getItem('Data-object'));
+        console.log("localStrgArr",localStrgArr);
+        const index = localStrgArr.indexOf(imgName);
+        if (index > -1) {
+          localStrgArr.splice(index, 1); // 2nd parameter means remove one item only
+          console.log("localStrgArr after splice",localStrgArr);
+          
+          localStorage.setItem('Data-object', JSON.stringify(localStrgArr))
+          setImgArry(JSON.parse(localStorage.getItem('Data-object')));
+          console.log("imgArry",imgArry);
+        }
+        else{
+
+          setImgArry(localStrgArr);
+          console.log("imgArry",imgArry);
+          localStorage.setItem('Data-object', JSON.stringify(imgArry))
+        }
+         
+
+
       }
     }
 
     let remainder = count % 8
     // console.log('remainder', remainder);
+    // if (count > 0 ) {
     if (count > 0 && remainder === 0) {
+
       document.getElementById('burn_NftBtn').removeAttribute('disabled')
       // let customValue = 1;
       // if (count === 8 && remainder === 0) {
@@ -94,23 +121,28 @@ function DH() {
     // console.log("loginadre", loginUserAddress);
     fetch(`https://api-eu1.tatum.io/v3/nft/address/balance/MATIC/0xD57A6427Ad96C17b7611F99967a65451F97b1C74`, requestOptions).then(res => res.json())
       .then((result) => {
-        // console.log('result', result); //API Result log
+        console.log('result', result); //API Result log
         if (result.length > 0) {
           result.map((findOurContractAddre) => {
-            if (findOurContractAddre.contractAddress == '0x5a271f70b958a094904e548fb8b6e5d7ef49dd13') {
-              // console.log("findOurContractAddre",findOurContractAddre);
+            if (findOurContractAddre.contractAddress == '0x84f80640ba7fbf6086c61d14a9f7ab778e9b910e') {
+              console.log("findOurContractAddre", findOurContractAddre);
               let arrayIMG = [];
-              findOurContractAddre.metadata.map((getImageUrl) => {
-                fetch(getImageUrl.url).then(res => res.json())
-                  .then((findImage) => {
-                    // console.log("findImage",findImage);
-                    arrayIMG.push(findImage);
-                    // console.log("imageDetailsARRRAY",imageDetails);
-                  });
-                setTimeout(() => {
-                  setimageDetails(arrayIMG);
-                  // console.log("imageDetails1",imageDetails);
-                }, 1000)
+              findOurContractAddre.metadata.map((getImageUrl,index) => {
+                if(index < 32) 
+                {
+                  var getCIDWithTokenID = getImageUrl.url.split('://');
+                  getCIDWithTokenID = getCIDWithTokenID[1];
+                  fetch(`https://gateway.pinata.cloud/ipfs/${getCIDWithTokenID}`).then(res => res.json())
+                    .then((findImage) => {
+                      // console.log("findImage",findImage);
+                      arrayIMG.push(findImage);
+                      // console.log("imageDetailsARRRAY",imageDetails);
+                    });
+                  setTimeout(() => {
+                    setimageDetails(arrayIMG);
+                    // console.log("imageDetails1",imageDetails);
+                  }, 1000)
+                }
               });
             }
           });
@@ -123,7 +155,9 @@ function DH() {
     burnRef.current = burnNFT;
     function burnNFT() {
       console.log('Burn Clicked');
+      document.getElementById('burn_NftBtn').setAttribute('disabled', '')
       const burnABiWthiCONTRACT = new web3_Stake.eth.Contract(BurnAbi, CONTACT_ADDRESS);
+      const mintABiWthiCONTRACT = new web3_Stake.eth.Contract(mint_DHFNFT, CONTACT_ADDRESS_DHFNFT);
 
       // burnABiWthiCONTRACT
       let localStorageDataGet = JSON.parse(localStorage.getItem('Data-object'));
@@ -131,20 +165,66 @@ function DH() {
       if (localStorageDataGet.length > 0) {
         localStorageDataGet.map((getNftName) => {
           console.log("getNftName", getNftName);
+          
           var findTokenId = getNftName.split("#");
-          findTokenId = findTokenId[1];
-          console.log(findTokenId);
-          burnABiWthiCONTRACT.methods.burn(findTokenId)
+          console.log("findTokenId[1]",findTokenId[1]);
+          findTokenId = findTokenId[1]-1;
+          console.log("findTokenId",findTokenId);
+          console.log(localStorageDataGet.lastIndexOf(getNftName));
+
+          burnABiWthiCONTRACT.methods.burnNFT(findTokenId)
             .send(
               {
                 from: loginUserAddress
               }
             )
             .on('error', function (error) {
-              console.log('error');
+              console.log('error',error);
             }).then(function (info) {
-              console.log("info",info)
+              console.log("info",info);
+              if (localStorageDataGet.length == localStorageDataGet.lastIndexOf(getNftName) + 1) {
+                var burnLength = localStorageDataGet.length;
+                var mintDHFNFT = burnLength / 8;
+                console.log("mintDHFNFT", mintDHFNFT)
+                mintABiWthiCONTRACT.methods.mint(loginUserAddress, mintDHFNFT)
+                  .send(
+                    {
+                      from: loginUserAddress,
+                      value: 1
+                    }
+                  )
+                  .on('error', function (error) {
+                    console.log('error',error);
+                  }).then(function (info) {
+                    console.log("info", info);
+                    console.log("info.events.Transfer.length", info.events.Transfer.length);
+                    if (info.events.Transfer.length > 0 && info.events.Transfer.length !== undefined) {
+                      var lengthOfTransfer = info.events.Transfer.length;
+                      console.log("lengthOfTransfer", lengthOfTransfer);
+                      var newArray = [];
+                      for (let i = 0; i < lengthOfTransfer; i++) {
+    
+                        var MImageUrl = `https://gateway.pinata.cloud/ipfs/QmNWsCuxDLHstrGU55oA7i8b8JuT7JSUxYKYN2Nyr6aYjj/DHF_${info.events.Transfer[i].returnValues.tokenId}.png`;
+    
+                        console.log("newArray newArray", newArray);
+                        newArray.push(MImageUrl);
+                      }
+                      setMintedImageUrl(newArray)
+                      console.log("setMintedImageUrl-Arry", mintedImageUrl);
+                    }
+                    else {
+                      console.log("enter",info.events.Transfer.returnValues.tokenId);
+                      var MImageUrl = `https://gateway.pinata.cloud/ipfs/QmNWsCuxDLHstrGU55oA7i8b8JuT7JSUxYKYN2Nyr6aYjj/DHF_${info.events.Transfer.returnValues.tokenId}.png`;
+                      var newArray = [];
+                      newArray.push(MImageUrl);
+                      console.log("newArray MImageUrl",newArray);
+                      setMintedImageUrl(newArray);
+                      console.log("setMintedImageUrl", mintedImageUrl);
+                    }
+                  });
+              }
             });
+
         })
       }
       setMainNftBox_toggle(!mainNftBox_toggle)
@@ -174,7 +254,12 @@ function DH() {
                 <div style={{ display: ' flex', justifyContent: ' center', flexDirection: ' column', alignItems: 'center' }}>
                   <h2 className='my-4'>Your One DHF NFT</h2>
                   <div className='container'>
-                    <div className='row justify-content-center' dangerouslySetInnerHTML={showNFTImg()}>
+                    <div className='row justify-content-center'>
+                      {mintedImageUrl.map((getmintedUrl) => {
+                        return <div className='col-lg-4 col-md-6 col-12' key={getmintedUrl}>
+                                  <img width="500" src={getmintedUrl} />
+                              </div>
+                      })}
                     </div>
                   </div>
                 </div>
