@@ -42,6 +42,9 @@ function DH() {
   const [imageDetails, setimageDetails] = useState([]);
   const [imgArry, setImgArry] = useState([])
   const [mintedImageUrl, setMintedImageUrl] = useState([])
+  const [loader, setLoader] = useState(false)
+  const [loaderFront, setLoaderFront] = useState(false)
+  const [allocated, setAllocated] = useState(0)
   // ====================== ALL useRef =================================
   const cardCountRef = useRef(null)
   const burnRef = useRef(null)
@@ -70,25 +73,25 @@ function DH() {
         setCount(count - 1)
         // imgArry.pop(e.target.value)
         var imgName = (e.target.value);
-        console.log("imgName",imgName);
+        console.log("imgName", imgName);
         var localStrgArr = JSON.parse(localStorage.getItem('Data-object'));
-        console.log("localStrgArr",localStrgArr);
+        console.log("localStrgArr", localStrgArr);
         const index = localStrgArr.indexOf(imgName);
         if (index > -1) {
           localStrgArr.splice(index, 1); // 2nd parameter means remove one item only
-          console.log("localStrgArr after splice",localStrgArr);
-          
+          console.log("localStrgArr after splice", localStrgArr);
+
           localStorage.setItem('Data-object', JSON.stringify(localStrgArr))
           setImgArry(JSON.parse(localStorage.getItem('Data-object')));
-          console.log("imgArry",imgArry);
+          console.log("imgArry", imgArry);
         }
-        else{
+        else {
 
           setImgArry(localStrgArr);
-          console.log("imgArry",imgArry);
+          console.log("imgArry", imgArry);
           localStorage.setItem('Data-object', JSON.stringify(imgArry))
         }
-         
+
 
 
       }
@@ -127,9 +130,8 @@ function DH() {
             if (findOurContractAddre.contractAddress == '0x84f80640ba7fbf6086c61d14a9f7ab778e9b910e') {
               console.log("findOurContractAddre", findOurContractAddre);
               let arrayIMG = [];
-              findOurContractAddre.metadata.map((getImageUrl,index) => {
-                if(index < 32) 
-                {
+              findOurContractAddre.metadata.map((getImageUrl, index) => {
+                if (index < 32) {
                   var getCIDWithTokenID = getImageUrl.url.split('://');
                   getCIDWithTokenID = getCIDWithTokenID[1];
                   fetch(`https://gateway.pinata.cloud/ipfs/${getCIDWithTokenID}`).then(res => res.json())
@@ -140,6 +142,7 @@ function DH() {
                     });
                   setTimeout(() => {
                     setimageDetails(arrayIMG);
+                    setLoaderFront(true)
                     // console.log("imageDetails1",imageDetails);
                   }, 1000)
                 }
@@ -165,11 +168,11 @@ function DH() {
       if (localStorageDataGet.length > 0) {
         localStorageDataGet.map((getNftName) => {
           console.log("getNftName", getNftName);
-          
+
           var findTokenId = getNftName.split("#");
-          console.log("findTokenId[1]",findTokenId[1]);
-          findTokenId = findTokenId[1]-1;
-          console.log("findTokenId",findTokenId);
+          console.log("findTokenId[1]", findTokenId[1]);
+          findTokenId = findTokenId[1] - 1;
+          console.log("findTokenId", findTokenId);
           console.log(localStorageDataGet.lastIndexOf(getNftName));
 
           burnABiWthiCONTRACT.methods.burnNFT(findTokenId)
@@ -179,9 +182,9 @@ function DH() {
               }
             )
             .on('error', function (error) {
-              console.log('error',error);
+              console.log('error', error);
             }).then(function (info) {
-              console.log("info",info);
+              console.log("info", info);
               if (localStorageDataGet.length == localStorageDataGet.lastIndexOf(getNftName) + 1) {
                 var burnLength = localStorageDataGet.length;
                 var mintDHFNFT = burnLength / 8;
@@ -194,7 +197,7 @@ function DH() {
                     }
                   )
                   .on('error', function (error) {
-                    console.log('error',error);
+                    console.log('error', error);
                   }).then(function (info) {
                     console.log("info", info);
                     console.log("info.events.Transfer.length", info.events.Transfer.length);
@@ -203,23 +206,27 @@ function DH() {
                       console.log("lengthOfTransfer", lengthOfTransfer);
                       var newArray = [];
                       for (let i = 0; i < lengthOfTransfer; i++) {
-    
+
                         var MImageUrl = `https://gateway.pinata.cloud/ipfs/QmNWsCuxDLHstrGU55oA7i8b8JuT7JSUxYKYN2Nyr6aYjj/DHF_${info.events.Transfer[i].returnValues.tokenId}.png`;
-    
+
                         console.log("newArray newArray", newArray);
                         newArray.push(MImageUrl);
                       }
                       setMintedImageUrl(newArray)
                       console.log("setMintedImageUrl-Arry", mintedImageUrl);
+                      setLoader(true)
+                      setAllocated(lengthOfTransfer)
                     }
                     else {
-                      console.log("enter",info.events.Transfer.returnValues.tokenId);
+                      console.log("enter", info.events.Transfer.returnValues.tokenId);
                       var MImageUrl = `https://gateway.pinata.cloud/ipfs/QmNWsCuxDLHstrGU55oA7i8b8JuT7JSUxYKYN2Nyr6aYjj/DHF_${info.events.Transfer.returnValues.tokenId}.png`;
                       var newArray = [];
                       newArray.push(MImageUrl);
-                      console.log("newArray MImageUrl",newArray);
+                      console.log("newArray MImageUrl", newArray);
                       setMintedImageUrl(newArray);
                       console.log("setMintedImageUrl", mintedImageUrl);
+                      setLoader(true)
+                      setAllocated(1)
                     }
                   });
               }
@@ -255,11 +262,13 @@ function DH() {
                   <h2 className='my-4'>Your One DHF NFT</h2>
                   <div className='container'>
                     <div className='row justify-content-center'>
-                      {mintedImageUrl.map((getmintedUrl) => {
+                      {loader ? mintedImageUrl.map((getmintedUrl) => {
                         return <div className='col-lg-4 col-md-6 col-12' key={getmintedUrl}>
-                                  <img width="500" src={getmintedUrl} />
-                              </div>
-                      })}
+                          <img width="500" src={getmintedUrl} />
+                        </div>
+                      }) : <div style={{ display: 'flex', justifyContent: "center", alignItems: "center" }}>
+                        <Grid color="#FFFFFF" height={60} width={60} />
+                      </div>}
                     </div>
                   </div>
                 </div>
@@ -303,7 +312,7 @@ function DH() {
                       <Grid color="#FFFFFF" height={60} width={60} />
                     </div>
                     } */}
-                    {imageDetails.map((data) => {
+                    {loaderFront ? imageDetails.map((data) => {
                       return <div className='col-lg-3 col-md-6 col-12' key={data.name}>
                         <div className='nft_boxes'>
                           <img src={data.image} alt="" />
@@ -319,7 +328,9 @@ function DH() {
                           </div>
                         </div>
                       </div>
-                    })}
+                    }) : <div style={{ display: 'flex', justifyContent: "center", alignItems: "center" }}>
+                      <Grid color="#FFFFFF" height={60} width={60} />
+                    </div>}
                     {/* ============================================= DH NFT CARD ================================================== */}
                     {/* <div className='col-lg-3 col-md-6 col-12'>
                       <div className='nft_boxes'>
@@ -587,7 +598,7 @@ function DH() {
             <div className='col-lg-3 col-12'>
               <div className="dh_right_box text-center">
                 <h4>You have to select Multiple of 8 NFT's</h4>
-                <h4>{count} NFTs selected</h4>
+                {loader ?  <h4>{allocated} DHF NFT Allocated</h4> : <h4>{count} NFTs selected</h4>}    
                 <Button onClick={() => { burnRef.current() }} variant="success" id='burn_NftBtn' className='green_btn'>Burn Selected NFTs</Button>
                 <h4 style={{ wordBreak: 'break-word' }}>Transaction Id : </h4>
               </div>

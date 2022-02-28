@@ -37,6 +37,7 @@ export default function DHRewards() {
     const [imgArry, setImgArry] = useState([])
     const [diamondWallet, setDiamondWallet] = useState(0)
     const [unStakeSelectArry, setUnStakeSelectArry] = useState([])
+    // const [dropTxt, setDropTxt] = useState([])
     // ================================ useState End =====================================
     // ====================== ALL useRef =================================
     const toggleDropDownRef_stake = useRef(null)
@@ -63,6 +64,8 @@ export default function DHRewards() {
             // console.log('nft card', e.target.checked);
             if (e.target.checked === true && count < 3) {
                 setCount(count + 1)
+                console.log('e.target.value', e.target.value);
+                // dropTxt.push(`DH.io ${e.target.value}`)
                 imgArry.push(e.target.value)
                 setImgArry(imgArry)
                 localStorage.setItem('DH-Id', JSON.stringify(imgArry))
@@ -185,6 +188,9 @@ export default function DHRewards() {
     // ============================================ UnStake Function =========================================
     useEffect(() => {
         createUnStakeRef.current = unStakeClick;
+        let unstakeSelect = JSON.parse(localStorage.getItem('DH-Id'))
+            setUnStakeSelectArry(unstakeSelect)
+
         function unStakeClick() {
             var unStakeNumber = document.getElementById('unStakeNumber').value;
             console.log("parseInt(diamondWallet)", parseInt(diamondWallet), "unStakeNumber", parseInt(unStakeNumber));
@@ -237,12 +243,12 @@ export default function DHRewards() {
                                                 <div className="stakeContentDiv">
                                                     {/* <div className='row dh_NFT_cards_Div my-4' style={{ height: '359px' }}> */}
                                                     <div className='custom_dropdown'>
-                                                        <div onClick={() => { toggleDropDownRef_stake.current() }} className='custom_dropdown_txt my-4' style={{ border: '1px solid #fff', padding: '10px', cursor: 'pointer' }}>Select NFT</div>
+                                                        <div onClick={() => { toggleDropDownRef_stake.current() }} className='custom_dropdown_txt my-4' style={{ border: '1px solid #fff', padding: '10px', cursor: 'pointer' }}>Select NFT </div>
                                                         <ul id='custDrop_ul_ID' className='custDrop_ul' style={toggleDropdown_stake ? { display: 'none' } : { display: 'block' }}>
                                                             {getNftList.map((param) => {
                                                                 // console.log(param);
                                                                 // dhnftincremental++
-                                                                return <li>
+                                                                return <li style={{display:'flex', alignItems:'center'}}>
                                                                     <input className="form-check-input" type="checkbox" value={param} id="flexCheckDefault1" onClick={(e) => { dropDownRefStake.current(e) }} />
                                                                     <label className="form-check-label mx-4" htmlFor="flexCheckDefault1">
                                                                         {/* DHN #{param.split('/')[5].slice(4, 7)} */}
@@ -309,7 +315,7 @@ export default function DHRewards() {
                                                         <div onClick={() => { toggleDropDownRef_unStake.current() }} className='custom_dropdown_txt my-4' style={{ border: '1px solid #fff', padding: '10px', cursor: 'pointer' }}>Select NFT</div>
                                                         <ul id='custDrop_ul_ID' className='custDrop_ul' style={toggleDropdown_unStake ? { display: 'none' } : { display: 'block' }}>
                                                             {unStakeSelectArry.map((param) => {
-                                                                return <li>
+                                                                return <li style={{display:'flex', alignItems:'center'}}>
                                                                     <input className="form-check-input" type="checkbox" value={param} id="flexCheckDefault1" onClick={(e) => { dropDownRefUnStake.current(e) }} />
                                                                     <label className="form-check-label" htmlFor="flexCheckDefault1">
                                                                         theDH.io {Number(param) + 1}

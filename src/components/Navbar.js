@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { FaTwitterSquare, FaDiscord } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import Cookies from 'js-cookie'
+// import Cookies from 'js-cookie'
 import logo from "../assets/logo-white.png";
 // import MetaMaskButton from "./MetaMaskButton";
 
@@ -29,6 +29,8 @@ function Navbar() {
   const [walletAddress, setWalletAddress] = useState(null);
   const [lastFourDigitAddValue, setLastFourDigitAddValue] = useState(null);
   // ===================================== OPEN METAMASK =====================================================
+
+  
   const openMetaMask = async () => {
     let data;
     await window.ethereum.enable().then((address) => {
@@ -47,7 +49,8 @@ function Navbar() {
 
       if (typeof data === 'string') {
         document.getElementById('connected').innerText = 'Connected'
-        Cookies.set('Address', data)
+        // Cookies.set('Address', data)
+        // sessionStorage.setItem('Address', data)
 
       }
       setHide(ShowStyle)
@@ -58,21 +61,48 @@ function Navbar() {
   // ====================================== useEffect ==============================================
   useEffect(() => {
     // =============================== SHOW ADDRESS BY COOKIE ==============================================
-    let checkAddress = Cookies.get('Address');
+    // let checkAddress = Cookies.get('Address');
+    let checkAddress = sessionStorage.getItem('Address')
     if (checkAddress === null || checkAddress === undefined) {
       document.getElementById('connected').innerText = 'Connect Wallet'
       // console.log("not connected");
     } else {
-      document.getElementById('connected').innerText = 'Connected'
-      // console.log("connected ");
-      setWalletAddress(checkAddress)
-      let lastAddressDigit = checkAddress.length - 4
-      let lastFourAddValue = checkAddress.slice(lastAddressDigit, checkAddress.length)
-      setLastFourDigitAddValue(lastFourAddValue)
+      // document.getElementById('connected').innerText = 'Connected'
+      // // console.log("connected ");
+      // setWalletAddress(checkAddress)
+      // let lastAddressDigit = checkAddress.length - 4
+      // let lastFourAddValue = checkAddress.slice(lastAddressDigit, checkAddress.length)
+      // setLastFourDigitAddValue(lastFourAddValue)
     }
 
   }, []);
+ 
+  useEffect(() => {
 
+    let data;
+    window.ethereum.enable().then((address) => {
+      data = address[0]
+      // console.log(address, 'this is the data we got ')
+  
+      document.getElementById('next').click();
+      setWalletAddress(data)
+  
+      let lastAddressDigit = data.length - 4
+  
+      // console.log(data.slice(lastAddressDigit, data.length));
+      let lastFourAddValue = data.slice(lastAddressDigit, data.length)
+      setLastFourDigitAddValue(lastFourAddValue)
+  
+  
+      if (typeof data === 'string') {
+        document.getElementById('connected').innerText = 'Connected'
+        // Cookies.set('Address', data)
+        // sessionStorage.setItem('Address', data)
+  
+      }
+      setHide(ShowStyle)
+    })
+  }, [])
 
   return (
     <div className="navbar">

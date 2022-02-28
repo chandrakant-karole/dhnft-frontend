@@ -555,9 +555,30 @@ a.second_nav {
   padding: 10px;
   list-style-type: none;
   line-height: 3;
+  height: 100px;
+  overflow-y: scroll;
 }
 
 .formDiv_dropdown{
   display: flex;
   align-items: center;
+}
+
+#custDrop_ul_ID li input{
+  margin-top: 0px;
+}
+
+#custDrop_ul_ID li input:checked{
+  background-color: #094445;
+  border-color: #067778;
+  width: 20px;
+  height: 20px;
+  border-radius: 0px !important;
+}
+#custDrop_ul_ID li input{
+  background-color: #00b7b9;
+  border-color: #d8d8d8;
+  width: 20px;
+  height: 20px;
+  border-radius: 0px !important;
 }
