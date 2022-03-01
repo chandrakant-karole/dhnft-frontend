@@ -37,6 +37,7 @@ export default function DHRewards() {
     const [imgArry, setImgArry] = useState([])
     const [diamondWallet, setDiamondWallet] = useState(0)
     const [unStakeSelectArry, setUnStakeSelectArry] = useState([])
+    const [diamondWalletUnstake, setdiamondWalletUnstake] = useState(0)
     // const [dropTxt, setDropTxt] = useState([])
     // ================================ useState End =====================================
     // ====================== ALL useRef =================================
@@ -106,12 +107,12 @@ export default function DHRewards() {
         function dropDrown_SelectItem_unStake(e) {
             // console.log('nft card', e.target.checked);
             if (e.target.checked === true) {
-                setCount(count + 1)
+                setdiamondWalletUnstake(diamondWalletUnstake + 1)
             } else {
-                setCount(count - 1)
+                setdiamondWalletUnstake(diamondWalletUnstake - 1)
             }
         }
-    }, [count])
+    }, [diamondWalletUnstake])
     // ======================= stake toggle useEffect dropDown ==============================
     useEffect(() => {
         toggleDropDownRef_stake.current = toggleDropBtn;
@@ -193,7 +194,7 @@ export default function DHRewards() {
 
         function unStakeClick() {
             var unStakeNumber = document.getElementById('unStakeNumber').value;
-            console.log("parseInt(diamondWallet)", parseInt(diamondWallet), "unStakeNumber", parseInt(unStakeNumber));
+            console.log("parseInt(diamondWallet)", (diamondWallet), "unStakeNumber", parseInt(unStakeNumber));
             // setUnStakeSelectArry(getIdArrayUnStake)
             console.log('unStake Clicked');
             stakingABiWthiCONTRACT.methods.removeStake(unStakeNumber)
@@ -204,7 +205,7 @@ export default function DHRewards() {
                     }
                 )
                 .on('error', function (error) {
-                    setDiamondWallet(diamondWallet - parseInt(unStakeNumber))
+                    setDiamondWallet((diamondWallet) - parseInt(unStakeNumber))
                     console.log('error');
                 }).then(function (info) {
                     console.log('success ', info);
@@ -212,7 +213,7 @@ export default function DHRewards() {
                 });
 
         }
-    }, [])
+    }, [diamondWallet])
 
     return (
         <>
@@ -354,7 +355,7 @@ export default function DHRewards() {
                                                         <button style={{ width: '150px' }}>Add Token</button>
                                                     </div> */}
                                                     <div className="inputDiv">
-                                                        <input id='unStakeNumber' type="number" value={count} />
+                                                        <input id='unStakeNumber' type="number" value={diamondWalletUnstake} />
                                                         <button onClick={() => { createUnStakeRef.current() }}>UnStake</button>
                                                     </div>
                                                     <div className="ContentDiv">
