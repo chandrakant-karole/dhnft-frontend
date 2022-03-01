@@ -15,6 +15,7 @@ import { FaSearch } from 'react-icons/fa';
 
 import { BurnAbi, CONTACT_ADDRESS } from '../contract/burn-abi';
 import { mint_DHFNFT, CONTACT_ADDRESS_DHFNFT } from '../contract/dhf-nft';
+import {CONTACT_ADDRESS_BURN_MINT, brun_mint_Abi} from '../contract/mintAndBurnBatch';
 import Web3 from "web3";
 const web3_Stake = new Web3(window.ethereum);
 
@@ -49,21 +50,27 @@ function DH() {
   const cardCountRef = useRef(null)
   const burnRef = useRef(null)
 
-  window.ethereum.enable().then((address) => {
-    loginUserAddress = address[0];
-    // console.log("loginUserAddressloginUserAddress",loginUserAddress);
-    setloginUserAddress(loginUserAddress)
-  });
+
 
   // ============================== NFT CARD COUNT ==================================
 
   useEffect(() => {
+    window.ethereum.enable().then((address) => {
+      let loginUserAddress = address[0];
+      console.log("loginUserAddressloginUserAddress",loginUserAddress);
+      setloginUserAddress(loginUserAddress)
+    });
     cardCountRef.current = nftCardClicked;
     function nftCardClicked(e) {
+      let splitNumber = Number(e.target.value.split('#')[1])
+      console.log("e.target.value",splitNumber);
       // console.log('nft card', e.target.checked);
       if (e.target.checked === true) {
         setCount(count + 1)
-        imgArry.push(e.target.value)
+        // let splitNumber = Number(e.target.value.split('#')[1])
+        // console.log("e.target.value",splitNumber);
+        // imgArry.push(e.target.value)
+        imgArry.push(splitNumber - 1)
         setImgArry(imgArry)
         localStorage.setItem('Data-object', JSON.stringify(imgArry))
         // console.log(JSON.stringify(e.target.value));
@@ -72,13 +79,13 @@ function DH() {
       } else {
         setCount(count - 1)
         // imgArry.pop(e.target.value)
-        var imgName = (e.target.value);
+        var imgName = splitNumber-1;
         console.log("imgName", imgName);
         var localStrgArr = JSON.parse(localStorage.getItem('Data-object'));
         console.log("localStrgArr", localStrgArr);
         const index = localStrgArr.indexOf(imgName);
         if (index > -1) {
-          localStrgArr.splice(index, 1); // 2nd parameter means remove one item only
+          localStrgArr.splice(index , 1); // 2nd parameter means remove one item only
           console.log("localStrgArr after splice", localStrgArr);
 
           localStorage.setItem('Data-object', JSON.stringify(localStrgArr))
@@ -86,6 +93,7 @@ function DH() {
           console.log("imgArry", imgArry);
         }
         else {
+
 
           setImgArry(localStrgArr);
           console.log("imgArry", imgArry);
@@ -121,17 +129,17 @@ function DH() {
 
   // ================================== API useEffect ===================================
   useEffect(() => {
-    // console.log("loginadre", loginUserAddress);
-    fetch(`https://api-eu1.tatum.io/v3/nft/address/balance/MATIC/0xD57A6427Ad96C17b7611F99967a65451F97b1C74`, requestOptions).then(res => res.json())
+    console.log("loginadre", loginUserAddress);
+    fetch(`https://api-eu1.tatum.io/v3/nft/address/balance/MATIC/${loginUserAddress}`, requestOptions).then(res => res.json())
       .then((result) => {
         console.log('result', result); //API Result log
         if (result.length > 0) {
           result.map((findOurContractAddre) => {
-            if (findOurContractAddre.contractAddress == '0x84f80640ba7fbf6086c61d14a9f7ab778e9b910e') {
+            if (findOurContractAddre.contractAddress == '0x913c6704985b958c86402c8001a5ae7287982ad9') {
               console.log("findOurContractAddre", findOurContractAddre);
               let arrayIMG = [];
               findOurContractAddre.metadata.map((getImageUrl, index) => {
-                if (index < 32) {
+                if (index < 10) {
                   var getCIDWithTokenID = getImageUrl.url.split('://');
                   getCIDWithTokenID = getCIDWithTokenID[1];
                   fetch(`https://gateway.pinata.cloud/ipfs/${getCIDWithTokenID}`).then(res => res.json())
@@ -151,7 +159,7 @@ function DH() {
           });
         }
       });
-  }, [])
+  }, [loginUserAddress])
 
   // =================================== Burn useEffect =================================
   useEffect(() => {
@@ -159,33 +167,36 @@ function DH() {
     function burnNFT() {
       console.log('Burn Clicked');
       document.getElementById('burn_NftBtn').setAttribute('disabled', '')
-      const burnABiWthiCONTRACT = new web3_Stake.eth.Contract(BurnAbi, CONTACT_ADDRESS);
+      const burnABiWthiCONTRACT = new web3_Stake.eth.Contract(brun_mint_Abi, CONTACT_ADDRESS_BURN_MINT);
       const mintABiWthiCONTRACT = new web3_Stake.eth.Contract(mint_DHFNFT, CONTACT_ADDRESS_DHFNFT);
 
       // burnABiWthiCONTRACT
       let localStorageDataGet = JSON.parse(localStorage.getItem('Data-object'));
       console.log("localStorageDataGet", localStorageDataGet);
-      if (localStorageDataGet.length > 0) {
-        localStorageDataGet.map((getNftName) => {
-          console.log("getNftName", getNftName);
+      console.log("loginUserAddress", loginUserAddress);
+      // if (localStorageDataGet.length > 0) {
+        // localStorageDataGet.map((getNftName) => {
+          // console.log("getNftName", getNftName);
 
-          var findTokenId = getNftName.split("#");
-          console.log("findTokenId[1]", findTokenId[1]);
-          findTokenId = findTokenId[1] - 1;
-          console.log("findTokenId", findTokenId);
-          console.log(localStorageDataGet.lastIndexOf(getNftName));
+          // var findTokenId = getNftName.split("#");
+          // console.log("findTokenId[1]", findTokenId[1]);
+          // findTokenId = findTokenId[1] - 1;
+          // console.log("findTokenId", findTokenId);
+          // console.log(localStorageDataGet.lastIndexOf(getNftName));
 
-          burnABiWthiCONTRACT.methods.burnNFT(findTokenId)
+          burnABiWthiCONTRACT.methods.burnBatch(localStorageDataGet)
             .send(
               {
                 from: loginUserAddress
+                // from: '0x619a67bc8132D5ce5Fb2D88a9a9912af86d9825b'
               }
             )
+            // .call()
             .on('error', function (error) {
               console.log('error', error);
             }).then(function (info) {
               console.log("info", info);
-              if (localStorageDataGet.length == localStorageDataGet.lastIndexOf(getNftName) + 1) {
+              // if (localStorageDataGet.length == localStorageDataGet.lastIndexOf(getNftName) + 1) {
                 var burnLength = localStorageDataGet.length;
                 var mintDHFNFT = burnLength / 8;
                 console.log("mintDHFNFT", mintDHFNFT)
@@ -229,15 +240,15 @@ function DH() {
                       setAllocated(1)
                     }
                   });
-              }
+              // }
             });
 
-        })
-      }
+        // })
+      // }
       setMainNftBox_toggle(!mainNftBox_toggle)
       setMainNftBox_toggle_oneNft(!mainNftBox_toggle_oneNft)
     }
-  }, [mainNftBox_toggle])
+  }, [mainNftBox_toggle,loginUserAddress,mintedImageUrl])
 
   // ====================================== inner HTML ==============================
   function showNFTImg() {

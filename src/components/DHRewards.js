@@ -3,6 +3,7 @@ import { React, useState, useRef, useEffect } from 'react';
 import Rewards from './Rewards';
 import Web3 from "web3";
 import { StakingAbi } from "../contract/staking-abi";
+import { CONTACT_ADDRESS_BURN_MINT, brun_mint_Abi } from '../contract/mintAndBurnBatch';
 // import { InputGroup, FormControl, Form, Button } from "react-bootstrap";
 // import rarity1 from "../assets/images/rarity/white.png";
 // import rarity2 from "../assets/images/rarity/magnethik.png";
@@ -26,7 +27,7 @@ export default function DHRewards() {
             'Content-Type': 'application/json',
         }
     };
-    
+
     // =========================== API Header End ================================================
     // ============================ ALL useState ===============================
     const [count, setCount] = useState(0)
@@ -34,7 +35,8 @@ export default function DHRewards() {
     const [toggleDropdown_unStake, setToggleDropdown_unStake] = useState(true)
     let [getNftList, setgetNftList] = useState([])
     let [loginUserAddress, setloginUserAddress] = useState('')
-    const [imgArry, setImgArry] = useState([])
+    const [imgArry, setImgArry] = useState([]);
+    const [forUnStake, setforUnStake] = useState([])
     const [diamondWallet, setDiamondWallet] = useState(0)
     const [unStakeSelectArry, setUnStakeSelectArry] = useState([])
     const [diamondWalletUnstake, setdiamondWalletUnstake] = useState(0)
@@ -54,8 +56,8 @@ export default function DHRewards() {
         // console.log("loginUserAddressloginUserAddress",loginUserAddress);
         setloginUserAddress(loginUserAddress)
     });
-    
-    const stakingABiWthiCONTRACT = new web3_Stake.eth.Contract(StakingAbi, '0x028cB60B6B11B4195937676ac99124E80917D1DC');
+
+    const stakingABiWthiCONTRACT = new web3_Stake.eth.Contract(brun_mint_Abi, CONTACT_ADDRESS_BURN_MINT);
 
     // ======================= useEffect nft dropDown Select Count  OF STAKE ==============================
     useEffect(() => {
@@ -89,8 +91,10 @@ export default function DHRewards() {
                     else {
 
                         setImgArry(localStrgArr);
+                        var imgName = (e.target.value);
                         console.log("imgArry", imgArry);
-                        localStorage.setItem('DH-Id', JSON.stringify(imgArry))
+                        localStorage.setItem('DH-Id', JSON.stringify(imgArry));
+
                     }
                 }
                 else {
@@ -103,15 +107,30 @@ export default function DHRewards() {
     }, [count])
     // ======================= useEffect nft dropDown Select Count  OF UN-STAKE ==============================
     useEffect(() => {
+
         dropDownRefUnStake.current = dropDrown_SelectItem_unStake;
         function dropDrown_SelectItem_unStake(e) {
+
             // console.log('nft card', e.target.checked);
             if (e.target.checked === true) {
                 setdiamondWalletUnstake(diamondWalletUnstake + 1)
+                console.log("e.target.value UnStake", e.target.value)
+                forUnStake.push(e.target.value)
+
             } else {
-                setdiamondWalletUnstake(diamondWalletUnstake - 1)
+                setdiamondWalletUnstake(diamondWalletUnstake - 1);
+                var localStrgArr = forUnStake;
+                var imgName = e.target.value
+                console.log("localStrgArr", localStrgArr);
+                const index = forUnStake.indexOf(imgName);
+                if (index > -1) {
+                    forUnStake.splice(index, 1); // 2nd parameter means remove one item only
+                    localStorage.setItem('DH-Id', JSON.stringify(forUnStake))
+                }
             }
+
         }
+        console.log("unStakeArrayDropList", forUnStake);
     }, [diamondWalletUnstake])
     // ======================= stake toggle useEffect dropDown ==============================
     useEffect(() => {
@@ -130,17 +149,17 @@ export default function DHRewards() {
 
     // ============================================ On Created =======================================
     // console.log('dropdown count',count);
-   
+
 
     // ================================== API useEffect ===================================
     useEffect(() => {
-        // console.log("loginadre", loginUserAddress);
-        fetch(`https://api-eu1.tatum.io/v3/nft/address/balance/MATIC/0xD57A6427Ad96C17b7611F99967a65451F97b1C74`, requestOptions).then(res => res.json())
+        console.log("loginadre", loginUserAddress);
+        fetch(`https://api-eu1.tatum.io/v3/nft/address/balance/MATIC/${loginUserAddress}`, requestOptions).then(res => res.json())
             .then((result) => {
                 console.log('result', result); //API Result log
                 if (result.length > 0) {
                     result.map((findOurContractAddre) => {
-                        if (findOurContractAddre.contractAddress == '0x84f80640ba7fbf6086c61d14a9f7ab778e9b910e') {
+                        if (findOurContractAddre.contractAddress == '0x913c6704985b958c86402c8001a5ae7287982ad9') {
                             console.log("findOurContractAddre", findOurContractAddre);
                             let arrayTokenIdAndName = [];
                             findOurContractAddre.metadata.map((getImageUrl, index) => {
@@ -155,61 +174,87 @@ export default function DHRewards() {
                     });
                 }
             });
-    }, [])
+    }, [loginUserAddress])
 
     // ======================================== Stake Function =========================================
     useEffect(() => {
         createStakeRef.current = stakeClick;
-       
+
         function stakeClick() {
-            var stakeNumber = document.getElementById('stakeNumber').value;
+            var stakeNumber = JSON.parse(localStorage.getItem("DH-Id"));
             console.log("stakeNumber", stakeNumber);
-            stakingABiWthiCONTRACT.methods.createStake(stakeNumber)
+            console.log("diamondWallet 186", diamondWallet);
+            stakingABiWthiCONTRACT.methods.stakingBatch(stakeNumber)
                 .send(
                     {
                         from: loginUserAddress,
-                        value: stakeNumber,
                     }
                 )
                 .on('error', function (error) {
-                    setDiamondWallet(diamondWallet + parseInt(stakeNumber))
-                    console.log(typeof stakeNumber);
+                    // setDiamondWallet(diamondWallet + parseInt(stakeNumber))
+                    // console.log(typeof stakeNumber);
                     console.log("error", error)
                     // let o = stakeNumber.Number()
                     // console.log(typeof o);
-                    console.log('error');
+                    // console.log('error');
                 }).then(function (info) {
                     console.log('success ', info);
                     // setDiamondWallet(diamondWallet + stakeNumber)
-                    setDiamondWallet(diamondWallet + parseInt(stakeNumber))
+                    console.log("diamondWallet 186", diamondWallet);
+                    setDiamondWallet(diamondWallet + parseInt(stakeNumber.length))
                 });
         }
     }, [])
 
     // ============================================ UnStake Function =========================================
     useEffect(() => {
+        let unstakeSelect = forUnStake
+        if (unstakeSelect == null) {
+            setUnStakeSelectArry([])
+        } else {
+            let revretFromLocal = JSON.parse(localStorage.getItem('DH-Id'));
+            console.log("revretFromLocal", revretFromLocal);
+            if (revretFromLocal !== undefined && revretFromLocal !== '' && revretFromLocal !== null) {
+
+                setUnStakeSelectArry(revretFromLocal)
+            }
+            else {
+                setUnStakeSelectArry([])
+            }
+            // setUnStakeSelectArry(unstakeSelect)
+        }
         createUnStakeRef.current = unStakeClick;
-        let unstakeSelect = JSON.parse(localStorage.getItem('DH-Id'))
-            setUnStakeSelectArry(unstakeSelect)
 
         function unStakeClick() {
             var unStakeNumber = document.getElementById('unStakeNumber').value;
             console.log("parseInt(diamondWallet)", (diamondWallet), "unStakeNumber", parseInt(unStakeNumber));
             // setUnStakeSelectArry(getIdArrayUnStake)
             console.log('unStake Clicked');
-            stakingABiWthiCONTRACT.methods.removeStake(unStakeNumber)
+            stakingABiWthiCONTRACT.methods.unstakeBatch(unstakeSelect)
                 .send(
                     {
-                        from: loginUserAddress,
-                        value: unStakeNumber,
+                        from: loginUserAddress
+                        // value: unStakeNumber,
                     }
                 )
                 .on('error', function (error) {
-                    setDiamondWallet((diamondWallet) - parseInt(unStakeNumber))
+
+                    // setDiamondWallet((diamondWallet) - parseInt(unStakeNumber.length))
                     console.log('error');
                 }).then(function (info) {
                     console.log('success ', info);
-                    setDiamondWallet(diamondWallet - parseInt(unStakeNumber))
+                    setDiamondWallet((diamondWallet) - parseInt(unstakeSelect.length))
+                    var stakeArray = JSON.parse(localStorage.getItem("DH-Id"));
+                    console.log("stakeArray", stakeArray);
+                    forUnStake.map((elemt) => {
+                        const index = stakeArray.indexOf(elemt);
+                        if (index > -1) {
+                            forUnStake.splice(index, 1); // 2nd parameter means remove one item only
+                            console.log("forUnStakeforUnStake set", forUnStake);
+                            localStorage.setItem('DH-Id', JSON.stringify(forUnStake));
+                        }
+                    });
+
                 });
 
         }
@@ -246,10 +291,10 @@ export default function DHRewards() {
                                                     <div className='custom_dropdown'>
                                                         <div onClick={() => { toggleDropDownRef_stake.current() }} className='custom_dropdown_txt my-4' style={{ border: '1px solid #fff', padding: '10px', cursor: 'pointer' }}>Select NFT </div>
                                                         <ul id='custDrop_ul_ID' className='custDrop_ul' style={toggleDropdown_stake ? { display: 'none' } : { display: 'block' }}>
-                                                            {getNftList.map((param) => {
+                                                            {getNftList.map((param, key) => {
                                                                 // console.log(param);
                                                                 // dhnftincremental++
-                                                                return <li style={{display:'flex', alignItems:'center'}}>
+                                                                return <li style={{ display: 'flex', alignItems: 'center' }} key={key}>
                                                                     <input className="form-check-input" type="checkbox" value={param} id="flexCheckDefault1" onClick={(e) => { dropDownRefStake.current(e) }} />
                                                                     <label className="form-check-label mx-4" htmlFor="flexCheckDefault1">
                                                                         {/* DHN #{param.split('/')[5].slice(4, 7)} */}
@@ -316,7 +361,7 @@ export default function DHRewards() {
                                                         <div onClick={() => { toggleDropDownRef_unStake.current() }} className='custom_dropdown_txt my-4' style={{ border: '1px solid #fff', padding: '10px', cursor: 'pointer' }}>Select NFT</div>
                                                         <ul id='custDrop_ul_ID' className='custDrop_ul' style={toggleDropdown_unStake ? { display: 'none' } : { display: 'block' }}>
                                                             {unStakeSelectArry.map((param) => {
-                                                                return <li style={{display:'flex', alignItems:'center'}}>
+                                                                return <li style={{ display: 'flex', alignItems: 'center' }}>
                                                                     <input className="form-check-input" type="checkbox" value={param} id="flexCheckDefault1" onClick={(e) => { dropDownRefUnStake.current(e) }} />
                                                                     <label className="form-check-label" htmlFor="flexCheckDefault1">
                                                                         theDH.io {Number(param) + 1}
