@@ -1,7 +1,8 @@
 // export const CONTACT_ADDRESS = '0x6659fb5b945b74b77ed8e0cd39b42b0c969cf880'; //client contract address 
 // export const CONTACT_ADDRESS = '0x2b0b868e5595715e3b5d9e54fc58ed6b1f27a450'; //nadeeem contract address
-export const CONTACT_ADDRESS = '0x1e55cc34f47e75ed3ff7137d2cfd4c9fe83081d5';
-export const CONTACT_ABI = [
+// export const CONTACT_ADDRESS_GVO = '0x1e55cc34f47e75ed3ff7137d2cfd4c9fe83081d5';
+export const CONTACT_ADDRESS_GVO = '0xD1cbEA071f3EE9D7b387bd23519082D5889D8950'
+export const CONTACT_ABI_GVO =[
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
@@ -33,6 +34,30 @@ export const CONTACT_ABI = [
 		"type": "event"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "delegate",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "numTokens",
+				"type": "uint256"
+			}
+		],
+		"name": "approve",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -57,6 +82,73 @@ export const CONTACT_ABI = [
 		],
 		"name": "Sold",
 		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "endDate",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_minPurchase",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_maxPurchase",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_availableTokens",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_softCap",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_hardCap",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_poolPercent",
+				"type": "uint256"
+			}
+		],
+		"name": "startICO",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "receiver",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "numTokens",
+				"type": "uint256"
+			}
+		],
+		"name": "transfer",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
 		"anonymous": false,
@@ -84,6 +176,64 @@ export const CONTACT_ABI = [
 		"type": "event"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "buyer",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "numTokens",
+				"type": "uint256"
+			}
+		],
+		"name": "transferFrom",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "numTokens",
+				"type": "uint256"
+			}
+		],
+		"name": "transferGVOToken",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -109,68 +259,37 @@ export const CONTACT_ABI = [
 		"type": "event"
 	},
 	{
-		"inputs": [],
-		"name": "BASE_RATE",
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "numTokens",
+				"type": "uint256"
+			}
+		],
+		"name": "transferToken",
 		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
 			{
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
 			}
 		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "DefiToken",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "END",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "INITIAL_ISSUANCE",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "PresellPercent",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
+		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -211,30 +330,6 @@ export const CONTACT_ABI = [
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "delegate",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "numTokens",
-				"type": "uint256"
-			}
-		],
-		"name": "approve",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [],
 		"name": "availableTokensICO",
 		"outputs": [
@@ -268,6 +363,19 @@ export const CONTACT_ABI = [
 	},
 	{
 		"inputs": [],
+		"name": "BASE_RATE",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "decimalFactor",
 		"outputs": [
 			{
@@ -287,6 +395,32 @@ export const CONTACT_ABI = [
 				"internalType": "uint8",
 				"name": "",
 				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "DefiToken",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "END",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -347,6 +481,19 @@ export const CONTACT_ABI = [
 	{
 		"inputs": [],
 		"name": "incubatorToken",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "INITIAL_ISSUANCE",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -424,6 +571,19 @@ export const CONTACT_ABI = [
 	},
 	{
 		"inputs": [],
+		"name": "PresellPercent",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "project",
 		"outputs": [
 			{
@@ -446,49 +606,6 @@ export const CONTACT_ABI = [
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "endDate",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_minPurchase",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_maxPurchase",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_availableTokens",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_softCap",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_hardCap",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_poolPercent",
-				"type": "uint256"
-			}
-		],
-		"name": "startICO",
-		"outputs": [],
-		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -528,93 +645,6 @@ export const CONTACT_ABI = [
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "receiver",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "numTokens",
-				"type": "uint256"
-			}
-		],
-		"name": "transfer",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "owner",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "buyer",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "numTokens",
-				"type": "uint256"
-			}
-		],
-		"name": "transferFrom",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "owner",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "numTokens",
-				"type": "uint256"
-			}
-		],
-		"name": "transferToken",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "payable",
 		"type": "function"
 	}
 ]

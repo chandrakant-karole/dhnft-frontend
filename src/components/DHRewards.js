@@ -4,6 +4,7 @@ import Rewards from './Rewards';
 import Web3 from "web3";
 import { StakingAbi } from "../contract/staking-abi";
 import { CONTACT_ADDRESS_BURN_MINT, brun_mint_Abi } from '../contract/mintAndBurnBatch';
+import { CONTACT_ADDRESS_GVO, CONTACT_ABI_GVO } from '../contract/GVOToken';
 // import { InputGroup, FormControl, Form, Button } from "react-bootstrap";
 // import rarity1 from "../assets/images/rarity/white.png";
 // import rarity2 from "../assets/images/rarity/magnethik.png";
@@ -40,6 +41,7 @@ export default function DHRewards() {
     const [diamondWallet, setDiamondWallet] = useState(0)
     const [unStakeSelectArry, setUnStakeSelectArry] = useState([])
     const [diamondWalletUnstake, setdiamondWalletUnstake] = useState(0)
+    const [gvoCount, setgvoCount] = useState(0);
     // const [dropTxt, setDropTxt] = useState([])
     // ================================ useState End =====================================
     // ====================== ALL useRef =================================
@@ -49,6 +51,7 @@ export default function DHRewards() {
     const dropDownRefUnStake = useRef(null)
     const createStakeRef = useRef(null)
     const createUnStakeRef = useRef(null)
+    const collectGVORef = useRef(null)
 
     const web3_Stake = new Web3(window.ethereum);
     window.ethereum.enable().then((address) => {
@@ -125,7 +128,7 @@ export default function DHRewards() {
                 const index = forUnStake.indexOf(imgName);
                 if (index > -1) {
                     forUnStake.splice(index, 1); // 2nd parameter means remove one item only
-                    localStorage.setItem('DH-Id', JSON.stringify(forUnStake))
+                    // localStorage.setItem('DH-Id', JSON.stringify(forUnStake))
                 }
             }
 
@@ -242,23 +245,62 @@ export default function DHRewards() {
                     // setDiamondWallet((diamondWallet) - parseInt(unStakeNumber.length))
                     console.log('error');
                 }).then(function (info) {
+                    localStorage.setItem("diamondWalletUnstake",unstakeSelect.length);
+                    setgvoCount(unstakeSelect.length);
+                    // setgvoCount(diamondWalletUnstake);
                     console.log('success ', info);
                     setDiamondWallet((diamondWallet) - parseInt(unstakeSelect.length))
                     var stakeArray = JSON.parse(localStorage.getItem("DH-Id"));
                     console.log("stakeArray", stakeArray);
                     forUnStake.map((elemt) => {
                         const index = stakeArray.indexOf(elemt);
+                        console.log(index);
                         if (index > -1) {
-                            forUnStake.splice(index, 1); // 2nd parameter means remove one item only
+                            stakeArray.splice(index, 1); // 2nd parameter means remove one item only
                             console.log("forUnStakeforUnStake set", forUnStake);
-                            localStorage.setItem('DH-Id', JSON.stringify(forUnStake));
+                            localStorage.setItem('DH-Id', JSON.stringify(stakeArray));
+                            setUnStakeSelectArry(stakeArray)
                         }
                     });
-
+                    
+                    setdiamondWalletUnstake(0);
                 });
 
         }
-    }, [diamondWallet])
+    }, [diamondWallet,gvoCount])
+    // ================================================= COLLECTED GVO =====================================
+    useEffect(() => {
+        setgvoCount(localStorage.getItem("diamondWalletUnstake"));
+        const gvoABiWthiCONTRACT = new web3_Stake.eth.Contract(CONTACT_ABI_GVO,CONTACT_ADDRESS_GVO );
+        collectGVORef.current = collectGVO;
+        function collectGVO() {
+            console.log("GVO",gvoCount);
+            gvoABiWthiCONTRACT.methods.transferGVOToken('0x619a67bc8132D5ce5Fb2D88a9a9912af86d9825b',gvoCount)
+            .send(
+                {
+                    from: loginUserAddress,
+                    gas:165000
+                }
+            )
+            .on('error', function (error) {
+                // setDiamondWallet(diamondWallet + parseInt(stakeNumber))
+                // console.log(typeof stakeNumber);
+                console.log("error", error)
+                // let o = stakeNumber.Number()
+                // console.log(typeof o);
+                // console.log('error');
+            }).then(function (info) {
+                console.log('success ', info);
+                localStorage.setItem("diamondWalletUnstake",0);
+                setgvoCount(0)
+                // setDiamondWallet(diamondWallet + stakeNumber)
+                // console.log("diamondWallet 186", diamondWallet);
+                // setDiamondWallet(diamondWallet + parseInt(stakeNumber.length))
+            });
+        }
+
+    }, [gvoCount])
+
 
     return (
         <>
@@ -441,8 +483,8 @@ export default function DHRewards() {
                                                 </div>
                                             </div>
                                             <div className="inputDiv">
-                                                <input type="text" />
-                                                <button>Collect</button>
+                                                <input type="text" value={gvoCount} />
+                                                <button onClick={() => { collectGVORef.current() }}>Collect</button>
                                             </div>
                                             {/* <div className="inputDiv mt-4">
                                                 <input type="number" />
