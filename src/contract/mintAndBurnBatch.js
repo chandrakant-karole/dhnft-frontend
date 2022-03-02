@@ -1,23 +1,9 @@
-export const CONTACT_ADDRESS_BURN_MINT = '0x913c6704985b958C86402c8001a5ae7287982aD9';
+// export const CONTACT_ADDRESS_BURN_MINT = '0x913c6704985b958C86402c8001a5ae7287982aD9';
+export const CONTACT_ADDRESS_BURN_MINT = '0xf2c7Ddf9E5a6e8AA3474A11E7b367528f21fC505';
+
 export const brun_mint_Abi = [
 	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_symbol",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_initBaseURI",
-				"type": "string"
-			}
-		],
+		"inputs": [],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
 	},
@@ -92,6 +78,37 @@ export const brun_mint_Abi = [
 	{
 		"inputs": [
 			{
+				"internalType": "address[]",
+				"name": "destinations",
+				"type": "address[]"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "assignNFT",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "bulkMint",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "uint256[]",
 				"name": "tokenIds",
 				"type": "uint256[]"
@@ -111,6 +128,19 @@ export const brun_mint_Abi = [
 			}
 		],
 		"name": "burnNFT",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "tokenIds",
+				"type": "uint256[]"
+			}
+		],
+		"name": "createStake",
 		"outputs": [],
 		"stateMutability": "payable",
 		"type": "function"
@@ -227,19 +257,6 @@ export const brun_mint_Abi = [
 		"inputs": [
 			{
 				"internalType": "string",
-				"name": "_newBaseExtension",
-				"type": "string"
-			}
-		],
-		"name": "setBaseExtension",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
 				"name": "_newBaseURI",
 				"type": "string"
 			}
@@ -252,25 +269,12 @@ export const brun_mint_Abi = [
 	{
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "_newCost",
-				"type": "uint256"
+				"internalType": "bool",
+				"name": "_value",
+				"type": "bool"
 			}
 		],
-		"name": "setCost",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_newmaxMintAmount",
-				"type": "uint256"
-			}
-		],
-		"name": "setmaxMintAmount",
+		"name": "setSaleActivatedPauseOrUnpause",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -293,19 +297,6 @@ export const brun_mint_Abi = [
 		],
 		"name": "Staked",
 		"type": "event"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256[]",
-				"name": "tokenIds",
-				"type": "uint256[]"
-			}
-		],
-		"name": "stakingBatch",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
 	},
 	{
 		"anonymous": false,
@@ -404,20 +395,19 @@ export const brun_mint_Abi = [
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_user",
+				"name": "destination",
 				"type": "address"
 			}
 		],
-		"name": "updateReward",
-		"outputs": [],
+		"name": "withdrawFund",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "withdraw",
-		"outputs": [],
-		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -441,38 +431,12 @@ export const brun_mint_Abi = [
 	},
 	{
 		"inputs": [],
-		"name": "baseExtension",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
 		"name": "baseURI",
 		"outputs": [
 			{
 				"internalType": "string",
 				"name": "",
 				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "cost",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -536,20 +500,7 @@ export const brun_mint_Abi = [
 	},
 	{
 		"inputs": [],
-		"name": "maxMintAmount",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "maxSupply",
+		"name": "MAX_BULK_TOKEN",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -568,6 +519,19 @@ export const brun_mint_Abi = [
 				"internalType": "string",
 				"name": "",
 				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "NFT_MINT_PRICE",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -626,6 +590,19 @@ export const brun_mint_Abi = [
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "saleActivated",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
@@ -756,6 +733,25 @@ export const brun_mint_Abi = [
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "_owner",
+				"type": "address"
+			}
+		],
+		"name": "tokenOwnedByUser",
+		"outputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
@@ -786,6 +782,19 @@ export const brun_mint_Abi = [
 				"internalType": "string",
 				"name": "",
 				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "TOTAL_SUPPLY",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",

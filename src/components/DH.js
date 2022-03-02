@@ -31,6 +31,7 @@ function DH() {
       'x-api-key': 'bf846fcb-8fb4-4c74-a0ce-0e9642fc6741',
       'x-testnet-type': 'polygonscan',
       'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
     }
   };
   // =========================== API Header End ================================================
@@ -62,7 +63,7 @@ function DH() {
     });
     cardCountRef.current = nftCardClicked;
     function nftCardClicked(e) {
-      let splitNumber = Number(e.target.value.split('#')[1])
+      let splitNumber = Number(e.target.value)
       console.log("e.target.value",splitNumber);
       // console.log('nft card', e.target.checked);
       if (e.target.checked === true) {
@@ -70,7 +71,7 @@ function DH() {
         // let splitNumber = Number(e.target.value.split('#')[1])
         // console.log("e.target.value",splitNumber);
         // imgArry.push(e.target.value)
-        imgArry.push(splitNumber - 1)
+        imgArry.push(splitNumber)
         setImgArry(imgArry)
         localStorage.setItem('Data-object', JSON.stringify(imgArry))
         // console.log(JSON.stringify(e.target.value));
@@ -79,7 +80,7 @@ function DH() {
       } else {
         setCount(count - 1)
         // imgArry.pop(e.target.value)
-        var imgName = splitNumber-1;
+        var imgName = splitNumber;
         console.log("imgName", imgName);
         var localStrgArr = JSON.parse(localStorage.getItem('Data-object'));
         console.log("localStrgArr", localStrgArr);
@@ -135,19 +136,21 @@ function DH() {
         console.log('result', result); //API Result log
         if (result.length > 0) {
           result.map((findOurContractAddre) => {
-            if (findOurContractAddre.contractAddress == '0x913c6704985b958c86402c8001a5ae7287982ad9') {
+            if (findOurContractAddre.contractAddress == "0xf2c7ddf9e5a6e8aa3474a11e7b367528f21fc505") {
               console.log("findOurContractAddre", findOurContractAddre);
               let arrayIMG = [];
               findOurContractAddre.metadata.map((getImageUrl, index) => {
-                if (index < 10) {
-                  var getCIDWithTokenID = getImageUrl.url.split('://');
-                  getCIDWithTokenID = getCIDWithTokenID[1];
-                  fetch(`https://gateway.pinata.cloud/ipfs/${getCIDWithTokenID}`).then(res => res.json())
-                    .then((findImage) => {
-                      // console.log("findImage",findImage);
-                      arrayIMG.push(findImage);
-                      // console.log("imageDetailsARRRAY",imageDetails);
-                    });
+                if (index < 20) {
+                  // var getCIDWithTokenID = getImageUrl.url.split('://');
+                  // getCIDWithTokenID = getCIDWithTokenID[1];
+                  console.log("getImageUrl",getImageUrl.tokenId);
+                  arrayIMG.push(getImageUrl.tokenId);
+                  // fetch(`https://sillysloths.mypinata.cloud/ipfs/QmdZaSSxjxoPZvQ5JYGPWnFY6nECCyaPasdPahUCQMCLh1/${getImageUrl.tokenId}`).then(res => res.json())
+                  //   .then((findImage) => {
+                  //     console.log("findImage",findImage);
+                  //     arrayIMG.push(findImage);
+                  //     // console.log("imageDetailsARRRAY",imageDetails);
+                  //   });
                   setTimeout(() => {
                     setimageDetails(arrayIMG);
                     setLoaderFront(true)
@@ -218,7 +221,7 @@ function DH() {
                       var newArray = [];
                       for (let i = 0; i < lengthOfTransfer; i++) {
 
-                        var MImageUrl = `https://gateway.pinata.cloud/ipfs/QmNWsCuxDLHstrGU55oA7i8b8JuT7JSUxYKYN2Nyr6aYjj/DHF_${info.events.Transfer[i].returnValues.tokenId}.png`;
+                        var MImageUrl = `https://sillysloths.mypinata.cloud/ipfs/QmNWsCuxDLHstrGU55oA7i8b8JuT7JSUxYKYN2Nyr6aYjj/DHF_${info.events.Transfer[i].returnValues.tokenId}.png`;
 
                         console.log("newArray newArray", newArray);
                         newArray.push(MImageUrl);
@@ -230,7 +233,7 @@ function DH() {
                     }
                     else {
                       console.log("enter", info.events.Transfer.returnValues.tokenId);
-                      var MImageUrl = `https://gateway.pinata.cloud/ipfs/QmNWsCuxDLHstrGU55oA7i8b8JuT7JSUxYKYN2Nyr6aYjj/DHF_${info.events.Transfer.returnValues.tokenId}.png`;
+                      var MImageUrl = `https://sillysloths.mypinata.cloud/ipfs/QmNWsCuxDLHstrGU55oA7i8b8JuT7JSUxYKYN2Nyr6aYjj/DHF_${info.events.Transfer.returnValues.tokenId}.png`;
                       var newArray = [];
                       newArray.push(MImageUrl);
                       console.log("newArray MImageUrl", newArray);
@@ -324,18 +327,18 @@ function DH() {
                     </div>
                     } */}
                     {loaderFront ? imageDetails.map((data) => {
-                      return <div className='col-lg-3 col-md-6 col-12' key={data.name}>
+                      return <div className='col-lg-3 col-md-6 col-12' key={data}>
                         <div className='nft_boxes'>
-                          <img src={data.image} alt="" />
+                          <img src={`https://sillysloths.mypinata.cloud/ipfs/QmNN2PcnL8rdzf2DxTkvmPEkyT3dg4fs2PeyDW1wmwEvea/DH_${Number(data)+1}.png`} alt="" />
                           <div className='nft_box_btm'>
                             <div className='title_card'>
-                              <h5>{data.name} </h5>
+                              <h5>Token ID {data} </h5>
                               <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                                <Form.Check type="checkbox" value={data.name} onClick={(e) => { cardCountRef.current(e) }} />
+                                <Form.Check type="checkbox" value={data} onClick={(e) => { cardCountRef.current(e) }} />
                               </Form.Group>
                             </div>
-                            <p> <span>94</span> days held </p>
-                            <p> DHT Reward: <span>3000</span> </p>
+                            {/* <p> <span>94</span> days held </p> */}
+                            {/* <p> DHT Reward: <span>3000</span> </p> */}
                           </div>
                         </div>
                       </div>
@@ -611,7 +614,7 @@ function DH() {
                 <h4>You have to select Multiple of 8 NFT's</h4>
                 {loader ?  <h4>{allocated} DHF NFT Allocated</h4> : <h4>{count} NFTs selected</h4>}    
                 <Button onClick={() => { burnRef.current() }} variant="success" id='burn_NftBtn' className='green_btn'>Burn Selected NFTs</Button>
-                <h4 style={{ wordBreak: 'break-word' }}>Transaction Id : </h4>
+                {/* <h4 style={{ wordBreak: 'break-word' }}>Transaction Id : </h4> */}
               </div>
             </div>
           </div>

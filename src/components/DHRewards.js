@@ -162,7 +162,7 @@ export default function DHRewards() {
                 console.log('result', result); //API Result log
                 if (result.length > 0) {
                     result.map((findOurContractAddre) => {
-                        if (findOurContractAddre.contractAddress == '0x913c6704985b958c86402c8001a5ae7287982ad9') {
+                        if (findOurContractAddre.contractAddress == '0xf2c7ddf9e5a6e8aa3474a11e7b367528f21fc505') {
                             console.log("findOurContractAddre", findOurContractAddre);
                             let arrayTokenIdAndName = [];
                             findOurContractAddre.metadata.map((getImageUrl, index) => {
@@ -187,7 +187,7 @@ export default function DHRewards() {
             var stakeNumber = JSON.parse(localStorage.getItem("DH-Id"));
             console.log("stakeNumber", stakeNumber);
             console.log("diamondWallet 186", diamondWallet);
-            stakingABiWthiCONTRACT.methods.stakingBatch(stakeNumber)
+            stakingABiWthiCONTRACT.methods.createStake(stakeNumber)
                 .send(
                     {
                         from: loginUserAddress,
