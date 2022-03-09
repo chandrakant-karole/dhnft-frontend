@@ -1,0 +1,86 @@
+@media screen and (max-width:991px) {
+    .brandDiv_bottomLink{
+        justify-content: flex-start;
+        margin-top: 20px;
+    }
+    .brandDiv_bottomSocial{
+        justify-content: flex-start;
+        margin-top: 20px;
+    }
+    .bottom_socialLinkDiv{
+    
+        ul{
+            padding-left: 9px;
+        }
+    }
+    .column-grid{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width:670px) {
+    .column-grid{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width:576px) {
+    body{
+        padding-bottom: 20px;
+    }
+    .column-grid{
+        grid-template-columns: repeat(1, 1fr);
+        gap: 40px;
+    }
+    .defi-section{
+        align-items: flex-start;
+    }
+
+    .faq-section > .sub-heading{
+        font-size: 16px;
+    }
+    .team-section > .sub-heading{
+        font-size: 16px;
+    }
+    .nav-justified .nav-item{
+        flex-basis: unset;
+    }
+    .dh_right_box{
+        padding-top: 40px;
+    }
+    .reawardsHeroSection{
+        padding: 100px 20px;
+    }
+    .stakeDiv .customTab Button{
+        margin: 5px 0px;
+    }
+    .stakeDiv .customTab Button.active{
+        margin: 5px 0px;
+    }
+    .whats_this_popover{
+        width: 300px;
+        bottom: -164px;
+    }
+    .compounding_popover{
+        width: 300px;
+        bottom: -100px;
+    }
+}
+
+@media screen and (max-width:375px) {
+    .reward_section{
+        flex-direction: column;
+    }
+    .responsive_second_nav{
+        padding: 9px 74px !important;
+        margin-bottom: 10px;
+    }
+    .whats_this_popover{
+        width: 250px;
+        // bottom: -164px;
+    }
+    .compounding_popover{
+        width: 250px;
+        // bottom: -100px;
+    }
+}

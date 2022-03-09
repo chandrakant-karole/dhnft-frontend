@@ -1,0 +1,9 @@
+{
+  "description": "The Diamond Hands is a collection of 11,111 programmatically, randomly generated NFTs on the Ethereum blockchain. We are bringing the NFT community a new level of value in the collectable art scene; so naturally we procured one of the most talented artists in the game, and he's currently approved and actively selling his 1 of 1 artwork on SuperRare.com.",
+  "image": "https://gateway.pinata.cloud/ipfs/QmNN2PcnL8rdzf2DxTkvmPEkyT3dg4fs2PeyDW1wmwEvea/DH_20.png",
+  "name": "DH-#20",
+  "attributes": [ 
+    {"trait_type": "moduloTen", "value": "0"},
+    {"trait_type": "moduloFive", "value": "0"}
+  ]
+}

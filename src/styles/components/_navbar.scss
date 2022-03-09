@@ -1,0 +1,215 @@
+@use "../abstracts/" as *;
+.navbar {
+    position: sticky;
+    z-index: 9;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #0b1212;
+    box-shadow: 0px 4px 6px rgba(54, 54, 54, 0.15);
+    >.container {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 20px 2rem;
+    }
+}
+
+.nav-menu {
+    >a {
+        color: $dark-theme-text;
+        margin: 0 5px;
+        padding: 5px 10px;
+        display: inline-block;
+        border-bottom: 1px solid transparent;
+        font-size: 17px;
+    }
+    >a:hover{
+        border-bottom: 1px solid #00fcff;
+    }
+}
+
+.nav-buttons {
+    display: flex;
+    align-items: center;
+    >* {
+        margin: 0 10px;
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+    >a {
+        display: flex;
+    }
+    .connect-btn {
+        svg {
+            margin-right: 10px;
+            font-size: 1.4rem;
+        }
+    }
+    svg {
+        color: $primary;
+        font-size: 1.6rem;
+    }
+}
+
+.cont_wlt {
+    background: #00fcff;
+    padding: 7px 18px;
+    font-size: 16px;
+    font-weight: 400;
+    /* border-radius: 5px; */
+    color: black;
+    font-weight: bold;
+    border: 1px solid #00fcff;
+}
+
+.cont_wlt:hover{
+    background-color: rgb(14, 14, 14);
+    color: #00fcff;
+}
+
+.conted_wlt {
+    color: #64cd64;
+    font-size: 14px;
+}
+
+.fa_disco svg {
+    color: #00fcff6e;
+}
+
+.fa_disco svg:hover{
+    color: #00fcff;
+}
+
+.twtsqur svg {
+    color: #00fcff6e;
+}
+
+.twtsqur svg:hover {
+    color: #00fcff;
+}
+
+a body.hidden {
+    overflow: hidden;
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    z-index: 999;
+    background: none;
+    outline: none;
+    border: none;
+    -webkit-tap-highlight-color: transparent;
+    .bar {
+        display: block;
+        width: 28px;
+        height: 2px;
+        margin: 8px auto;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        background-color: $dark-theme-text;
+    }
+}
+
+.hamburger.active {
+    span:first-child {
+        transform: translateY(5px) rotate(45deg);
+    }
+    span:last-child {
+        transform: translateY(-5px) rotate(-45deg);
+    }
+}
+
+.mobile-nav {
+    position: absolute;
+    bottom: 90%;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: -100%;
+    opacity: 0;
+    background: $dark-theme-background;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease-in-out;
+    >.nav-menu {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        font-size: 1.5em;
+        .sm-links {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            color: $primary;
+            font-size: 1.5em;
+            >a {
+                line-height: 0;
+                color: #008789;
+            }
+        }
+        .connect-btn {
+            svg {
+                margin-right: 10px;
+            }
+        }
+    }
+    &.active {
+        left: 0;
+        opacity: 1;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .navbar {
+        position: static;
+        >.container {
+            justify-content: flex-end;
+            .logo {
+                margin-right: auto;
+            }
+        }
+    }
+    .hamburger {
+        display: block;
+    }
+    .nav-buttons {
+        >.sm {
+            display: none;
+        }
+        .btn {
+            margin-right: 20px;
+        }
+    }
+    .nav-menu {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .nav-buttons {
+        .connect-btn {
+            padding: 5px 10px;
+            font-size: 0.95rem;
+            svg {
+                font-size: 1.2rem;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .nav-buttons {
+        .connect-btn {
+            svg {
+                display: none;
+            }
+        }
+    }
+}
