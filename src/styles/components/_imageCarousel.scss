@@ -1,0 +1,109 @@
+@use "../abstracts/" as *;
+
+.carousel__wrapper {
+  position: relative;
+  border-radius: 5px;
+  margin: 2rem auto;
+  overflow: hidden;
+  width: 400px;
+}
+
+.carousel__container {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+  background: orage;
+  &::before {
+    position: absolute;
+    content: "";
+    border: 5px solid #f3f3f352;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    animation: spin 0.5s ease-in infinite;
+  }
+  @keyframes spin {
+    0% {
+      border-top: 5px dashed $primary;
+    }
+    25% {
+      border-right: 5px dashed $primary;
+    }
+    50% {
+      border-bottom: 5px dashed $primary;
+    }
+    100% {
+      border-left: 5px dashed $primary;
+    }
+  }
+}
+
+.carousel__image {
+  position: absolute;
+  left: 0;
+  opacity: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.1);
+  transition: all 0.15s ease-out;
+}
+
+.carousel__image.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.carousel__controls {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.carousel__button {
+  cursor: pointer;
+  background-color: rgba(1, 1, 1, 0.3);
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel__button:hover {
+  background-color: rgba(1, 1, 1, 0.5);
+}
+
+.carousel__button:active svg {
+  transform: scale(1.15);
+}
+
+.carousel__button svg {
+  height: 20px;
+  color: white;
+}
+
+@media screen and (max-width: 600px) {
+  .carousel__wrapper {
+    width: 260px;
+  }
+
+  .carousel__container {
+    height: 260px;
+  }
+
+  .carousel__button {
+    height: 30px;
+    width: 30px;
+  }
+}

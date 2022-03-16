@@ -1,0 +1,84 @@
+@use '../abstracts/' as *;
+
+.team-section {
+  flex-direction: column;
+
+  > .heading {
+    margin-bottom: 0;
+    text-align: center;
+  }
+
+  > .sub-heading {
+    margin-bottom: 50px;
+    text-align: center;
+  }
+
+  .column-grid {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    > * {
+      width: 100%;
+      // flex-basis: 170px;
+      // flex-grow: 1;
+    }
+  }
+}
+
+.team-profile {
+  background-color: #0b1212;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 10px;
+  box-shadow: 0px 0px 5px #067577;
+  transform: translateY(0px);
+  transition: all .5s;
+
+  .profile-picture {
+    width: 170px;
+    height: 170px;
+    margin: auto;
+    margin-bottom: 20px;
+    align-self: center;
+
+    border-radius: 50%;
+    overflow: hidden;
+    background: $gray-100;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  > .sub-heading {
+    margin-bottom: 0;
+    color: #577e7f;
+    font-weight: 500;
+  }
+}
+
+.team-profile:hover{
+  transform: translateY(-20px);
+}
+
+@media screen and (max-width: 600px) {
+  .team-section {
+    .column-grid {
+      > * {
+        width: 100%;
+        // flex-basis: 130px;
+      }
+    }
+  }
+
+  .team-profile {
+    .profile-picture {
+      height: 130px;
+      width: 130px;
+    }
+  }
+}
