@@ -1,0 +1,9 @@
+{
+  "description": "The Diamond Hands Founder NFT is a collection of 250 programmatically, randomly generated NFTs on the Ethereum blockchain. This will be used as Governance Token.",
+  "image": "https://gateway.pinata.cloud/ipfs/QmNWsCuxDLHstrGU55oA7i8b8JuT7JSUxYKYN2Nyr6aYjj/DHF_237.png",
+  "name": "DHF-#237",
+  "attributes": [ 
+    {"trait_type": "isEven", "value": "True"},
+    {"trait_type": "modTen", "value": "7"}
+  ]
+}

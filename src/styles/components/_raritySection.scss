@@ -1,0 +1,61 @@
+@use '../abstracts/' as *;
+
+.rarity-section {
+  flex-direction: column;
+  // padding-left: 0px !important;
+  // padding-right: 0px !important;
+
+  .col-4 {
+    display: flex;
+    gap: 50px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+
+    > .image-container {
+      flex: 1 1 100%;
+      border-radius: 10px;
+      overflow: hidden;
+      filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.2));
+    }
+  }
+
+  .col-2 {
+    width: 100%;
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    justify-content: space-between;
+
+    > * {
+      flex-basis: 100%;
+    }
+
+    .dh {
+      width: 100%;
+      * {
+        text-align: center;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .rarity-section {
+    .col-4 {
+      gap: 25px;
+      flex-wrap: wrap;
+      > * {
+        flex: 1 1 100%;
+        max-width: calc(50% - 13px);
+      }
+    }
+
+    .col-2 {
+      .rarities {
+        width: 100%;
+      }
+    }
+  }
+}

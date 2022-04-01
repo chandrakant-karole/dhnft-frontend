@@ -1,0 +1,701 @@
+@use "../abstracts/"as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+iframe {
+  display: none !important;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  // font-family: "Rubik", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+  //   "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: 'Manrope', sans-serif;
+  margin: 0;
+  letter-spacing: 1px;
+  word-spacing: 1px;
+}
+
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  color: $dark-theme-text;
+  background: $dark-theme-background !important;
+  // background-image: url('../../assets/background.png');
+  // background-repeat: no-repeat;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+
+// ====================== Rewards ==========================
+
+.reawardsHeroSection {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 164px 100px;
+  background-image: url('../../assets/backgroun1d.png');
+  background-repeat: no-repeat;
+
+  .reawardsHeroDiv {
+
+    .title {
+      font-size: 2em;
+    }
+
+    .numberHead {
+      font-size: 4em;
+      font-weight: 900;
+      background: linear-gradient(68deg, #00ff1f 3%, #0f999c 36%, #0b4e4f 77%, #0b1212 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+}
+
+
+.intro-section {
+
+  .image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    img {
+      width: 340px;
+      height: auto;
+    }
+  }
+}
+
+
+// ====================== Rarity ==========================
+
+
+.rarity-section {
+
+  .image-container {
+
+    img {
+      padding: 20px;
+    }
+  }
+
+}
+
+
+.stakeDiv {
+
+  .accordion button:hover::after {
+    border: none;
+  }
+
+  .accordion button::after {
+    filter: brightness(0.5) invert(1);
+  }
+
+  // .accordion button
+  .accordion button:focus::after {
+    border: none;
+    filter: brightness(0.5) invert(1);
+  }
+
+  .accordion-header {
+
+    button {
+      font-size: .7em !important;
+      color: #fff;
+      display: flex;
+    }
+
+    button:focus {
+      box-shadow: none;
+    }
+  }
+
+  .accordion-item {
+    background-color: #0b1212;
+  }
+
+  .customTab {
+    border-bottom: 0px !important;
+
+    Button {
+      padding: 5px 50px;
+      margin: 42px 0px;
+      border-radius: 0px;
+      font-weight: bold;
+      border: 2px solid #fff;
+      color: #fff !important;
+    }
+
+    Button.active {
+      padding: 5px 50px;
+      margin: 42px 0px;
+      border-radius: 0px;
+      font-weight: bold;
+      border: 2px solid #fff;
+      color: #000 !important;
+      background-color: #fff;
+    }
+  }
+
+  .stakeContentDiv {
+
+    .inputDiv {
+      display: flex;
+      height: 50px;
+
+      button {
+        color: black;
+        font-weight: 900;
+        background: #0e8d8f;
+        text-align: center;
+        width: 100px;
+        font-size: 1em !important;
+        padding: 0px 9px;
+        letter-spacing: normal;
+        border-radius: 0px !important;
+        border: 1px solid #085b5c;
+      }
+
+      .maxBtn {
+        color: #cdcdcd;
+        background-color: #121e1d;
+        border: none;
+        border-bottom: 1px solid #1b4d4e;
+      }
+
+      input {
+        width: 100%;
+        background: #0b1212;
+        border: none;
+        border-bottom: 1px solid #1b4d4e;
+        color: #fff;
+        -moz-appearance: textfield;
+
+        &::-webkit-inner-spin-button {
+          display: none;
+        }
+      }
+
+      input::placeholder {
+        color: #fff;
+      }
+
+      input:focus-visible {
+        border: none;
+        outline: none;
+        border-bottom: 1px solid #0e8d8f;
+      }
+
+    }
+
+    .ContentDiv {
+      margin-top: 20px;
+
+      .StakewalletDiv,
+      .YourStakeDiv {
+        display: flex;
+        justify-content: space-between;
+      }
+
+
+    }
+
+
+  }
+}
+
+.rewardsCollectTop {
+  display: flex;
+  justify-content: end;
+}
+
+.whats_this {
+  padding: 20px;
+  color: #5f8585;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.compoundingDiv {
+  display: flex;
+  align-items: center;
+  color: #5f8585;
+  font-weight: 700;
+  position: relative;
+  cursor: pointer;
+}
+
+.whats_this_popover {
+  position: absolute;
+  width: 457px;
+  bottom: -115px;
+  z-index: 5;
+  right: 0px;
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #0b4e4f;
+  color: #0b1212;
+  font-size: 1em;
+  letter-spacing: 0.1px;
+  font-weight: 500;
+  display: none;
+}
+
+.whats_this:hover .whats_this_popover {
+  display: block;
+}
+
+
+.compounding_popover {
+  position: absolute;
+  width: 457px;
+  bottom: -115px;
+  z-index: 5;
+  right: 0px;
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #0b4e4f;
+  color: #0b1212;
+  font-size: 1em;
+  letter-spacing: 0.1px;
+  font-weight: 500;
+  display: none;
+}
+
+.compoundingDiv:hover .compounding_popover {
+  display: block;
+}
+
+
+.stakeTitle {
+  margin-bottom: 20px;
+
+  h2 {
+    font-weight: 900;
+  }
+}
+
+.second_nav:hover {
+  color: #00fcff !important;
+}
+
+// =============================================
+.cntwllt_nav {
+
+
+  .nav-link.active {
+    color: #495057;
+    background-color: #0b1212;
+    box-shadow: inset 0px 0px 14px #067778;
+    border: none;
+    border-radius: 0px;
+  }
+
+  .nav-link:hover {
+    border: none;
+    box-shadow: inset 0px 0px 12px #067778;
+    border-radius: 0px;
+    color: transparent !important;
+  }
+
+  .nav-link:focus {
+    border: none;
+  }
+
+  .nav-link:focus-visible {
+    border: none;
+  }
+
+  .nav-tabs {
+    border: none;
+    background: #0b1212;
+    border-radius: 0px;
+    margin: 30px 0px;
+
+    .nav-link {
+      border: none;
+    }
+  }
+}
+
+.searchDHT {
+  color: #fff;
+  background: #0b1212;
+  border: none !important;
+  border-bottom: 1px solid #1b4d4e !important;
+}
+
+.searchDHT:focus {
+  color: #fff;
+  background: #0b1212;
+  border: none !important;
+  border-bottom: 1px solid #0e8d8f !important;
+  box-shadow: none;
+}
+
+
+.title_card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.form-check-input {
+  background-color: #0b1212;
+  // border-color: #067778;
+  width: 30px;
+  height: 30px;
+  border-radius: 50% !important;
+  box-shadow: inset 0px 0px 4px #067778d6;
+}
+
+.form-check-input:focus {
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+
+.form-check-input:checked {
+  background-color: #094445;
+  border-color: #067778;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.btn-danger:focus {
+  box-shadow: none !important;
+}
+
+.dht_nft_list {
+  padding: 25px;
+}
+
+
+.btn-success:hover {
+  background-color: #094445;
+  border-color: #067778;
+}
+
+.search_Btn {
+  color: black;
+  font-weight: 700;
+  background: #0e8d8f;
+  text-align: center;
+  width: 128px;
+  font-size: 1em !important;
+  padding: 0px 9px;
+  letter-spacing: normal;
+  border-radius: 0px !important;
+  border: none;
+}
+
+// ================================= Footer Common ================================
+
+.brandDiv_bottomHead {
+
+  h2 {
+    background: linear-gradient(68deg, #00ff1f 3%, #0f999c 36%, #0b4e4f 77%, #0b1212 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 900;
+    font-size: 2.5em;
+  }
+}
+
+.brandDiv_bottomLink {
+  display: flex;
+  height: 100%;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.brandDiv_bottomSocial {
+  display: flex;
+  height: 100%;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.bottom_socialLinkDiv {
+
+  ul {
+    list-style-type: none;
+    line-height: 2;
+
+    a:hover {
+      color: #00fcff;
+    }
+  }
+}
+
+.bottom_linkDiv {
+
+
+  // h4{
+  //   text-decoration: underline;
+  // }
+
+
+  ul {
+    list-style-type: none;
+    line-height: 1.6;
+
+    a {
+      position: relative;
+    }
+
+    a:hover {
+      color: #00fcff;
+    }
+
+    a::before {
+      content: '>';
+      position: absolute;
+      top: -1px;
+      left: -18px;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+a.second_nav {
+  border: 2px solid #7c7d7d;
+  padding: 10px 35px;
+  background-color: #0b1212;
+  border-radius: 25px;
+  color: #7c7d7d;
+  font-weight: 600;
+}
+
+
+.reward_section {
+
+  .inner_nav_active {
+    border: 2px solid #00fcff;
+    padding: 10px 35px;
+    background-color: #0b1212;
+    border-radius: 25px;
+    color: #00fcff;
+    font-weight: 600;
+  }
+
+}
+
+.dh_NFT_cards_Div {
+  height: 390px;
+  overflow-y: scroll;
+  width: 100%;
+}
+
+.dh_NFT_cards_InnerDiv {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.dh_NFT_cards_Div::-webkit-scrollbar {
+  width: 10px;
+  background-color: #067778;
+  border-radius: 25px;
+}
+
+.dh_NFT_cards_Div::-webkit-scrollbar-thumb {
+  width: 10px;
+  background-color: #00fcff;
+  border-radius: 25px;
+  box-shadow: inset 0px 0px 6px #000;
+}
+
+.walletAddress_txt {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 61px;
+  margin: 0px !important;
+}
+
+.lastFourAddValue {
+  margin: 0px !important;
+}
+
+#custDrop_ul_ID {
+  background-color: #fff;
+  color: #000;
+  padding: 10px;
+  list-style-type: none;
+  line-height: 3;
+  height: 100px;
+  overflow-y: scroll;
+
+  .select_all_unstakeBtn{
+    padding: 5px 20px;
+    width: auto;
+    line-height: 1;
+    background-color: #0e8c8e;
+    color: #fff;
+    float: right;
+    transition: all .2s;
+
+    &:hover{
+      transform: scale(.95);
+    }
+  }
+}
+
+.formDiv_dropdown {
+  display: flex;
+  align-items: center;
+}
+
+#custDrop_ul_ID li input {
+  margin-top: 0px;
+}
+
+#custDrop_ul_ID li input:checked {
+  background-color: #094445;
+  border-color: #067778;
+  width: 20px;
+  height: 20px;
+  border-radius: 0px !important;
+}
+
+#custDrop_ul_ID li input {
+  background-color: #00b7b9;
+  border-color: #d8d8d8;
+  width: 20px;
+  height: 20px;
+  border-radius: 0px !important;
+}
+// ==========================================================
+#custDrop_ul_ID_unstake {
+  background-color: #fff;
+  color: #000;
+  padding: 10px;
+  list-style-type: none;
+  line-height: 3;
+  height: 100px;
+  overflow-y: scroll;
+
+  .select_all_unstakeBtn{
+    padding: 5px 20px;
+    width: auto;
+    line-height: 1;
+    background-color: #0e8c8e;
+    color: #fff;
+    float: right;
+    transition: all .2s;
+
+    &:hover{
+      transform: scale(.95);
+    }
+  }
+}
+
+.formDiv_dropdown {
+  display: flex;
+  align-items: center;
+}
+
+#custDrop_ul_ID_unstake li input {
+  margin-top: 0px;
+}
+
+#custDrop_ul_ID_unstake li input:checked {
+  background-color: #094445;
+  border-color: #067778;
+  width: 20px;
+  height: 20px;
+  border-radius: 0px !important;
+}
+
+#custDrop_ul_ID_unstake li #all:checked{
+  background-color: #094445;
+  border-color: #067778;
+  width: 20px;
+  height: 20px;
+  border-radius: 0px !important;
+}
+
+// input#all [type=checkbox] {
+//   background-color: #094445;
+//   border-color: #067778;
+// }
+
+#custDrop_ul_ID_unstake li input {
+  background-color: #00b7b9;
+  border-color: #d8d8d8;
+  width: 20px;
+  height: 20px;
+  border-radius: 0px !important;
+  margin-right: 10px;
+}
+
+
+.nft_boxes img {
+  width: 100%;
+}
+
+.unstake_dropArrow svg {
+  transition: all .5s;
+}
+
+.stake_dropArrow svg {
+  transition: all .5s;
+}

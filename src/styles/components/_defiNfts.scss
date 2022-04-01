@@ -1,0 +1,15 @@
+.defi-section {
+  flex-direction: column;
+    background-image: url('../../assets/backgroun1d.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  
+  .description,
+  .heading-small {
+    align-self: flex-start;
+  }
+
+  .heading-small {
+    margin-top: 15px;
+  }
+}
