@@ -15,7 +15,7 @@ import { FaSearch } from 'react-icons/fa';
 
 import { BurnAbi, CONTACT_ADDRESS } from '../contract/burn-abi';
 import { mint_DHFNFT, CONTACT_ADDRESS_DHFNFT } from '../contract/dhf-nft';
-import { CONTACT_ADDRESS_BURN_MINT, brun_mint_Abi } from '../contract/dht-abi';
+import { CONTACT_ADDRESS_BURN_MINT, brun_mint_Abi } from '../contract/mintAndBurnBatch';
 
 import Web3 from "web3";
 import { DhState } from '../context/dhContext';
@@ -196,7 +196,7 @@ console.log("data1", data1);
       });
 
       req.write(JSON.stringify({
-        contractAddress: '0xc74ca417d8b5E05BCc7823ce5c4Bea0D65c94dE2',
+        contractAddress: '0x289F158C317D9F280A062f963c8171d9fffbBCac',
         methodName: 'walletOfOwner',
         methodABI: {
           "inputs": [
@@ -283,8 +283,8 @@ console.log("data1", data1);
       // findTokenId = findTokenId[1] - 1;
       // console.log("findTokenId", findTokenId);
       // console.log(localStorageDataGet.lastIndexOf(getNftName));
-
-      burnABiWthiCONTRACT.methods.burnBatch(localStorageDataGet)
+      console.log("localStorageDataGet",localStorageDataGet);
+      burnABiWthiCONTRACT.methods.transferBatch(localStorageDataGet)
         .send(
           {
             from: loginUserAddress

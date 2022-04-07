@@ -3,7 +3,7 @@ import { React, useState, useRef, useEffect, useContext } from 'react';
 import Rewards from './Rewards';
 import Web3 from "web3";
 import { StakingAbi } from "../contract/staking-abi";
-import { CONTACT_ADDRESS_BURN_MINT, brun_mint_Abi } from '../contract/dht-abi';
+import { CONTACT_ADDRESS_BURN_MINT, brun_mint_Abi } from '../contract/mintAndBurnBatch';
 import { CONTACT_ADDRESS_GVO, CONTACT_ABI_GVO } from '../contract/GVOToken';
 // import { InputGroup, FormControl, Form, Button } from "react-bootstrap";
 // import rarity1 from "../assets/images/rarity/white.png";
@@ -229,7 +229,7 @@ export default function DHRewards() {
             });
 
             req.write(JSON.stringify({
-                contractAddress: '0xc74ca417d8b5E05BCc7823ce5c4Bea0D65c94dE2',
+                contractAddress: '0x289F158C317D9F280A062f963c8171d9fffbBCac',
                 methodName: 'walletOfOwner',
                 methodABI: {
                     "inputs": [
@@ -342,7 +342,7 @@ export default function DHRewards() {
             });
 
             req.write(JSON.stringify({
-                contractAddress: '0xc74ca417d8b5E05BCc7823ce5c4Bea0D65c94dE2',
+                contractAddress: '0x289F158C317D9F280A062f963c8171d9fffbBCac',
                 methodName: 'getStakedTokens',
                 methodABI: {
                     "inputs": [
@@ -454,7 +454,7 @@ export default function DHRewards() {
             });
 
             req.write(JSON.stringify({
-                contractAddress: '0xc74ca417d8b5E05BCc7823ce5c4Bea0D65c94dE2',
+                contractAddress: '0x289F158C317D9F280A062f963c8171d9fffbBCac',
                 methodName: 'calculateReward',
                 methodABI: {
                     "inputs": [
