@@ -1,0 +1,21 @@
+.bottom_section{
+    padding: 0em 4em !important;
+ 
+    .bottom_contentDiv{
+        text-align: center;
+
+        p{
+            margin-bottom: 20px;
+            color: #ffffffb5;
+            font-size: 14px;
+        }
+    }
+    .bottom_image{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+        img{
+            width: 200px;
+        }
+    }
+}

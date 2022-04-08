@@ -1,4 +1,9 @@
 @use "../abstracts/"as *;
+// @font-face {
+//   font-family: AvenirNext;
+//   src: url(../../assets//font/AvenirNext.ttc);
+// }
+
 
 *,
 *::before,
@@ -23,6 +28,7 @@ dd {
   // font-family: "Rubik", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
   //   "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-family: 'Manrope', sans-serif;
+  // font-family: AvenirNext;
   margin: 0;
   letter-spacing: 1px;
   word-spacing: 1px;
@@ -46,7 +52,7 @@ body {
   text-rendering: optimizeSpeed;
   line-height: 1.5;
   color: $dark-theme-text;
-  background: $dark-theme-background !important;
+  background: #181820 !important;
   // background-image: url('../../assets/background.png');
   // background-repeat: no-repeat;
 }

@@ -11,6 +11,13 @@ import Timeline from "./Timeline";
 import TotalMints from "./TotalMints";
 import VideoSection from "./VideoSection";
 import { DhState } from '../context/dhContext';
+import OurStory from "./OurStory";
+import GvoToken from "./GvoToken";
+import AboutGVO from "./AboutGVO";
+import DHBuyBtn from "./DHBuyBtn";
+import VibeMap from "./VibeMap";
+import Community from "./Community";
+import Bottom from "./Bottom";
 
 function Home() {
   const { data1, setData } = DhState();
@@ -24,14 +31,21 @@ function Home() {
       <div className="home_page">
         {/* <Navbar /> */}
         <VideoSection />
-        <TotalMints />
-        <IntroSection />
-        <DefiNfts />
-        <RaritySection />
-        <TeamSection />
-        <Timeline />
+        {/* <TotalMints /> */}
+        <OurStory/>
+        <GvoToken/>
+        <AboutGVO/>
+        <DHBuyBtn/>
+        <VibeMap/>
+        <Community/>
+        <Bottom/>
+        {/* <IntroSection /> */}
+        {/* <DefiNfts /> */}
+        {/* <RaritySection /> */}
+        {/* <TeamSection /> */}
+        {/* <Timeline /> */}
         {/* <Footer /> */}
-        <Faq />
+        {/* <Faq /> */}
         {/* <FooterCommon/> */}
       </div>
     );

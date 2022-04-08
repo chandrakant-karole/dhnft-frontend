@@ -5,9 +5,9 @@
     top: 0;
     left: 0;
     right: 0;
-    background: #0b1212;
+    background: #191921;
     box-shadow: 0px 4px 6px rgba(54, 54, 54, 0.15);
-    >.container {
+    > .container {
         flex-direction: row;
         justify-content: space-between;
         padding: 20px 2rem;
@@ -15,29 +15,59 @@
 }
 
 .nav-menu {
-    >a {
-        color: $dark-theme-text;
+    > a {
+        color: #ffffffb5;
         margin: 0 5px;
         padding: 5px 10px;
         display: inline-block;
-        border-bottom: 1px solid transparent;
+        border-bottom: 2px solid transparent;
         font-size: 17px;
     }
-    >a:hover{
-        border-bottom: 1px solid #00fcff;
+    > a:hover {
+        color: #ffffff;
+        border-bottom: 2px solid #05f9bc;
+    }
+
+    .claim_gvoBtn {
+        background-color: #05f9bc;
+        color: #19181e;
+        border-radius: 15px;
+        font-weight: 900;
+        letter-spacing: 0px;
+        font-size: 15px;
+        padding: 3px 15px;
+        border-bottom: none;
+        position: relative;
+
+        &:hover {
+            border-bottom: none;
+            color: #19181e;
+        }
+
+        &::after {
+            content: "NEW";
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: fit-content;
+            height: auto;
+            color: #05f9bc;
+            font-weight: bold;
+            font-size: 13px;
+        }
     }
 }
 
 .nav-buttons {
     display: flex;
     align-items: center;
-    >* {
+    > * {
         margin: 0 10px;
         &:last-child {
             margin-right: 0;
         }
     }
-    >a {
+    > a {
         display: flex;
     }
     .connect-btn {
@@ -50,19 +80,23 @@
         color: $primary;
         font-size: 1.6rem;
     }
+    .wallet_icon{
+        color: #05f9bc;
+        margin-right: 0px;
+    }
 }
 
 .cont_wlt {
-    background: #00fcff;
-    padding: 7px 18px;
-    font-size: 16px;
-    font-weight: 400;
-    /* border-radius: 5px; */
-    color: black;
-    font-weight: bold;
-    border: 1px solid #00fcff;
+    background-color: #05f9bc;
+    color: #19181e;
+    border-radius: 15px;
+    font-weight: 900;
+    letter-spacing: 0px;
+    font-size: 15px;
+    padding: 5px 15px;
+    border: none;
 
-    &:disabled{
+    &:disabled {
         cursor: not-allowed;
         background: #343434;
         border: 2px solid #515151;
@@ -81,19 +115,19 @@
 }
 
 .fa_disco svg {
-    color: #00fcff6e;
+    color: #05f9bc;
 }
 
-.fa_disco svg:hover{
-    color: #00fcff;
+.fa_disco svg:hover {
+    color: #05f9bccc;
 }
 
 .twtsqur svg {
-    color: #00fcff6e;
+    color: #05f9bc;
 }
 
 .twtsqur svg:hover {
-    color: #00fcff;
+    color: #05f9bccc;
 }
 
 a body.hidden {
@@ -142,7 +176,7 @@ a body.hidden {
     align-items: center;
     justify-content: center;
     transition: all 0.25s ease-in-out;
-    >.nav-menu {
+    > .nav-menu {
         display: flex;
         gap: 20px;
         align-items: center;
@@ -156,7 +190,7 @@ a body.hidden {
             justify-content: space-around;
             color: $primary;
             font-size: 1.5em;
-            >a {
+            > a {
                 line-height: 0;
                 color: #008789;
             }
@@ -176,7 +210,7 @@ a body.hidden {
 @media screen and (max-width: 800px) {
     .navbar {
         position: static;
-        >.container {
+        > .container {
             justify-content: flex-end;
             .logo {
                 margin-right: auto;
@@ -187,7 +221,7 @@ a body.hidden {
         display: block;
     }
     .nav-buttons {
-        >.sm {
+        > .sm {
             display: none;
         }
         .btn {

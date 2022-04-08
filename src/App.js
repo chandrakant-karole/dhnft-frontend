@@ -76,7 +76,7 @@ function App() {
           </Route>
           <Route path='/DH_Rewards' component={DHRewards} />
         </Switch>
-        <FooterCommon />
+        {/* <FooterCommon /> */}
         </DhProvider>
       </BrowserRouter>
     

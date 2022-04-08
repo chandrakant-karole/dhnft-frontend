@@ -1,0 +1,92 @@
+.community_section {
+    background-image: url("../../assets/NetWork__Background.png");
+    background-size: cover;
+    .container {
+        max-width: 1140px;
+        display: block;
+
+        .community_container {
+            .community_title_two {
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+            }
+
+            .community_title_three {
+                display: flex;
+                justify-content: center;
+            }
+
+            .community_title_four {
+                h2 {
+                    width: fit-content;
+                    text-align: end;
+                    margin-left: 4em;
+                }
+            }
+
+            .community_title_five {
+                display: flex;
+                justify-content: flex-end;
+                align-items: flex-start;
+                margin-right: 4em;
+            }
+
+            h2 {
+                text-transform: uppercase;
+                font-size: 2em;
+                color: #fff;
+                font-family: sans-serif;
+                font-weight: 900;
+            }
+
+            span {
+                text-transform: uppercase;
+                // font-size: 1.5em;
+                color: #05f9bc;
+                font-family: sans-serif;
+                font-weight: 900;
+            }
+        }
+
+        .community_content {
+            text-align: center;
+            background-color: #3b3a3fd9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 3em 0em;
+
+            h2 {
+                color: #05f9bc;
+                letter-spacing: 0px;
+                font-family: sans-serif;
+                font-weight: 600;
+                font-size: 1.2em;
+                text-transform: uppercase;
+            }
+            p {
+                font-size: 14px;
+                letter-spacing: 0px;
+                line-height: 1.5;
+                color: #ffffffb5;
+            }
+        }
+
+        .community_btn {
+            display: flex;
+            justify-content: center;
+            button {
+                margin-right: 20px;
+                background-color: #05f9bc;
+                color: #19181e;
+                border-radius: 5px;
+                font-weight: 900;
+                letter-spacing: 0px;
+                font-size: 1.2em;
+                padding: 5px 60px;
+                border: none;
+                margin-top: 20px;
+            }
+        }
+    }
+}

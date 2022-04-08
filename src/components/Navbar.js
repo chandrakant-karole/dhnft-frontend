@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef, useContext } from "react";
-import { FaTwitterSquare, FaDiscord } from "react-icons/fa";
+import { FaTwitterSquare, FaDiscord, FaTwitter } from "react-icons/fa";
+import { BiWallet } from 'react-icons/bi'
 import { Link } from "react-router-dom";
-import logo from "../assets/logo-white.png";
+import logo from "../assets/DH-logo.png";
 import { DhState } from '../context/dhContext';
 
 function Navbar() {
@@ -36,7 +37,7 @@ function Navbar() {
       console.log("nadeem data", data1);
       if (data1 == "") {
         document.getElementById('connected').innerText = 'Connect Wallet'
-        document.getElementById('burnLink').style.display = "none"
+        // document.getElementById('burnLink').style.display = "none"
       }
       else {
 
@@ -46,7 +47,7 @@ function Navbar() {
         setLastFourDigitAddValue(lastFourAddValue)
         document.getElementById('connected').innerText = 'Connected'
         document.getElementById('connected').setAttribute("disabled", "")
-        document.getElementById('burnLink').style.display = "inline-block"
+        // document.getElementById('burnLink').style.display = "inline-block"
       }
     }
 
@@ -122,7 +123,7 @@ function Navbar() {
         let lastAddressDigit = data1.length - 4
         let lastFourAddValue = data1.slice(lastAddressDigit, data1.length)
         setLastFourDigitAddValue(lastFourAddValue)
-        document.getElementById('burnLink').style.display = "inline-block "
+        // document.getElementById('burnLink').style.display = "inline-block "
       }
     }
   }, [data1])
@@ -135,16 +136,18 @@ function Navbar() {
           </Link>
         </div>
         <div className="nav-menu">
-          <a href='/stringblock/#learn' >Learn</a>
-          <a href="/stringblock/#defi-nft">DeFi + NFTs</a>
-          <a href="/stringblock/#rarity">Rarity</a>
+          <a href='/stringblock/#learn' >Our Story</a>
+          <a href="/stringblock/#defi-nft">$GVO Token</a>
+          <a href="/stringblock/#rarity">Map</a>
           <a href="/stringblock/#team">Team</a>
-          <a href="/stringblock/#faqs">FAQ's</a>
-          <Link id="burnLink" to="/DH" style={{ display: "none" }}>Burn</Link>
+          <a href="/stringblock/#faqs">Network</a>
+          <a href="/" className="claim_gvoBtn">Claim $GVO</a>
+          {/* <Link id="burnLink" to="/DH" style={{ display: "none" }}>Burn</Link> */}
         </div>
         <div className="nav-buttons">
           <Link id="next" to="/DH" style={HideStyle} className="conted_wlt">Connected #0x02548</Link>
           <span className="walletAddress_txt">{walletAddress}</span><span className="lastFourAddValue">{lastFourDigitAddValue}</span>
+          <BiWallet className="wallet_icon"/>
           <button id="connected" onClick={openMetaMask} className="cont_wlt">Connect Wallet</button>
           <a
             href="https://discord.com/invite/H7KMAKgaSH"
@@ -160,7 +163,8 @@ function Navbar() {
             rel="noreferrer noopener"
             className="sm twtsqur"
           >
-            <FaTwitterSquare />
+            {/* <FaTwitterSquare /> */}
+            <FaTwitter />
           </a>
           {/* <MetaMaskButton /> */}
         </div>
@@ -208,7 +212,8 @@ function MobileNavMenu({ active = true, setActive }) {
             rel="noreferrer noopener"
             onClick={closeNav}
           >
-            <FaTwitterSquare />
+            {/* <FaTwitterSquare /> */}
+            <FaTwitter />
           </a>
           <a
             href="https://discord.com/invite/H7KMAKgaSH"

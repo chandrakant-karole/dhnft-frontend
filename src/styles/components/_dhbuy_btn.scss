@@ -1,0 +1,66 @@
+.dhbuy_btn_sections {
+    background-image: linear-gradient(0deg, #1d1c24, #1d1c2400, #1d1c24), url("../../assets/IMAGE_COMP_copy.png");
+
+    .container {
+        max-width: 1140px;
+        display: block;
+    }
+
+    .dhbuy_btn_container {
+        display: flex;
+        justify-content: center;
+        .dhbuy_btn_containerDiv {
+            .dhbuy_site_logoDiv {
+                padding: 50px 0px;
+            }
+        }
+    }
+
+    .dhbuy_btn_contentDiv {
+        background-color: #48494ab3;
+        padding: 40px 20px;
+        border-radius: 10px;
+        .dhbuy_btn_content {
+            h6 {
+                color: #05f9bc;
+                letter-spacing: 0px;
+                font-family: sans-serif;
+                font-weight: 600;
+            }
+
+            ul {
+                list-style-type: none;
+                padding: 0px;
+                // line-height: 2;
+
+                li {
+                    font-size: 14px;
+                    letter-spacing: 0px;
+
+                    svg {
+                        color: #05f9bc;
+                    }
+                }
+            }
+        }
+    }
+
+    .dhbuy_btn_Div {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+
+        button {
+            margin-right: 20px;
+            background-color: #05f9bc;
+            color: #19181e;
+            border-radius: 5px;
+            font-weight: 900;
+            letter-spacing: 0px;
+            font-size: 1.2em;
+            padding: 5px 60px;
+            border: none;
+            margin-top: 20px;
+        }
+    }
+}

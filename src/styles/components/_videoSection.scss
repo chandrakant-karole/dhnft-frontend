@@ -29,3 +29,129 @@
     height: calc(100vh - 140px - 90px);
   }
 }
+
+// ============================================================================================
+.hero_section_dhNft {
+  padding: 0% !important;
+}
+.top_strip_head {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  background-color: #05f9bc;
+  padding: 20px 0px;
+
+  .top_strip_text {
+    color: #19181e;
+    font-weight: 900;
+    letter-spacing: 0px;
+  }
+
+  .join_daoBtn {
+    background-color: #151419;
+    color: #ffffff;
+    padding: 5px 20px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-size: 15px;
+    border: none;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+}
+
+.react-3d-carousel .slider-container .slider-content .slider-single.preactive {
+  filter: blur(5px);
+}
+
+.react-3d-carousel .slider-container .slider-content .slider-single.proactive {
+  filter: blur(5px);
+}
+
+.react-3d-carousel .slider-container .slider-content .slider-single.active .slider-left,
+.react-3d-carousel .slider-container .slider-content .slider-single.active .slider-right {
+  display: none;
+}
+
+.react-3d-carousel .slider-container .slider-content .slider-single.proactive .slider-single-content {
+  transform: translateX(40%) scale(0.8);
+}
+.react-3d-carousel .slider-container .slider-content .slider-single.preactive .slider-single-content {
+  transform: translateX(-50%) scale(0.6);
+}
+.dh_container.container {
+  max-width: 1140px;
+  display: block;
+}
+
+.hero_section_content_left,
+.custom_silder_Div {
+  padding: 200px 0px;
+}
+
+.hero_section_content_leftDiv {
+  h1 {
+    font-family: sans-serif;
+    font-size: 4em;
+    font-weight: 900;
+    text-transform: uppercase;
+    width: max-content;
+  }
+
+  .hero_section_call_to_action {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+
+    .openSea_btn {
+      background-color: #05f9bc;
+      color: #19181e;
+      border-radius: 5px;
+      font-weight: 900;
+      letter-spacing: 0px;
+      font-size: 15px;
+      padding: 5px 60px;
+      border: none;
+    }
+
+    .lookRare_btn {
+      background-color: #05f9bc;
+      color: #19181e;
+      border-radius: 5px;
+      font-weight: 900;
+      letter-spacing: 0px;
+      font-size: 15px;
+      padding: 5px 60px;
+      border: none;
+    }
+  }
+}
+
+.top_strip_foot {
+  background-color: #05f9bc;
+  padding: 20px 0px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  .GVO_img {
+    width: 80px;
+  }
+
+  .top_strip_text{
+    color: #19181e;
+    font-weight: 600;
+    width: 600px;
+    line-height: 1.2;
+    letter-spacing: 0px;
+  }
+  .join_daoBtn{
+    background-color: #19181e;
+    text-transform: uppercase;
+    color: #ffffff;
+    padding: 8px 30px;
+    border-radius: 5px;
+    border: none;
+  }
+}
