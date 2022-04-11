@@ -7,7 +7,7 @@ import Compression from '../assets/images/rarity/compression.png';
 import Air from '../assets/images/rarity/Air.png';
 import Ethik from '../assets/images/rarity/Ethik.png';
 
-export default function HeroSlider() {
+export default function HeroSlider(props) {
     let slides = [
         <img style={{width:"200px"}} src={demo} alt="1" />,
         <img style={{width:"200px"}} src={Magnethik} alt="2" />,

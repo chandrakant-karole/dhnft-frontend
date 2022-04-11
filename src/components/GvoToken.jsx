@@ -1,11 +1,11 @@
 import React from 'react'
 import { Image } from 'react-bootstrap'
-import logo from '../assets/logo.png';
+import logo from '../assets/DH-logo-black.png';
 import person from '../assets/unnamed-1.png';
 export default function GvoToken() {
     return (
         <>
-            <section className='gvo_token_section'>
+            <section className='gvo_token_section' id='gvoToken'>
                 <div className="gvo_top_strip_bar">
                     <div><Image src={logo} fluid className='site_logo'/></div>
                     <div><Image src={person} fluid className='gvo_strip_person_img' /></div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Col, Container, Image, Row } from 'react-bootstrap'
 import { BsCheckCircleFill } from 'react-icons/bs'
-import Logo from '../assets/DH-logo.png'
+import Logo from '../assets/DH-logo-white.png'
 export default function DHBuyBtn() {
     return (
         <>
@@ -19,7 +19,7 @@ export default function DHBuyBtn() {
                         </Col>
                     </Row>
                     <Row>
-                        <Col lg={4}>
+                        <Col lg={4} className="my-4">
                             <div className='dhbuy_btn_contentDiv'>
                                 <div className='dhbuy_btn_content'>
                                     <h6>CRYPTOPUNK 3557</h6>
@@ -30,7 +30,7 @@ export default function DHBuyBtn() {
                                 </div>
                             </div>
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={4} className="my-4">
                             <div className='dhbuy_btn_contentDiv'>
                                 <div className='dhbuy_btn_content'>
                                     <h6>ETH VALIDATOR NODE</h6>
@@ -41,7 +41,7 @@ export default function DHBuyBtn() {
                                 </div>
                             </div>
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={4} className="my-4">
                             <div className='dhbuy_btn_contentDiv'>
                                 <div className='dhbuy_btn_content'>
                                     <h6>EXCLUSIVE ACCESS</h6>

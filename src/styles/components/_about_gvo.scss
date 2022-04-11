@@ -78,3 +78,13 @@
         }
     }
 }
+
+@media screen and (max-width:425px){
+    .about_gvo_section .container .about_gvo_contentDiv .about_gvo_content h2{
+        font-size: 2em;
+    }
+
+    .about_gvo_imgDiv{
+        padding: 20px;
+    }
+}

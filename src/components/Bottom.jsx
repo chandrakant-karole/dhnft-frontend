@@ -1,6 +1,6 @@
 import React from 'react'
 import { Image } from 'react-bootstrap'
-import logo from '../assets/DH-logo.png'
+import logo from '../assets/DH-logo-white.png'
 export default function Bottom() {
     return (
         <>

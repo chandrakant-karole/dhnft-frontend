@@ -7,10 +7,10 @@ import EthicImage from "../assets/images/profile/ethic.jpg";
 function TeamSection() {
   return (
     <section id="team" className="container team-section">
-      <h2 className="heading">A Real Team</h2>
-      <p className="sub-heading">
+      <h2 className="heading">The Diamond Hand Team</h2>
+      {/* <p className="sub-heading">
         Real Artists - Real BlockChain Developers - Real NFT Curators
-      </p>
+      </p> */}
 
 
       <div className="column-grid">

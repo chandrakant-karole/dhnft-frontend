@@ -5,15 +5,15 @@ import demo from '../assets/Trails.png';
 export default function OurStory() {
     return (
         <>
-            <section className='our_story_section'>
+            <section className='our_story_section' id='ourStory'>
                 <Container>
                     <Row>
-                        <Col lg={3}>
+                        <Col lg={3} md={3} sm={12}>
                             <div className="our_story_img">
                                 <Image src={demo} fluid />
                             </div>
                         </Col>
-                        <Col lg={9}>
+                        <Col lg={9} md={9} sm={12}>
                             <div className='our_story_content_container'>
                                 <div className="our_story_contentDiv">
                                     <h2>Our Story</h2>

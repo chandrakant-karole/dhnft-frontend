@@ -16,10 +16,12 @@ import Rewards from "./components/Rewards";
 import ConnectedWallet from './components/DH';
 import DHF from './components/DHF';
 import DHT from './components/DHT';
-import DHRewards from './components/DHRewards'
+// import DHRewards from './components/DHRewards'
+import DHFRewards from './components/DHFRewards';
 import FooterCommon from './components/FooterCommon';
 import DhProvider from './context/dhContext';
 import data from './context/contextData';
+import Bottom from './components/Bottom';
 function App() {
   return (
     <>
@@ -74,8 +76,9 @@ function App() {
           <Route path="/DHT">
             <DHT />
           </Route>
-          <Route path='/DH_Rewards' component={DHRewards} />
+          <Route path='/DH_Rewards' component={DHFRewards} />
         </Switch>
+        <Bottom/>
         {/* <FooterCommon /> */}
         </DhProvider>
       </BrowserRouter>

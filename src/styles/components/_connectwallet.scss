@@ -1,5 +1,5 @@
 .cont_wallet_box {
-    margin: 25px auto 15px;
+    margin: 50px auto;
 }
 
 .cntwllt_nav {
@@ -69,12 +69,11 @@
 }
 
 .nft_boxes {
-    border: 1px solid #074a4b;
     margin: 15px auto;
     padding: 10px;
-    background: #143030;
+    background: #181820;
     border-radius: 5px;
-    box-shadow: inset 0px 0px 10px #0f6667;
+    box-shadow: inset 0px 0px 10px #05f9bc;
 }
 
 .nft_box_btm {
@@ -100,12 +99,16 @@
     flex-flow: wrap;
     justify-content: center;
     padding-top: 120px;
+
+    p{
+        color: #05f9bc;
+        margin-bottom: 20px;
+    }
 }
 
 .dh_right_box h4 {
     font-weight: 400;
-    font-size: 16px;
-    margin: 20px auto;
+    font-size: 35px;
 }
 
 .btn-danger {
@@ -117,10 +120,10 @@
 
 .dh_left_box {
     // border: 1px solid #ddd;
-    background-color: #132323;
+    background-color: #28272e;
     border-radius: 0px;
     overflow: hidden;
-    border-bottom: 1px solid #067778;
+    // border-bottom: 1px solid #067778;
     padding-bottom: 20px;
 }
 
@@ -134,7 +137,8 @@
 .dh_left_box {
     
     .search_input {
-        margin: 15px 0px;
+        margin: 30px 0px;
+        margin-bottom: 50px;
         position: relative;
         display: flex;
         flex-wrap: wrap;

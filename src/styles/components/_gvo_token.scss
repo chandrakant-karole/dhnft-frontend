@@ -4,11 +4,12 @@
     .gvo_top_strip_bar{
         background-color: #05f9bc;
         display: flex;
+        flex-wrap: wrap;
         justify-content: center;
         align-items: center;
         padding: 20px 0px;
         .site_logo{
-            width: 60px;
+            // width: 60px;
             margin-right: 60px;
         }
         .gvo_strip_person_img{

@@ -334,9 +334,9 @@ select {
   }
 }
 
-.second_nav:hover {
-  color: #00fcff !important;
-}
+// .second_nav:hover {
+//   color: #00fcff !important;
+// }
 
 // =============================================
 .cntwllt_nav {
@@ -379,16 +379,18 @@ select {
 
 .searchDHT {
   color: #fff;
-  background: #0b1212;
+  background: #181820;
   border: none !important;
-  border-bottom: 1px solid #1b4d4e !important;
+  border-top-right-radius: 10px !important; 
+  border-bottom-right-radius: 10px !important;
+  // border-bottom: 1px solid #1b4d4e !important;
 }
 
 .searchDHT:focus {
   color: #fff;
-  background: #0b1212;
+  background: #181820;
   border: none !important;
-  border-bottom: 1px solid #0e8d8f !important;
+  // border-bottom: 1px solid #0e8d8f !important;
   box-shadow: none;
 }
 
@@ -433,21 +435,23 @@ select {
 
 
 .btn-success:hover {
-  background-color: #094445;
-  border-color: #067778;
+  background-color: #04f9bc;
+  color: #000;
+  // border-color: #067778;
 }
 
 .search_Btn {
   color: black;
   font-weight: 700;
-  background: #0e8d8f;
+  background: #04f9bc;
   text-align: center;
   width: 128px;
   font-size: 1em !important;
   padding: 0px 9px;
   letter-spacing: normal;
-  border-radius: 0px !important;
   border: none;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
 
 // ================================= Footer Common ================================
@@ -532,14 +536,14 @@ a.second_nav {
 
 .reward_section {
 
-  .inner_nav_active {
-    border: 2px solid #00fcff;
-    padding: 10px 35px;
-    background-color: #0b1212;
-    border-radius: 25px;
-    color: #00fcff;
-    font-weight: 600;
-  }
+  // .inner_nav_active {
+  //   border: 2px solid #00fcff;
+  //   padding: 10px 35px;
+  //   background-color: #0b1212;
+  //   border-radius: 25px;
+  //   color: #00fcff;
+  //   font-weight: 600;
+  // }
 
 }
 
@@ -558,15 +562,15 @@ a.second_nav {
 
 .dh_NFT_cards_Div::-webkit-scrollbar {
   width: 10px;
-  background-color: #067778;
+  background-color: #212028;
   border-radius: 25px;
 }
 
 .dh_NFT_cards_Div::-webkit-scrollbar-thumb {
   width: 10px;
-  background-color: #00fcff;
+  background-color: #04f9bc;
   border-radius: 25px;
-  box-shadow: inset 0px 0px 6px #000;
+  // box-shadow: inset 0px 0px 6px #000;
 }
 
 .walletAddress_txt {

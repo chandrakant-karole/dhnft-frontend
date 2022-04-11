@@ -36,6 +36,7 @@
 }
 .top_strip_head {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
   width: 100%;
@@ -71,7 +72,7 @@
 
 .react-3d-carousel .slider-container .slider-content .slider-single.active .slider-left,
 .react-3d-carousel .slider-container .slider-content .slider-single.active .slider-right {
-  display: none;
+  display: none !important;
 }
 
 .react-3d-carousel .slider-container .slider-content .slider-single.proactive .slider-single-content {
@@ -102,6 +103,7 @@
   .hero_section_call_to_action {
     margin-top: 20px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
 
     .openSea_btn {
@@ -132,6 +134,7 @@
   background-color: #05f9bc;
   padding: 20px 0px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
 
@@ -153,5 +156,25 @@
     padding: 8px 30px;
     border-radius: 5px;
     border: none;
+  }
+}
+
+
+@media screen and (max-width:989px){
+  .hero_section_content_left, .custom_silder_Div{
+    padding: 32px 0px;
+  }
+}
+
+@media screen and(max-width:665px){
+  .hero_section_content_leftDiv h1{
+    font-size: 2em;
+  }
+}
+
+@media screen and (max-width:555px) {
+  .hero_section_content_leftDiv .hero_section_call_to_action{
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }

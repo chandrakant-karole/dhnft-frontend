@@ -27,8 +27,8 @@ function Rewards() {
   return (
     <section className="reward_section">
       {/* <p className="mb-0">My DH Token <span>"Diamond Handing"</span> Rewards</p> */}
-      <Link className={`second_nav responsive_second_nav ${activeBurn}`} to="/DH">Burn</Link>
-      <Link className={`second_nav ${activeStaking}`} to="/DH_Rewards">Stake / Rewards</Link>
+      <Link className={`second_nav commit responsive_second_nav ${activeBurn}`} to="/DH">Commit</Link>
+      <Link className={`second_nav rewards ${activeStaking}`} to="/DH_Rewards">Rewards</Link>
     </section>
   );
 }

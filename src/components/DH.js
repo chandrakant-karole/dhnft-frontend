@@ -1,7 +1,7 @@
 import { React, useState, useEffect, useRef } from 'react'
 import '../styles/components/_connectwallet.scss';
 import { Grid } from 'react-loader-spinner'
-import { InputGroup, FormControl, Nav, Form, Button } from "react-bootstrap";
+import { InputGroup, FormControl, Nav, Form, Button, Container, Row, Col } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import dhfNFT from '../assets/Trails.png'
 
@@ -708,9 +708,9 @@ console.log("data1", data1);
             </div>
             <div className='col-lg-3 col-12'>
               <div className="dh_right_box text-center">
-                <h4>You have to select Multiple of 8 NFT's</h4>
                 {loader ? <h4>{allocated} DHF NFT Allocated</h4> : <h4>{count} NFTs selected</h4>}
-                <Button onClick={() => { burnRef.current() }} variant="success" id='burn_NftBtn' className='green_btn'>Burn Selected NFTs</Button>
+                <p>You have to select Multiple of 8 NFT's</p>
+                <Button onClick={() => { burnRef.current() }} variant="success" id='burn_NftBtn' className='green_btn'>Commit Selected NFTs</Button>
                 {/* <h4 style={{ wordBreak: 'break-word' }}>Transaction Id : </h4> */}
               </div>
             </div>

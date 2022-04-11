@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Col, Container, Row, Image } from "react-bootstrap";
 import video from "../assets/diamond-hands.mp4";
 import HeroSlider from "./HeroSlider";
@@ -24,8 +25,8 @@ function VideoSection() {
               <div className="hero_section_content_leftDiv">
                 <h1>The <br /> Diamond Hands</h1>
                 <div className="hero_section_call_to_action">
-                  <button className="openSea_btn">Buy on OpenSea</button>
-                  <button className="lookRare_btn">Buy on LooksRare</button>
+                  <button className="openSea_btn my-2">Buy on OpenSea</button>
+                  <button className="lookRare_btn my-2">Buy on LooksRare</button>
                 </div>
               </div>
             </div>
@@ -33,7 +34,7 @@ function VideoSection() {
           <Col lg={6}>
             <div className="custom_silder_Div">
               <div className="slider_dh">
-                <HeroSlider />
+                <HeroSlider/>
               </div>
             </div>
           </Col>

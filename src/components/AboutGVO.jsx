@@ -8,7 +8,7 @@ export default function AboutGVO() {
             <section className='about_gvo_section'>
                 <Container>
                     <Row>
-                        <Col lg={8}>
+                        <Col lg={8} md={8} sm={12}>
                             <div className='about_gvo_contentDiv'>
                                 <div className="about_gvo_content">
                                     <h2>WHAT IS $GVO TOKEN</h2>
@@ -18,19 +18,19 @@ export default function AboutGVO() {
                                 </div>
                             </div>
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={4} md={4} sm={12}>
                             <div className="about_gvo_imgDiv">
                                 <Image src={GVO} fluid />
                             </div>
                         </Col>
                     </Row>
                     <Row>
-                        <Col lg={4}>
+                        <Col lg={4} md={4} sm={12}>
                             <div className="about_gvo_benefit_divImg">
                                 <Image src={GvoBenefit} fluid />
                             </div>
                         </Col>
-                        <Col lg={8}>
+                        <Col lg={8} md={8} sm={12}>
                             <div className='about_gvo_benefit_contentDiv_container'>
                                 <div className='about_gvo_benefit_contentDiv'>
                                     <h3>BENEFITS OF "GOOD VIBES ONLY"</h3>

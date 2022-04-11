@@ -18,6 +18,7 @@ import DHBuyBtn from "./DHBuyBtn";
 import VibeMap from "./VibeMap";
 import Community from "./Community";
 import Bottom from "./Bottom";
+import OurTeam from "./OurTeam";
 
 function Home() {
   const { data1, setData } = DhState();
@@ -38,11 +39,12 @@ function Home() {
         <DHBuyBtn/>
         <VibeMap/>
         <Community/>
-        <Bottom/>
+        {/* <TeamSection /> */}
+        <OurTeam/>
+        {/* <Bottom/> */}
         {/* <IntroSection /> */}
         {/* <DefiNfts /> */}
         {/* <RaritySection /> */}
-        {/* <TeamSection /> */}
         {/* <Timeline /> */}
         {/* <Footer /> */}
         {/* <Faq /> */}

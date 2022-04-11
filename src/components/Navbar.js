@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useContext } from "react";
 import { FaTwitterSquare, FaDiscord, FaTwitter } from "react-icons/fa";
 import { BiWallet } from 'react-icons/bi'
 import { Link } from "react-router-dom";
-import logo from "../assets/DH-logo.png";
+import logo from "../assets/DH-logo-white.png";
 import { DhState } from '../context/dhContext';
 
 function Navbar() {
@@ -136,9 +136,9 @@ function Navbar() {
           </Link>
         </div>
         <div className="nav-menu">
-          <a href='/stringblock/#learn' >Our Story</a>
-          <a href="/stringblock/#defi-nft">$GVO Token</a>
-          <a href="/stringblock/#rarity">Map</a>
+          <a href='/stringblock/#ourStory' >Our Story</a>
+          <a href="/stringblock/#gvoToken">$GVO Token</a>
+          <a href="/stringblock/#map">Map</a>
           <a href="/stringblock/#team">Team</a>
           <a href="/stringblock/#faqs">Network</a>
           <a href="/" className="claim_gvoBtn">Claim $GVO</a>
